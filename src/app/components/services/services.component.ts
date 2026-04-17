@@ -23,6 +23,7 @@ const BRAND_SERVICES: Service[] = [
     tag: 'Development',
     title: 'Angular Engineering',
     description: 'Senior-level Angular development for teams that need someone who ships — not someone who needs onboarding. From architecture decisions to production deploy.',
+    price: '€60–90/hr · Projects from €1,500',
     features: [
       'Angular 19 + Signal APIs (stable)',
       'TypeScript strict, RxJS, NgRx',
@@ -36,6 +37,7 @@ const BRAND_SERVICES: Service[] = [
     tag: 'Specialty',
     title: 'Travel-Tech Builds',
     description: 'Digital products for hotels, agencies and tour operators — designed by someone who has been your guest in 40+ cities and left because the booking form was broken.',
+    price: 'From €1,500',
     features: [
       'Booking & availability systems',
       'Mobile-first, conversion-focused',
@@ -49,6 +51,7 @@ const BRAND_SERVICES: Service[] = [
     tag: 'Content',
     title: 'UGC & Tech Content',
     description: 'Authentic content for travel, tech and lifestyle brands. Shot on location, not in a studio. Real traveler perspective — 40+ cities, 10K+ community built from scratch.',
+    price: 'From €150',
     features: [
       'Travel & lifestyle UGC',
       'App & SaaS walkthroughs',
