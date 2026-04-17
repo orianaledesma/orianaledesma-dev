@@ -1,0 +1,58 @@
+<section class="hero" id="hero">
+  <div class="hero__grid-bg" aria-hidden="true"></div>
+
+  <div class="container hero__container">
+
+    <!-- LEFT: Text content -->
+    <div class="hero__content">
+      @let c = content();
+
+      <span class="badge">
+        <span class="badge__dot"></span>
+        {{ c.badge }}
+      </span>
+
+      <h1 class="hero__headline">
+        @for (line of c.headline; track line.text) {
+          <span
+            class="hero__headline-line"
+            [class.hero__headline-line--italic]="line.italic"
+            [class.hero__headline-line--accent]="line.accent"
+          >{{ line.text }}</span>
+        }
+      </h1>
+
+      <p class="hero__subheadline">{{ c.subheadline }}</p>
+
+      @if (c.description) {
+        <p class="hero__description">{{ c.description }}</p>
+      }
+
+      <div class="hero__actions">
+        <a href="#contact" class="btn btn--primary">{{ c.ctaPrimary }}</a>
+        <a href="#work" class="btn btn--outline">{{ c.ctaSecondary }}</a>
+      </div>
+
+      <div class="hero__stats">
+        @for (stat of c.stats; track stat.label) {
+          <div class="stat">
+            <span class="stat__value">{{ stat.value }}</span>
+            <span class="stat__label">{{ stat.label }}</span>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- RIGHT: Photo placeholder -->
+    <div class="hero__photo-wrap">
+      <div class="hero__photo-placeholder">
+        <div class="hero__photo-inner">
+          <span class="hero__photo-initials">OL</span>
+          <div class="hero__photo-grid" aria-hidden="true"></div>
+        </div>
+      </div>
+      <div class="hero__photo-glow" aria-hidden="true"></div>
+    </div>
+
+  </div>
+</section>

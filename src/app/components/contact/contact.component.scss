@@ -1,0 +1,256 @@
+.contact {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  background: var(--color-bg-soft);
+
+  .container {
+    width: 100%;
+  }
+
+  &__wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.5rem;
+  }
+
+  // ── Header ──────────────────────────────────────────────────────────────────
+
+  &__label {
+    font-size: 0.7rem;
+    font-weight: var(--font-semibold);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+
+  &__headline {
+    margin: 0;
+    line-height: 1.1;
+  }
+
+  &__sub {
+    font-size: 1rem;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  // ── Calendly CTA ─────────────────────────────────────────────────────────────
+
+  &__calendly-btn {
+    margin-top: 0.5rem;
+    font-size: 0.95rem;
+  }
+
+  // ── Separator ────────────────────────────────────────────────────────────────
+
+  &__separator {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  &__separator-line {
+    flex: 1;
+    height: 1px;
+    background: var(--color-border);
+  }
+
+  &__separator-text {
+    font-size: 0.75rem;
+    font-weight: var(--font-semibold);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  // ── Form ─────────────────────────────────────────────────────────────────────
+
+  &__form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    text-align: left;
+  }
+
+  &__feedback {
+    font-size: 0.9rem;
+    padding: 0.85rem 1rem;
+    border-radius: var(--radius-md);
+    text-align: left;
+
+    &--success {
+      color: var(--color-accent);
+      background: var(--color-accent-dim);
+      border: 1px solid var(--color-border);
+    }
+
+    &--error {
+      color: #f87171;
+      background: rgba(248, 113, 113, 0.08);
+      border: 1px solid rgba(248, 113, 113, 0.2);
+
+      a {
+        color: #f87171;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__submit-btn {
+    align-self: flex-start;
+    min-width: 160px;
+    justify-content: center;
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+  }
+
+  // ── Social links ─────────────────────────────────────────────────────────────
+
+  &__socials {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--color-border);
+    width: 100%;
+  }
+
+  &__social-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.45rem 0.9rem;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--color-border);
+    font-size: 0.78rem;
+    font-weight: var(--font-semibold);
+    color: var(--color-text-muted);
+    transition: border-color var(--transition), color var(--transition);
+
+    &:hover {
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+      opacity: 1;
+    }
+  }
+
+  &__social-icon {
+    font-size: 0.65rem;
+    font-weight: var(--font-bold);
+    letter-spacing: 0;
+    color: var(--color-accent);
+    font-style: normal;
+  }
+}
+
+// ── Form field ──────────────────────────────────────────────────────────────────
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+
+  &__label {
+    font-size: 0.75rem;
+    font-weight: var(--font-semibold);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  &__input {
+    width: 100%;
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 0.75rem 1rem;
+    font-family: var(--font-family);
+    font-size: 0.9rem;
+    font-weight: var(--font-light);
+    color: var(--color-text);
+    outline: none;
+    transition: border-color var(--transition), box-shadow var(--transition);
+
+    &::placeholder {
+      color: var(--color-text-muted);
+      opacity: 0.6;
+    }
+
+    &:focus {
+      border-color: var(--color-accent);
+      box-shadow: 0 0 0 3px var(--color-accent-glow);
+    }
+
+    &--textarea {
+      resize: vertical;
+      min-height: 120px;
+      line-height: 1.6;
+    }
+  }
+
+  &--error &__input {
+    border-color: rgba(248, 113, 113, 0.5);
+
+    &:focus {
+      border-color: #f87171;
+      box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.15);
+    }
+  }
+
+  &__label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__counter {
+    font-size: 0.72rem;
+    color: var(--color-text-muted);
+    font-weight: var(--font-semibold);
+
+    &--over { color: #f87171; }
+  }
+
+  &__error {
+    font-size: 0.75rem;
+    color: #f87171;
+    font-weight: var(--font-semibold);
+  }
+
+  &--honeypot {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact {
+    &__submit-btn {
+      width: 100%;
+      min-width: unset;
+    }
+
+    &__calendly-btn {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+}

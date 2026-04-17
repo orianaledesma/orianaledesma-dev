@@ -1,0 +1,198 @@
+.work {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: var(--space-lg);
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+.case-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: border-color var(--transition), transform var(--transition);
+
+  &:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-4px);
+  }
+
+  &--wide {
+    grid-column: 1 / -1;
+    flex-direction: row;
+
+    .case-card__image {
+      width: 480px;
+      flex-shrink: 0;
+    }
+  }
+
+  &--muted {
+    opacity: 0.6;
+
+    &:hover {
+      opacity: 0.8;
+      transform: none;
+      border-color: var(--color-border);
+    }
+  }
+
+  // ── Image area ─────────────────────────────────────────────────────────────
+
+  &__image {
+    height: 220px;
+    background: var(--color-bg-soft);
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+
+    // grid pattern fallback when no image/branded
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--color-border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--color-border) 1px, transparent 1px);
+      background-size: 32px 32px;
+      pointer-events: none;
+    }
+  }
+
+  &__screenshot {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    display: block;
+    position: relative;
+    z-index: 1;
+  }
+
+  &__branded {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+  }
+
+  &__branded-text {
+    font-family: var(--font-family);
+    font-size: 1.6rem;
+    font-weight: var(--font-bold);
+    color: #fff;
+    letter-spacing: -0.01em;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  }
+
+  &__placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.5rem;
+    font-weight: var(--font-bold);
+    color: var(--color-accent);
+    opacity: 0.2;
+    z-index: 1;
+  }
+
+  // ── Body ───────────────────────────────────────────────────────────────────
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.75rem;
+    flex: 1;
+  }
+
+  &__category {
+    font-size: 0.7rem;
+    font-weight: var(--font-semibold);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+
+  &__title {
+    font-size: 1.25rem;
+    color: var(--color-text);
+  }
+
+  &__description {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    flex: 1;
+  }
+
+  &__stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  &__action {
+    font-size: 0.82rem;
+    font-weight: var(--font-semibold);
+    align-self: flex-start;
+    margin-top: 0.25rem;
+
+    &--link {
+      color: var(--color-accent);
+      transition: opacity var(--transition);
+
+      &:hover { opacity: 0.7; }
+    }
+
+    &--nda {
+      color: var(--color-text-muted);
+      padding: 0.2rem 0.6rem;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-pill);
+      font-size: 0.72rem;
+    }
+
+    &--progress {
+      color: var(--color-text-muted);
+      font-style: italic;
+    }
+  }
+}
+
+.tech-pill {
+  display: inline-block;
+  padding: 0.2rem 0.65rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-accent-dim);
+  border: 1px solid var(--color-border);
+  font-size: 0.7rem;
+  font-weight: var(--font-semibold);
+  color: var(--color-text-muted);
+  letter-spacing: 0.03em;
+}
+
+@media (max-width: 768px) {
+  .work__grid { grid-template-columns: 1fr; }
+
+  .case-card--wide {
+    flex-direction: column;
+
+    .case-card__image { width: 100%; }
+  }
+}

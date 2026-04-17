@@ -1,0 +1,33 @@
+<section class="testimonials" id="testimonials">
+  <div class="container">
+    @let c = content();
+
+    <span class="section-label">{{ c.label }}</span>
+    <h2>{{ c.headline }}</h2>
+
+    <div class="testimonials__grid">
+      @for (t of c.testimonials; track $index) {
+        @if (t.placeholder) {
+          <div class="testimonial-card testimonial-card--coming-soon">
+            <p class="testimonial-card__coming-soon-text">More coming soon</p>
+          </div>
+        } @else {
+          <blockquote class="testimonial-card">
+            <span class="testimonial-card__quote-mark" aria-hidden="true">"</span>
+            <p class="testimonial-card__text">{{ t.quote }}</p>
+            <footer class="testimonial-card__footer">
+              <div class="testimonial-card__avatar" aria-hidden="true">
+                {{ t.name[0] }}
+              </div>
+              <div>
+                <p class="testimonial-card__name">{{ t.name }}</p>
+                <p class="testimonial-card__role">{{ t.role }} · {{ t.company }}</p>
+              </div>
+            </footer>
+          </blockquote>
+        }
+      }
+    </div>
+
+  </div>
+</section>

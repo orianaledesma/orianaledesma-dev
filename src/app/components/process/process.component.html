@@ -1,0 +1,35 @@
+<section class="process" id="process">
+  <div class="container">
+    @let c = content();
+
+    <span class="section-label">{{ c.label }}</span>
+    <h2>{{ c.headline }}</h2>
+
+    <div class="process__steps">
+      @for (step of c.steps; track step.number; let last = $last) {
+        <div class="process-step">
+          <div class="process-step__left">
+            <div class="process-step__number">{{ step.number }}</div>
+            @if (!last) {
+              <div class="process-step__line" aria-hidden="true"></div>
+            }
+          </div>
+          <div class="process-step__body">
+            <div class="process-step__title-row">
+              <h3 class="process-step__title">{{ step.title }}</h3>
+              @if (step.timeframe) {
+                <span class="process-step__timeframe">{{ step.timeframe }}</span>
+              }
+            </div>
+            <p class="process-step__description">{{ step.description }}</p>
+          </div>
+        </div>
+      }
+    </div>
+
+    <div class="process__cta">
+      <a href="#contact" class="btn btn--primary">Start with a free call</a>
+    </div>
+
+  </div>
+</section>

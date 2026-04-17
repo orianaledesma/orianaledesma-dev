@@ -1,0 +1,161 @@
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="contact__wrapper">
+
+      <!-- Header -->
+      <span class="contact__label">Let's work together</span>
+      <h2 class="contact__headline">Have a project in mind?</h2>
+      <p class="contact__sub">Book a free 30-min call. No commitment.</p>
+
+      <!-- Calendly CTA -->
+      <a
+        [href]="calendlyUrl"
+        target="_blank"
+        rel="noopener"
+        class="btn btn--primary contact__calendly-btn"
+      >
+        Book a Free Call
+      </a>
+
+      <!-- Separator -->
+      <div class="contact__separator">
+        <span class="contact__separator-line"></span>
+        <span class="contact__separator-text">or</span>
+        <span class="contact__separator-line"></span>
+      </div>
+
+      <!-- Form -->
+      <form
+        class="contact__form"
+        [formGroup]="contactForm"
+        (ngSubmit)="onSubmit()"
+        novalidate
+      >
+        <!-- Honeypot — hidden from real users, visible to bots -->
+        <div class="form-field form-field--honeypot" aria-hidden="true">
+          <input
+            type="text"
+            formControlName="website"
+            tabindex="-1"
+            autocomplete="off"
+          />
+        </div>
+
+        <!-- Name -->
+        <div
+          class="form-field"
+          [class.form-field--error]="nameCtrl.invalid && nameCtrl.touched"
+        >
+          <label class="form-field__label" for="contact-name">Name</label>
+          <input
+            id="contact-name"
+            class="form-field__input"
+            type="text"
+            formControlName="name"
+            placeholder="Your name"
+            autocomplete="name"
+          />
+          @if (nameCtrl.invalid && nameCtrl.touched) {
+            <span class="form-field__error" data-testid="name-error">
+              @if (nameCtrl.hasError('required')) { Name is required }
+              @else if (nameCtrl.hasError('minlength')) { At least 2 characters required }
+              @else if (nameCtrl.hasError('maxlength')) { Maximum 50 characters }
+            </span>
+          }
+        </div>
+
+        <!-- Email -->
+        <div
+          class="form-field"
+          [class.form-field--error]="emailCtrl.invalid && emailCtrl.touched"
+        >
+          <label class="form-field__label" for="contact-email">Email</label>
+          <input
+            id="contact-email"
+            class="form-field__input"
+            type="email"
+            formControlName="email"
+            placeholder="you@company.com"
+            autocomplete="email"
+          />
+          @if (emailCtrl.invalid && emailCtrl.touched) {
+            <span class="form-field__error" data-testid="email-error">
+              @if (emailCtrl.hasError('required')) { Email is required }
+              @else { Enter a valid email address }
+            </span>
+          }
+        </div>
+
+        <!-- Message -->
+        <div
+          class="form-field"
+          [class.form-field--error]="messageCtrl.invalid && messageCtrl.touched"
+        >
+          <div class="form-field__label-row">
+            <label class="form-field__label" for="contact-message">Message</label>
+            <span class="form-field__counter" [class.form-field__counter--over]="messageLen() > 500">
+              {{ messageLen() }} / 500
+            </span>
+          </div>
+          <textarea
+            id="contact-message"
+            class="form-field__input form-field__input--textarea"
+            formControlName="message"
+            placeholder="Tell me about your project..."
+            rows="5"
+          ></textarea>
+          @if (messageCtrl.invalid && messageCtrl.touched) {
+            <span class="form-field__error" data-testid="message-error">
+              @if (messageCtrl.hasError('required')) { Message is required }
+              @else if (messageCtrl.hasError('minlength')) { At least 10 characters required }
+              @else if (messageCtrl.hasError('maxlength')) { Maximum 500 characters }
+            </span>
+          }
+        </div>
+
+        <!-- Submit feedback -->
+        @if (submitStatus() === 'success') {
+          <p class="contact__feedback contact__feedback--success" data-testid="success-message">
+            Message sent! I'll reply within 24h.
+          </p>
+        }
+        @if (submitStatus() === 'error') {
+          <p class="contact__feedback contact__feedback--error" data-testid="error-message">
+            Something went wrong. Email me directly at
+            <a href="mailto:hola&#64;exploriando.page">hola&#64;exploriando.page</a>
+          </p>
+        }
+        @if (submitStatus() === 'rateLimit') {
+          <p class="contact__feedback contact__feedback--error" data-testid="rate-limit-message">
+            Too many attempts. Please wait 10 minutes before trying again.
+          </p>
+        }
+
+        <button
+          type="submit"
+          class="btn btn--outline contact__submit-btn"
+          [disabled]="sending()"
+          data-testid="submit-button"
+        >
+          {{ sending() ? 'Sending…' : 'Send message' }}
+        </button>
+      </form>
+
+      <!-- Social links -->
+      <div class="contact__socials">
+        @for (link of socialLinks; track link.label) {
+          <a
+            [href]="link.href"
+            target="_blank"
+            rel="noopener"
+            class="contact__social-link"
+          >
+            <span class="contact__social-icon">{{ link.icon }}</span>
+            <span>{{ link.label }}</span>
+          </a>
+        }
+      </div>
+
+    </div>
+  </div>
+</section>

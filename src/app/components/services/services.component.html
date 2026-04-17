@@ -1,0 +1,31 @@
+<section class="services" id="services">
+  <div class="container">
+    @let c = content();
+
+    <span class="section-label">{{ c.label }}</span>
+    <h2 class="services__title">{{ c.headline }}</h2>
+
+    <div class="services__grid">
+      @for (service of c.services; track service.title) {
+        <div class="service-card">
+          <div class="service-card__header">
+            <span class="service-card__icon">{{ service.icon }}</span>
+            <span class="service-card__tag">{{ service.tag }}</span>
+          </div>
+          <h3 class="service-card__title">{{ service.title }}</h3>
+          <p class="service-card__description">{{ service.description }}</p>
+          @if (service.price) {
+            <p class="service-card__price">{{ service.price }}</p>
+          }
+          <ul class="service-card__features">
+            @for (f of service.features; track f) {
+              <li><span class="service-card__check">✓</span>{{ f }}</li>
+            }
+          </ul>
+          <a href="#contact" class="btn btn--outline service-card__cta">{{ service.cta }}</a>
+        </div>
+      }
+    </div>
+
+  </div>
+</section>

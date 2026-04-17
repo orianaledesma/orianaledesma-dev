@@ -1,0 +1,53 @@
+<section class="about" id="about">
+  <div class="container about__container">
+    @let c = content();
+
+    <div class="about__photo-wrap">
+      <div class="about__photo">
+        <span class="about__photo-initials">OL</span>
+      </div>
+      <div class="about__photo-glow" aria-hidden="true"></div>
+    </div>
+
+    <div class="about__content">
+      <span class="section-label">About</span>
+      <h2 class="about__headline">{{ c.headline }}</h2>
+
+      @for (paragraph of c.bio; track paragraph) {
+        <p class="about__bio">{{ paragraph }}</p>
+      }
+
+      @if (c.roles) {
+        <!-- Role cards -->
+        <div class="about__roles">
+          @for (role of c.roles; track role.title) {
+            <div class="about__role-card">
+              <h4 class="about__role-title">{{ role.title }}</h4>
+              <p class="about__role-tags">{{ role.tags }}</p>
+              <p class="about__role-stat">{{ role.stat }}</p>
+            </div>
+          }
+        </div>
+        @if (c.location) {
+          <p class="about__location">{{ c.location }}</p>
+        }
+      } @else {
+        <!-- Classic facts + skills -->
+        <div class="about__facts">
+          @for (fact of c.facts; track fact.label) {
+            <div class="about__fact">
+              <span class="about__fact-value">{{ fact.value }}</span>
+              <span class="about__fact-label">{{ fact.label }}</span>
+            </div>
+          }
+        </div>
+        <div class="about__skills">
+          @for (skill of c.skills; track skill) {
+            <span class="skill-pill">{{ skill }}</span>
+          }
+        </div>
+      }
+    </div>
+
+  </div>
+</section>

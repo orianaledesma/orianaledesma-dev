@@ -1,0 +1,52 @@
+<nav class="nav" [class.nav--scrolled]="scrolled()">
+  <div class="nav__inner">
+
+    <!-- Logo -->
+    <button class="nav__logo" (click)="scrollTo('hero')">
+      <span class="nav__logo-ori">Ori</span><span class="nav__logo-dot">.</span><span class="nav__logo-surname">Ledesma</span>
+    </button>
+
+    <!-- Desktop links -->
+    <ul class="nav__links">
+      @for (link of links; track link.fragment) {
+        <li>
+          <button class="nav__link" (click)="scrollTo(link.fragment)">
+            {{ link.label }}
+          </button>
+        </li>
+      }
+    </ul>
+
+    <!-- CTA -->
+    <button class="nav__cta" (click)="scrollTo('contact')">Let's talk</button>
+
+    <!-- Hamburger -->
+    <button
+      class="nav__hamburger"
+      [class.nav__hamburger--open]="menuOpen()"
+      (click)="toggleMenu()"
+      aria-label="Toggle menu"
+      [attr.aria-expanded]="menuOpen()"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+  </div>
+
+  <!-- Mobile menu -->
+  <div class="nav__mobile" [class.nav__mobile--open]="menuOpen()">
+    <ul class="nav__mobile-list">
+      @for (link of links; track link.fragment) {
+        <li>
+          <button class="nav__mobile-link" (click)="scrollTo(link.fragment)">
+            {{ link.label }}
+          </button>
+        </li>
+      }
+    </ul>
+    <button class="nav__mobile-cta" (click)="scrollTo('contact')">Let's talk</button>
+  </div>
+
+</nav>
