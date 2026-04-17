@@ -41,7 +41,6 @@ testem.log
 .env
 .env.*
 !.env.example
-src/environments/environment.prod.ts
 *.local
 
 # System files
