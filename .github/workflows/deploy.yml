@@ -62,9 +62,9 @@ jobs:
           EMAILJS_TEMPLATE_ID: ${{ secrets.EMAILJS_TEMPLATE_ID }}
           EMAILJS_PUBLIC_KEY:  ${{ secrets.EMAILJS_PUBLIC_KEY }}
         run: |
-          sed -i "s/serviceId:  ''/serviceId:  '$EMAILJS_SERVICE_ID'/" src/environments/environment.prod.ts
+          sed -i "s/serviceId: ''/serviceId: '$EMAILJS_SERVICE_ID'/" src/environments/environment.prod.ts
           sed -i "s/templateId: ''/templateId: '$EMAILJS_TEMPLATE_ID'/" src/environments/environment.prod.ts
-          sed -i "s/publicKey:  ''/publicKey:  '$EMAILJS_PUBLIC_KEY'/" src/environments/environment.prod.ts
+          sed -i "s/publicKey: ''/publicKey: '$EMAILJS_PUBLIC_KEY'/" src/environments/environment.prod.ts
 
       - name: Build for production
         run: npx ng build --configuration production
