@@ -8,6 +8,12 @@ import { ContactFormData } from '../models/contact.model';
 @Injectable({ providedIn: 'root' })
 export class ContactService {
   sendMessage(data: ContactFormData): Observable<void> {
+    const { serviceId, templateId, publicKey } = environment.emailjs;
+    console.log('[EmailJS] keys check →', {
+      serviceId:  serviceId.slice(0, 4)  || '(empty)',
+      templateId: templateId.slice(0, 4) || '(empty)',
+      publicKey:  publicKey.slice(0, 4)  || '(empty)',
+    });
     return from(
       emailjs.send(
         environment.emailjs.serviceId,

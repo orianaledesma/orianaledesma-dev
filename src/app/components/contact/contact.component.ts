@@ -18,7 +18,7 @@ const SOCIAL_LINKS: SocialLink[] = [
   { label: 'LinkedIn',  href: 'https://linkedin.com/in/orianaledesma',  icon: 'in' },
   { label: 'GitHub',    href: 'https://github.com/orianaledesma',       icon: 'gh' },
   { label: 'Instagram', href: 'https://instagram.com/exploriando',      icon: 'ig' },
-  { label: 'Email',     href: 'mailto:hola@exploriando.page',           icon: '@'  },
+  { label: 'Email',     href: 'mailto:hello@orianaledesma.dev',         icon: '@'  },
 ];
 
 const RATE_LIMIT_KEY     = 'contact_submissions';
@@ -38,7 +38,7 @@ export class ContactComponent {
   variant = input<HeroVariant>('technical');
 
   readonly socialLinks = SOCIAL_LINKS;
-  readonly calendlyUrl = 'https://calendly.com/exploriando-1/asesoria-personalizada-clone';
+  readonly calendlyUrl = 'https://calendly.com/hello-orianaledesma/30min';
 
   private readonly fb             = inject(FormBuilder);
   private readonly contactService = inject(ContactService);
