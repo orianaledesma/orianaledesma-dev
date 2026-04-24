@@ -1,0 +1,112 @@
+.availability {
+  background: var(--color-bg-soft);
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  &__slots {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--color-border);
+    flex-wrap: wrap;
+  }
+
+  &__closing {
+    font-size: 0.85rem;
+    font-weight: var(--font-semibold);
+    color: var(--color-text-muted);
+    letter-spacing: 0.02em;
+  }
+}
+
+// ── Slot card ─────────────────────────────────────────────────────────────────
+
+.slot-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.5rem;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  &__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+
+    &--open {
+      background: var(--color-accent);
+      animation: pulse 2s infinite;
+    }
+
+    &--closed {
+      background: var(--color-text-muted);
+      opacity: 0.5;
+    }
+  }
+
+  &__label {
+    font-size: 0.75rem;
+    font-weight: var(--font-semibold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  &__detail {
+    font-size: 0.9rem;
+    font-weight: var(--font-semibold);
+    color: var(--color-text);
+    line-height: 1.4;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.85); }
+}
+
+@media (max-width: 768px) {
+  .availability {
+    &__slots {
+      grid-template-columns: 1fr;
+    }
+
+    &__footer {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slot-card__dot--open {
+    animation: none;
+  }
+}

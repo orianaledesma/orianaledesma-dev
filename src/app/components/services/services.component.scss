@@ -19,22 +19,54 @@
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   transition: border-color var(--transition), transform var(--transition);
+  position: relative;
 
   &:hover {
     border-color: var(--color-accent);
     transform: translateY(-4px);
   }
 
-  &__header {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
+  @media (prefers-reduced-motion: reduce) {
+    &:hover { transform: none; }
   }
 
-  &__icon {
-    font-size: 1.4rem;
-    color: var(--color-accent);
-    line-height: 1;
+  // ── Label badge (MOST REQUESTED / FOR TEAMS / NICHE) ──────────────────────
+
+  &__label {
+    position: absolute;
+    top: -1px;
+    right: 1.5rem;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.62rem;
+    font-weight: var(--font-bold);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+    background: var(--color-accent);
+    color: var(--color-bg);
+
+    &--secondary {
+      background: var(--color-bg-soft);
+      color: var(--color-text-muted);
+      border: 1px solid var(--color-border);
+      border-top: none;
+    }
+  }
+
+  // ── Header (title + price) ────────────────────────────────────────────────
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding-top: 0.5rem;
+  }
+
+  &__title {
+    font-size: 1.2rem;
+    font-weight: var(--font-bold);
+    color: var(--color-text);
+    line-height: 1.2;
   }
 
   &__tag {
@@ -45,9 +77,11 @@
     color: var(--color-text-muted);
   }
 
-  &__title {
-    font-size: 1.3rem;
-    color: var(--color-text);
+  &__for {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+    font-style: italic;
   }
 
   &__description {
@@ -92,6 +126,6 @@
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
   .services__grid { grid-template-columns: 1fr; }
 }

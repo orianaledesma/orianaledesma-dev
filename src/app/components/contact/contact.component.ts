@@ -3,19 +3,19 @@ import {
   Component,
   computed,
   inject,
-  input,
   signal,
 } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { HeroVariant } from '../hero/hero.component';
 import { ContactService } from '../../services/contact.service';
 import { ContactFormData } from '../../models/contact.model';
+import { LanguageService } from '../../services/language.service';
+import { TRANSLATIONS } from '../../translations/translations';
 
 interface SocialLink { label: string; href: string; icon: string; }
 
 const SOCIAL_LINKS: SocialLink[] = [
-  { label: 'LinkedIn',  href: 'https://linkedin.com/in/orianaledesma',  icon: 'in' },
+  { label: 'LinkedIn',  href: 'https://www.linkedin.com/in/oriana-ledesma/',  icon: 'in' },
   { label: 'GitHub',    href: 'https://github.com/orianaledesma',       icon: 'gh' },
   { label: 'Instagram', href: 'https://instagram.com/exploriando',      icon: 'ig' },
   { label: 'Email',     href: 'mailto:hello@orianaledesma.dev',         icon: '@'  },
@@ -35,10 +35,16 @@ export type SubmitStatus = 'idle' | 'success' | 'error' | 'rateLimit';
   imports: [ReactiveFormsModule],
 })
 export class ContactComponent {
-  variant = input<HeroVariant>('technical');
-
   readonly socialLinks = SOCIAL_LINKS;
-  readonly calendlyUrl = 'https://calendly.com/hello-orianaledesma/30min';
+  readonly calendlyUrl = 'https://calendly.com/hello-orianaledesma/20min';
+
+  private readonly lang = inject(LanguageService);
+  readonly t = computed(() => TRANSLATIONS[this.lang.current()].contact);
+
+  /** Scrolls to contact section and focuses the first form field. */
+  focusForm(): void {
+    document.getElementById('contact-name')?.focus();
+  }
 
   private readonly fb             = inject(FormBuilder);
   private readonly contactService = inject(ContactService);

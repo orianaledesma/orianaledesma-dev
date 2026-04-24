@@ -79,6 +79,188 @@
     &:hover { color: var(--color-text); }
   }
 
+  // ── External link (Exploriando ↗) ────────────────────────────────────────
+
+  &__link-external {
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: var(--font-family);
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: color var(--transition);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--color-accent);
+      opacity: 1;
+    }
+  }
+
+  // ── Language dropdown ─────────────────────────────────────────────────────
+
+  &__lang {
+    position: relative;
+    flex-shrink: 0;
+
+    &--mobile {
+      position: static;
+      display: flex;
+      align-items: center;
+      gap: 0.15rem;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-pill);
+      padding: 0.35rem 0.1rem;
+      margin: 0 var(--space-md) 0.75rem;
+    }
+  }
+
+  &__lang-trigger {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    background: none;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-pill);
+    padding: 0.3rem 0.55rem 0.3rem 0.45rem;
+    cursor: pointer;
+    color: var(--color-text-muted);
+    transition: border-color var(--transition), color var(--transition);
+
+    &:hover {
+      border-color: var(--color-accent);
+      color: var(--color-text);
+    }
+  }
+
+  &__lang-icon {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+
+    svg {
+      width: 12px;
+      height: 12px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+  }
+
+  &__lang--mobile &__lang-icon {
+    padding: 0 0.4rem 0 0.55rem;
+  }
+
+  &__lang-active {
+    font-family: var(--font-family);
+    font-size: 0.62rem;
+    font-weight: var(--font-bold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text);
+  }
+
+  &__lang-chevron {
+    width: 10px;
+    height: 10px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex-shrink: 0;
+    transition: transform var(--transition);
+  }
+
+  &__lang--open &__lang-chevron {
+    transform: rotate(180deg);
+  }
+
+  &__lang-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 998;
+  }
+
+  &__lang-dropdown {
+    position: absolute;
+    top: calc(100% + 0.4rem);
+    right: 0;
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    list-style: none;
+    padding: 0.25rem;
+    min-width: 80px;
+    z-index: 999;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  }
+
+  &__lang-option {
+    display: block;
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 0.45rem 0.75rem;
+    font-family: var(--font-family);
+    font-size: 0.65rem;
+    font-weight: var(--font-bold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    text-align: left;
+    border-radius: var(--radius-sm);
+    transition: background var(--transition), color var(--transition);
+
+    &--active {
+      color: var(--color-accent);
+      background: var(--color-accent-dim);
+      cursor: default;
+    }
+
+    &:not(&--active):hover {
+      color: var(--color-text);
+      background: var(--color-bg-soft);
+    }
+  }
+
+  // ── Mobile pill toggle (inside drawer) ────────────────────────────────────
+
+  &__lang-btn {
+    background: none;
+    border: none;
+    padding: 0.35rem 0.65rem;
+    border-radius: var(--radius-pill);
+    font-family: var(--font-family);
+    font-size: 0.62rem;
+    font-weight: var(--font-bold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: background var(--transition), color var(--transition);
+    display: inline-flex;
+    align-items: center;
+    min-height: 28px;
+
+    &--active {
+      background: var(--color-accent);
+      color: var(--color-bg);
+      cursor: default;
+    }
+
+    &:not(&--active):hover {
+      color: var(--color-text);
+    }
+  }
+
   // ── CTA button ────────────────────────────────────────────────────────────
 
   &__cta {
@@ -144,7 +326,7 @@
     transition: max-height 0.3s ease;
 
     &--open {
-      max-height: 360px;
+      max-height: 480px;
     }
   }
 
@@ -205,6 +387,8 @@
   .nav {
     &__links,
     &__cta { display: none; }
+
+    &__inner &__lang { display: none; }
 
     &__hamburger { display: flex; }
 

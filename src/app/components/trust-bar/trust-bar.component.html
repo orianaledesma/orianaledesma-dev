@@ -1,0 +1,11 @@
+<section class="trust-bar" aria-label="Credentials">
+  <div class="container">
+    <ul class="trust-bar__list" role="list">
+      @for (item of t().items; track item) {
+        <li class="trust-bar__item" role="listitem">
+          <span class="trust-bar__text">{{ item }}</span>
+        </li>
+      }
+    </ul>
+  </div>
+</section>

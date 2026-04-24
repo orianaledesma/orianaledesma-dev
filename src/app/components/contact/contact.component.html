@@ -3,24 +3,24 @@
     <div class="contact__wrapper">
 
       <!-- Header -->
-      <span class="contact__label">Let's work together</span>
-      <h2 class="contact__headline">Have a project in mind?</h2>
-      <p class="contact__sub">Book a free 30-min call. No commitment.</p>
+      <h2 class="contact__headline">{{ t().h2 }}</h2>
+      <p class="contact__sub">{{ t().sub }}</p>
 
-      <!-- Calendly CTA -->
+      <!-- Calendly CTA (secondary) -->
       <a
         [href]="calendlyUrl"
         target="_blank"
         rel="noopener"
-        class="btn btn--primary contact__calendly-btn"
+        class="btn btn--outline contact__calendly-btn"
+        [attr.aria-label]="t().calendlyCta + ', opens in new tab'"
       >
-        Book a Free Call
+        {{ t().calendlyCta }}
       </a>
 
       <!-- Separator -->
       <div class="contact__separator">
         <span class="contact__separator-line"></span>
-        <span class="contact__separator-text">or</span>
+        <span class="contact__separator-text">{{ t().separator }}</span>
         <span class="contact__separator-line"></span>
       </div>
 
@@ -46,20 +46,20 @@
           class="form-field"
           [class.form-field--error]="nameCtrl.invalid && nameCtrl.touched"
         >
-          <label class="form-field__label" for="contact-name">Name</label>
+          <label class="form-field__label" for="contact-name">{{ t().form.nameLbl }}</label>
           <input
             id="contact-name"
             class="form-field__input"
             type="text"
             formControlName="name"
-            placeholder="Your name"
+            [placeholder]="t().form.namePlaceholder"
             autocomplete="name"
           />
           @if (nameCtrl.invalid && nameCtrl.touched) {
             <span class="form-field__error" data-testid="name-error">
-              @if (nameCtrl.hasError('required')) { Name is required }
-              @else if (nameCtrl.hasError('minlength')) { At least 2 characters required }
-              @else if (nameCtrl.hasError('maxlength')) { Maximum 50 characters }
+              @if (nameCtrl.hasError('required')) { {{ t().form.nameRequired }} }
+              @else if (nameCtrl.hasError('minlength')) { {{ t().form.nameMin }} }
+              @else if (nameCtrl.hasError('maxlength')) { {{ t().form.nameMax }} }
             </span>
           }
         </div>
@@ -69,7 +69,7 @@
           class="form-field"
           [class.form-field--error]="emailCtrl.invalid && emailCtrl.touched"
         >
-          <label class="form-field__label" for="contact-email">Email</label>
+          <label class="form-field__label" for="contact-email">{{ t().form.emailLbl }}</label>
           <input
             id="contact-email"
             class="form-field__input"
@@ -80,8 +80,8 @@
           />
           @if (emailCtrl.invalid && emailCtrl.touched) {
             <span class="form-field__error" data-testid="email-error">
-              @if (emailCtrl.hasError('required')) { Email is required }
-              @else { Enter a valid email address }
+              @if (emailCtrl.hasError('required')) { {{ t().form.emailRequired }} }
+              @else { {{ t().form.emailInvalid }} }
             </span>
           }
         </div>
@@ -92,7 +92,7 @@
           [class.form-field--error]="messageCtrl.invalid && messageCtrl.touched"
         >
           <div class="form-field__label-row">
-            <label class="form-field__label" for="contact-message">Message</label>
+            <label class="form-field__label" for="contact-message">{{ t().form.messageLbl }}</label>
             <span class="form-field__counter" [class.form-field__counter--over]="messageLen() > 500">
               {{ messageLen() }} / 500
             </span>
@@ -101,14 +101,14 @@
             id="contact-message"
             class="form-field__input form-field__input--textarea"
             formControlName="message"
-            placeholder="Tell me about your project..."
+            [placeholder]="t().form.messagePlaceholder"
             rows="5"
           ></textarea>
           @if (messageCtrl.invalid && messageCtrl.touched) {
             <span class="form-field__error" data-testid="message-error">
-              @if (messageCtrl.hasError('required')) { Message is required }
-              @else if (messageCtrl.hasError('minlength')) { At least 10 characters required }
-              @else if (messageCtrl.hasError('maxlength')) { Maximum 500 characters }
+              @if (messageCtrl.hasError('required')) { {{ t().form.messageRequired }} }
+              @else if (messageCtrl.hasError('minlength')) { {{ t().form.messageMin }} }
+              @else if (messageCtrl.hasError('maxlength')) { {{ t().form.messageMax }} }
             </span>
           }
         </div>
@@ -116,28 +116,28 @@
         <!-- Submit feedback -->
         @if (submitStatus() === 'success') {
           <p class="contact__feedback contact__feedback--success" data-testid="success-message">
-            Message sent! I'll reply within 24h.
+            {{ t().form.success }}
           </p>
         }
         @if (submitStatus() === 'error') {
           <p class="contact__feedback contact__feedback--error" data-testid="error-message">
-            Something went wrong. Email me directly at
+            {{ t().form.error }}
             <a href="mailto:hello&#64;orianaledesma.dev">hello&#64;orianaledesma.dev</a>
           </p>
         }
         @if (submitStatus() === 'rateLimit') {
           <p class="contact__feedback contact__feedback--error" data-testid="rate-limit-message">
-            Too many attempts. Please wait 10 minutes before trying again.
+            {{ t().form.rateLimit }}
           </p>
         }
 
         <button
           type="submit"
-          class="btn btn--outline contact__submit-btn"
+          class="btn btn--primary contact__submit-btn"
           [disabled]="sending()"
           data-testid="submit-button"
         >
-          {{ sending() ? 'Sending…' : 'Send message' }}
+          {{ sending() ? t().form.sending : t().form.submit }}
         </button>
       </form>
 
@@ -158,4 +158,6 @@
 
     </div>
   </div>
+
+  <footer class="footer-tagline">{{ t().footer }}</footer>
 </section>

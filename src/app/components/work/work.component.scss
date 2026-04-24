@@ -1,4 +1,6 @@
 .work {
+  background: var(--color-bg-soft);
+
   &__header {
     display: flex;
     justify-content: space-between;
@@ -35,6 +37,8 @@
 
     .case-card__image {
       width: 480px;
+      height: unset;
+      min-height: 280px;
       flex-shrink: 0;
     }
   }
@@ -94,7 +98,7 @@
     font-family: var(--font-family);
     font-size: 1.6rem;
     font-weight: var(--font-bold);
-    color: #fff;
+    color: var(--color-bg);
     letter-spacing: -0.01em;
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   }
@@ -114,6 +118,33 @@
 
   // ── Body ───────────────────────────────────────────────────────────────────
 
+  &--placeholder {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-style: dashed;
+    opacity: 0.7;
+    gap: 2rem;
+
+    &:hover {
+      opacity: 1;
+      border-style: dashed;
+    }
+
+    .case-card__image { display: none; }
+
+    .case-card__body {
+      padding: 1.5rem 2rem;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+  }
+
   &__body {
     display: flex;
     flex-direction: column;
@@ -130,6 +161,13 @@
     color: var(--color-accent);
   }
 
+  &__role {
+    font-size: 0.78rem;
+    font-weight: var(--font-semibold);
+    color: var(--color-text-muted);
+    letter-spacing: 0.04em;
+  }
+
   &__title {
     font-size: 1.25rem;
     color: var(--color-text);
@@ -139,6 +177,46 @@
     font-size: 0.9rem;
     line-height: 1.7;
     flex: 1;
+  }
+
+  &__bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-top: 0.25rem;
+
+    li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+      line-height: 1.5;
+
+      &::before {
+        content: '—';
+        color: var(--color-accent);
+        flex-shrink: 0;
+        font-size: 0.75rem;
+        margin-top: 1px;
+      }
+    }
+  }
+
+  &__quote {
+    margin-top: 0.5rem;
+    padding: 0.85rem 1rem;
+    border-left: 2px solid var(--color-accent);
+    background: var(--color-accent-dim);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+
+    p {
+      font-size: 0.88rem;
+      font-style: italic;
+      color: var(--color-text);
+      line-height: 1.6;
+    }
   }
 
   &__stack {

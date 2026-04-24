@@ -2,7 +2,7 @@
   &__container {
     display: grid;
     grid-template-columns: 1fr 2fr;
-    gap: 5rem;
+    gap: var(--space-xl);
     align-items: flex-start;
   }
 
@@ -55,12 +55,31 @@
   }
 
   &__answer {
-    padding: 0 1rem 1.5rem;
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.28s ease;
+    overflow: hidden;
+
+    &-inner {
+      overflow: hidden;
+      padding: 0 1rem;
+    }
 
     p {
       font-size: 0.9rem;
       line-height: 1.8;
+      padding-bottom: 1.5rem;
     }
+  }
+
+  &--open &__answer {
+    grid-template-rows: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-item__answer {
+    transition: none;
   }
 }
 

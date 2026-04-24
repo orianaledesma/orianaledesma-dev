@@ -5,42 +5,29 @@
 
     <!-- LEFT: Text content -->
     <div class="hero__content">
-      @let c = content();
 
       <span class="badge">
-        <span class="badge__dot"></span>
-        {{ c.badge }}
+        <span class="badge__dot" aria-hidden="true"></span>
+        <span>{{ t().badge }}</span>
       </span>
 
-      <h1 class="hero__headline">
-        @for (line of c.headline; track line.text) {
-          <span
-            class="hero__headline-line"
-            [class.hero__headline-line--italic]="line.italic"
-            [class.hero__headline-line--accent]="line.accent"
-          >{{ line.text }}</span>
-        }
-      </h1>
+      <h1 class="hero__headline">{{ t().h1 }}</h1>
 
-      <p class="hero__subheadline">{{ c.subheadline }}</p>
-
-      @if (c.description) {
-        <p class="hero__description">{{ c.description }}</p>
-      }
+      <p class="hero__subheadline">{{ t().subheadline }}</p>
 
       <div class="hero__actions">
-        <a href="#contact" class="btn btn--primary">{{ c.ctaPrimary }}</a>
-        <a href="#work" class="btn btn--outline">{{ c.ctaSecondary }}</a>
+        <a href="#services" class="btn btn--primary">{{ t().ctaPrimary }}</a>
+        <a
+          [href]="calendlyUrl"
+          target="_blank"
+          rel="noopener"
+          class="btn btn--outline"
+          [attr.aria-label]="t().ctaSecondary + ', opens in new tab'"
+        >{{ t().ctaSecondary }}</a>
       </div>
 
-      <div class="hero__stats">
-        @for (stat of c.stats; track stat.label) {
-          <div class="stat">
-            <span class="stat__value">{{ stat.value }}</span>
-            <span class="stat__label">{{ stat.label }}</span>
-          </div>
-        }
-      </div>
+      <p class="hero__tagline">{{ t().tagline }}</p>
+
     </div>
 
     <!-- RIGHT: Photo -->
@@ -48,11 +35,12 @@
       <div class="hero__photo-placeholder">
         <img
           src="assets/images/profile/hero.png"
-          alt="Oriana Ledesma — Angular Developer"
+          alt="Oriana Ledesma — Frontend Engineer"
           class="hero__photo-img"
           width="420"
           height="520"
           loading="eager"
+          fetchpriority="high"
         />
       </div>
       <div class="hero__photo-glow" aria-hidden="true"></div>

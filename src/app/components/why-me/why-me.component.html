@@ -1,0 +1,20 @@
+<section class="why-me" id="why-me" aria-labelledby="why-me-heading">
+  <div class="container">
+    <div class="why-me__inner">
+
+      <div class="why-me__header">
+        <h2 id="why-me-heading">{{ t().h2 }}</h2>
+      </div>
+
+      <ul class="why-me__list" role="list">
+        @for (bullet of t().bullets; track bullet) {
+          <li class="why-me__item">
+            <span class="why-me__marker" aria-hidden="true"></span>
+            <span class="why-me__text">{{ bullet }}</span>
+          </li>
+        }
+      </ul>
+
+    </div>
+  </div>
+</section>

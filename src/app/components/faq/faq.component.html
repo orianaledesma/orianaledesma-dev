@@ -1,28 +1,35 @@
 <section class="faq" id="faq">
   <div class="container faq__container">
-    @let c = content();
 
     <div class="faq__header">
-      <span class="section-label">{{ c.label }}</span>
-      <h2>{{ c.headline }}</h2>
+      <span class="section-label">FAQ</span>
+      <h2>{{ t().h2 }}</h2>
     </div>
 
     <div class="faq__list">
-      @for (item of c.items; track item.question; let i = $index) {
+      @for (item of t().items; track item.question; let i = $index) {
         <div class="faq-item" [class.faq-item--open]="openIndex() === i">
           <button
             class="faq-item__question"
-            (click)="toggle(i)"
+            [id]="'faq-btn-' + i"
             [attr.aria-expanded]="openIndex() === i"
+            [attr.aria-controls]="'faq-panel-' + i"
+            (click)="toggle(i)"
           >
             <span>{{ item.question }}</span>
             <span class="faq-item__icon" aria-hidden="true">{{ openIndex() === i ? '−' : '+' }}</span>
           </button>
-          @if (openIndex() === i) {
-            <div class="faq-item__answer">
+
+          <div
+            role="region"
+            class="faq-item__answer"
+            [id]="'faq-panel-' + i"
+            [attr.aria-labelledby]="'faq-btn-' + i"
+          >
+            <div class="faq-item__answer-inner">
               <p>{{ item.answer }}</p>
             </div>
-          }
+          </div>
         </div>
       }
     </div>

@@ -1,0 +1,34 @@
+<section class="availability" id="availability" aria-labelledby="availability-heading">
+  <div class="container">
+    <div class="availability__inner">
+
+      <div class="availability__header">
+        <span class="section-label">{{ t().sectionLabel }}</span>
+        <h2 id="availability-heading">{{ t().h2 }}</h2>
+      </div>
+
+      <div class="availability__slots">
+        @for (slot of t().slots; track slot.label) {
+          <div class="slot-card">
+            <div class="slot-card__header">
+              <span
+                class="slot-card__dot"
+                [class.slot-card__dot--open]="slot.open"
+                [class.slot-card__dot--closed]="!slot.open"
+                aria-hidden="true"
+              ></span>
+              <span class="slot-card__label">{{ slot.label }}</span>
+            </div>
+            <p class="slot-card__detail">{{ slot.detail }}</p>
+          </div>
+        }
+      </div>
+
+      <div class="availability__footer">
+        <p class="availability__closing">{{ t().closing }}</p>
+        <a href="#contact" class="btn btn--primary">{{ t().cta }}</a>
+      </div>
+
+    </div>
+  </div>
+</section>

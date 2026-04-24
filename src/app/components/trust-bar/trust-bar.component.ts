@@ -3,14 +3,12 @@ import { LanguageService } from '../../services/language.service';
 import { TRANSLATIONS } from '../../translations/translations';
 
 @Component({
-  selector: 'app-hero',
-  templateUrl: './hero.component.html',
-  styleUrl: './hero.component.scss',
+  selector: 'app-trust-bar',
+  templateUrl: './trust-bar.component.html',
+  styleUrl: './trust-bar.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeroComponent {
-  readonly calendlyUrl = 'https://calendly.com/hello-orianaledesma/20min';
-
+export class TrustBarComponent {
   private readonly lang = inject(LanguageService);
-  readonly t = computed(() => TRANSLATIONS[this.lang.current()].hero);
+  readonly t = computed(() => TRANSLATIONS[this.lang.current()].trustBar);
 }

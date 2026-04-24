@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, input, signal } from '@angular/core';
-import { HeroVariant } from '../hero/hero.component';
+
+type HeroVariant = 'technical' | 'narrative' | 'brand';
 
 interface Testimonial {
   quote:       string;

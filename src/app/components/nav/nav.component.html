@@ -1,24 +1,78 @@
-<nav class="nav" [class.nav--scrolled]="scrolled()">
+<nav
+  class="nav"
+  [class.nav--scrolled]="scrolled()"
+  role="navigation"
+  aria-label="Main navigation"
+>
   <div class="nav__inner">
 
     <!-- Logo -->
-    <button class="nav__logo" (click)="scrollTo('hero')">
+    <button class="nav__logo" (click)="scrollTo('hero')" aria-label="Go to top">
       <span class="nav__logo-ori">Ori</span><span class="nav__logo-dot">.</span><span class="nav__logo-surname">Ledesma</span>
     </button>
 
     <!-- Desktop links -->
     <ul class="nav__links">
-      @for (link of links; track link.fragment) {
+      @for (link of t().links; track link.fragment) {
         <li>
           <button class="nav__link" (click)="scrollTo(link.fragment)">
             {{ link.label }}
           </button>
         </li>
       }
+      @for (ext of externalLinks; track ext.href) {
+        <li>
+          <a
+            [href]="ext.href"
+            target="_blank"
+            rel="noopener"
+            class="nav__link nav__link-external"
+            [attr.aria-label]="ext.label + ', opens in new tab'"
+          >{{ ext.label }}</a>
+        </li>
+      }
     </ul>
 
+    <!-- Language dropdown -->
+    <div class="nav__lang" [class.nav__lang--open]="langOpen()">
+      <button
+        class="nav__lang-trigger"
+        (click)="toggleLang()"
+        [attr.aria-expanded]="langOpen()"
+        aria-haspopup="listbox"
+        aria-label="Select language"
+      >
+        <span class="nav__lang-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="2" y1="12" x2="22" y2="12"/>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+        </span>
+        <span class="nav__lang-active">{{ activeLang() }}</span>
+        <svg class="nav__lang-chevron" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </button>
+      @if (langOpen()) {
+        <div class="nav__lang-backdrop" (click)="closeLang()"></div>
+        <ul class="nav__lang-dropdown" role="listbox" aria-label="Select language">
+          @for (lang of languages; track lang.code) {
+            <li role="option" [attr.aria-selected]="lang.code === activeLang()">
+              <button
+                class="nav__lang-option"
+                [class.nav__lang-option--active]="lang.code === activeLang()"
+                [attr.aria-label]="lang.code === activeLang() ? lang.code + ' — current language' : 'Switch to ' + lang.code"
+                (click)="setLang(lang.code)"
+              >{{ lang.code }}</button>
+            </li>
+          }
+        </ul>
+      }
+    </div>
+
     <!-- CTA -->
-    <button class="nav__cta" (click)="scrollTo('contact')">Let's talk</button>
+    <button class="nav__cta" (click)="scrollTo('contact')">{{ t().cta }}</button>
 
     <!-- Hamburger -->
     <button
@@ -27,6 +81,7 @@
       (click)="toggleMenu()"
       aria-label="Toggle menu"
       [attr.aria-expanded]="menuOpen()"
+      aria-controls="mobile-menu"
     >
       <span></span>
       <span></span>
@@ -36,17 +91,50 @@
   </div>
 
   <!-- Mobile menu -->
-  <div class="nav__mobile" [class.nav__mobile--open]="menuOpen()">
+  <div
+    class="nav__mobile"
+    [class.nav__mobile--open]="menuOpen()"
+    id="mobile-menu"
+  >
     <ul class="nav__mobile-list">
-      @for (link of links; track link.fragment) {
+      @for (link of t().links; track link.fragment) {
         <li>
           <button class="nav__mobile-link" (click)="scrollTo(link.fragment)">
             {{ link.label }}
           </button>
         </li>
       }
+      @for (ext of externalLinks; track ext.href) {
+        <li>
+          <a
+            [href]="ext.href"
+            target="_blank"
+            rel="noopener"
+            class="nav__mobile-link"
+          >{{ ext.label }}</a>
+        </li>
+      }
     </ul>
-    <button class="nav__mobile-cta" (click)="scrollTo('contact')">Let's talk</button>
+
+    <!-- Mobile lang toggle -->
+    <div class="nav__lang nav__lang--mobile" role="group" aria-label="Language selector">
+      <span class="nav__lang-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="2" y1="12" x2="22" y2="12"/>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        </svg>
+      </span>
+      @for (lang of languages; track lang.code) {
+        <button
+          class="nav__lang-btn"
+          [class.nav__lang-btn--active]="lang.code === activeLang()"
+          (click)="setLang(lang.code)"
+        >{{ lang.code }}</button>
+      }
+    </div>
+
+    <button class="nav__mobile-cta" (click)="scrollTo('contact')">{{ t().cta }}</button>
   </div>
 
 </nav>

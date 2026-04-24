@@ -1,21 +1,19 @@
 <section class="work" id="work">
   <div class="container">
-    @let c = content();
 
     <div class="work__header">
       <div>
-        <span class="section-label">{{ c.label }}</span>
-        <h2>{{ c.headline }}</h2>
+        <span class="section-label">{{ t().sectionLabel }}</span>
+        <h2>{{ t().h2 }}</h2>
       </div>
-      <a href="#contact" class="btn btn--outline">Start a project →</a>
     </div>
 
     <div class="work__grid">
-      @for (item of c.cases; track item.title; let i = $index) {
+      @for (item of cases; track item.title; let i = $index) {
         <article
           class="case-card"
           [class.case-card--wide]="i === 0"
-          [class.case-card--muted]="item.status === 'in-progress'"
+          [class.case-card--placeholder]="item.placeholder"
         >
           <!-- Image area -->
           <div class="case-card__image">
@@ -27,14 +25,11 @@
                 loading="lazy"
               />
             } @else if (item.brandedBg) {
-              <div
-                class="case-card__branded"
-                [style.background]="item.brandedBg"
-              >
-                <span class="case-card__branded-text">{{ item.brandedText }}</span>
+              <div class="case-card__branded" [style.background]="item.brandedBg">
+                <span class="case-card__branded-text">{{ item.title }}</span>
               </div>
             } @else {
-              <span class="case-card__placeholder">{{ item.title[0] }}</span>
+              <span class="case-card__placeholder-icon" aria-hidden="true">{{ item.title[0] }}</span>
             }
           </div>
 
@@ -42,33 +37,46 @@
           <div class="case-card__body">
             <span class="case-card__category">{{ item.category }}</span>
             <h3 class="case-card__title">{{ item.title }}</h3>
-            <p class="case-card__description">{{ item.description }}</p>
 
-            <div class="case-card__stack">
-              @for (tech of item.stack; track tech) {
-                <span class="tech-pill">{{ tech }}</span>
-              }
-            </div>
+            @if (item.role) {
+              <p class="case-card__role">{{ item.role }}</p>
+            }
 
-            @if (item.link) {
+            @if (item.bullets.length > 0) {
+              <ul class="case-card__bullets">
+                @for (b of item.bullets; track b) {
+                  <li>{{ b }}</li>
+                }
+              </ul>
+            }
+
+            @if (item.stack.length > 0) {
+              <div class="case-card__stack">
+                @for (tech of item.stack; track tech) {
+                  <span class="tech-pill">{{ tech }}</span>
+                }
+              </div>
+            }
+
+            @if (item.quote) {
+              <div class="case-card__quote">
+                <p>{{ item.quote }}</p>
+              </div>
+            }
+
+            @if (item.cta && item.ctaHref) {
               <a
-                [href]="item.link"
+                [href]="item.ctaHref"
                 target="_blank"
                 rel="noopener"
                 class="case-card__action case-card__action--link"
-              >
-                {{ item.actionTag }}
-              </a>
-            } @else {
-              <span
-                class="case-card__action"
-                [class.case-card__action--nda]="item.status === 'nda'"
-                [class.case-card__action--progress]="item.status === 'in-progress'"
-              >
-                {{ item.actionTag }}
-              </span>
+                [attr.aria-label]="item.title + ', opens in new tab'"
+              >{{ item.cta }}</a>
+            } @else if (item.cta && item.placeholder) {
+              <a href="#contact" class="case-card__action case-card__action--link">{{ item.cta }}</a>
             }
           </div>
+
         </article>
       }
     </div>
