@@ -10,6 +10,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { ContactService } from '../../services/contact.service';
 import { ContactFormData } from '../../models/contact.model';
 import { LanguageService } from '../../services/language.service';
+import { AnalyticsService } from '../../services/analytics.service';
 import { TRANSLATIONS } from '../../translations/translations';
 
 interface SocialLink { label: string; href: string; icon: string; }
@@ -48,6 +49,7 @@ export class ContactComponent {
 
   private readonly fb             = inject(FormBuilder);
   private readonly contactService = inject(ContactService);
+  private readonly analytics      = inject(AnalyticsService);
 
   contactForm = this.fb.group({
     name:    ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
@@ -103,10 +105,12 @@ export class ContactComponent {
         this.recordSubmission();
         this.contactForm.reset();
         this.sending.set(false);
+        this.analytics.track('contact_form_submit');
       },
       error: () => {
         this.submitStatus.set('error');
         this.sending.set(false);
+        this.analytics.track('contact_form_error');
       },
     });
   }

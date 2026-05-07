@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { LanguageService } from '../../services/language.service';
+import { AnalyticsService } from '../../services/analytics.service';
 import { TRANSLATIONS } from '../../translations/translations';
 
 @Component({
@@ -12,5 +13,16 @@ export class HeroComponent {
   readonly calendlyUrl = 'https://calendly.com/hello-orianaledesma/20min';
 
   private readonly lang = inject(LanguageService);
+  private readonly analytics = inject(AnalyticsService);
   readonly t = computed(() => TRANSLATIONS[this.lang.current()].hero);
+
+  /** Tracking: CTA primario del hero (See plans & pricing → #services). */
+  onCtaPrimaryClick(): void {
+    this.analytics.track('hero_cta_primary_click');
+  }
+
+  /** Tracking: CTA secundario del hero (Short intro call → Calendly). */
+  onCtaSecondaryClick(): void {
+    this.analytics.track('hero_cta_secondary_click');
+  }
 }

@@ -70,10 +70,12 @@
                 target="_blank"
                 rel="noopener"
                 class="case-card__action case-card__action--link"
+                (click)="onCaseCtaClick(item)"
                 [attr.aria-label]="item.title + ', opens in new tab'"
               >{{ item.cta }}</a>
             } @else if (item.cta && item.placeholder) {
-              <a href="#contact" class="case-card__action case-card__action--link">{{ item.cta }}</a>
+              <a href="#contact" class="case-card__action case-card__action--link"
+                 (click)="onCaseCtaClick(item)">{{ item.cta }}</a>
             }
           </div>
 

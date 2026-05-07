@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { NAV_COPY } from './nav.copy';
 import { LanguageService } from '../../services/language.service';
+import { AnalyticsService } from '../../services/analytics.service';
 import { TRANSLATIONS } from '../../translations/translations';
 import { Lang } from '../../models/language.model';
 
@@ -23,6 +24,7 @@ export class NavComponent {
   langOpen  = signal(false);
 
   private readonly langService = inject(LanguageService);
+  private readonly analytics   = inject(AnalyticsService);
 
   readonly activeLang  = computed(() => this.langService.current().toUpperCase());
   readonly t           = computed(() => TRANSLATIONS[this.langService.current()].nav);
@@ -56,5 +58,11 @@ export class NavComponent {
     this.langService.set(code.toLowerCase() as Lang);
     this.menuOpen.set(false);
     this.langOpen.set(false);
+  }
+
+  /** Tracking: click en el CTA del nav (desktop o mobile) → scroll a #contact. */
+  onCtaClick(): void {
+    this.analytics.track('nav_cta_click');
+    this.scrollTo('contact');
   }
 }

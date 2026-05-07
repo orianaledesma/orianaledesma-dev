@@ -26,6 +26,16 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Google Analytics GA4 -->
+  <!-- Single-page con anchors: el pageview automático de gtag es suficiente, no hay rutas SPA. -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-33HPNM69MM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-33HPNM69MM');
+  </script>
 </head>
 <body>
   <a href="#hero" class="skip-link">Skip to main content</a>

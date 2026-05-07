@@ -3,6 +3,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { of, throwError } from 'rxjs';
 import { ContactComponent } from './contact.component';
 import { ContactService } from '../../services/contact.service';
+import { AnalyticsService } from '../../services/analytics.service';
 
 const VALID_FORM = {
   name:    'Test User',
@@ -15,6 +16,7 @@ describe('ContactComponent', () => {
   let component: ContactComponent;
   let fixture:   ComponentFixture<ContactComponent>;
   let mockContactService: jasmine.SpyObj<ContactService>;
+  let trackSpy: jasmine.Spy;
 
   beforeEach(async () => {
     mockContactService = jasmine.createSpyObj<ContactService>('ContactService', ['sendMessage']);
@@ -26,6 +28,7 @@ describe('ContactComponent', () => {
 
     fixture   = TestBed.createComponent(ContactComponent);
     component = fixture.componentInstance;
+    trackSpy  = spyOn(TestBed.inject(AnalyticsService), 'track');
     fixture.detectChanges();
   });
 
@@ -209,5 +212,25 @@ describe('ContactComponent', () => {
 
     expect(mockContactService.sendMessage).toHaveBeenCalledTimes(1);
     expect(component.submitStatus()).toBe('success');
+  }));
+
+  // ── Analytics ─────────────────────────────────────────────────────────────
+
+  it('trackea contact_form_submit en submit exitoso', fakeAsync(() => {
+    mockContactService.sendMessage.and.returnValue(of(undefined));
+    component.contactForm.setValue(VALID_FORM);
+    tick();
+    component.onSubmit();
+
+    expect(trackSpy).toHaveBeenCalledWith('contact_form_submit');
+  }));
+
+  it('trackea contact_form_error en submit con error', fakeAsync(() => {
+    mockContactService.sendMessage.and.returnValue(throwError(() => new Error('boom')));
+    component.contactForm.setValue(VALID_FORM);
+    tick();
+    component.onSubmit();
+
+    expect(trackSpy).toHaveBeenCalledWith('contact_form_error');
   }));
 });

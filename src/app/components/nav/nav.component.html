@@ -72,7 +72,7 @@
     </div>
 
     <!-- CTA -->
-    <button class="nav__cta" (click)="scrollTo('contact')">{{ t().cta }}</button>
+    <button class="nav__cta" (click)="onCtaClick()">{{ t().cta }}</button>
 
     <!-- Hamburger -->
     <button
@@ -134,7 +134,7 @@
       }
     </div>
 
-    <button class="nav__mobile-cta" (click)="scrollTo('contact')">{{ t().cta }}</button>
+    <button class="nav__mobile-cta" (click)="onCtaClick()">{{ t().cta }}</button>
   </div>
 
 </nav>

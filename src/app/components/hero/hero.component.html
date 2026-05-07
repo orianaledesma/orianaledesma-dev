@@ -16,12 +16,13 @@
       <p class="hero__subheadline">{{ t().subheadline }}</p>
 
       <div class="hero__actions">
-        <a href="#services" class="btn btn--primary">{{ t().ctaPrimary }}</a>
+        <a href="#services" class="btn btn--primary" (click)="onCtaPrimaryClick()">{{ t().ctaPrimary }}</a>
         <a
           [href]="calendlyUrl"
           target="_blank"
           rel="noopener"
           class="btn btn--outline"
+          (click)="onCtaSecondaryClick()"
           [attr.aria-label]="t().ctaSecondary + ', opens in new tab'"
         >{{ t().ctaSecondary }}</a>
       </div>
