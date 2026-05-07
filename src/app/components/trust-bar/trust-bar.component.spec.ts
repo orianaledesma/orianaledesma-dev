@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TrustBarComponent } from './trust-bar.component';
-import { TRUST_BAR_COPY } from './trust-bar.copy';
+import { LanguageService } from '../../services/language.service';
+import { TRANSLATIONS } from '../../translations/translations';
 
 describe('TrustBarComponent', () => {
   let fixture: ComponentFixture<TrustBarComponent>;
@@ -11,6 +12,7 @@ describe('TrustBarComponent', () => {
       imports: [TrustBarComponent],
     }).compileComponents();
 
+    TestBed.inject(LanguageService).set('en');
     fixture = TestBed.createComponent(TrustBarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -22,12 +24,12 @@ describe('TrustBarComponent', () => {
 
   it('should render all trust bar items', () => {
     const items = fixture.nativeElement.querySelectorAll('.trust-bar__text');
-    expect(items.length).toBe(TRUST_BAR_COPY.items.length);
+    expect(items.length).toBe(TRANSLATIONS.en.trustBar.items.length);
   });
 
   it('should render correct text for each item', () => {
     const items = fixture.nativeElement.querySelectorAll('.trust-bar__text');
-    TRUST_BAR_COPY.items.forEach((text, i) => {
+    TRANSLATIONS.en.trustBar.items.forEach((text, i) => {
       expect(items[i].textContent.trim()).toBe(text);
     });
   });
