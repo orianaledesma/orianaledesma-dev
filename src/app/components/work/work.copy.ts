@@ -56,14 +56,16 @@ export const WORK_COPY: WorkCopy = {
       category: 'In progress',
       title: 'Latina Connection',
       role: 'In build right now',
+      image: 'assets/images/work/latina-connection.webp',
       stack: ['In progress'],
       bullets: [
         'A community platform currently in the works',
         'Building it the same way: clear scope, shipped properly',
-        'Take a peek at where it is today',
+        'The product is already live — see it on Hotmart',
       ],
-      cta: 'Take a peek →',
-      ctaHref: 'http://latinaconnection.info/',
+      cta: 'See the product →',
+      ctaHref:
+        'https://hotmart.com/en/marketplace/products/the-latin-connection-from-gringo-to-galan-in-2-hours/J104478384F',
     },
   ],
 };
