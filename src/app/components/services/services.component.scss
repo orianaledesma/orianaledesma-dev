@@ -1,12 +1,17 @@
 .services {
   background: var(--color-bg-soft);
 
-  &__title { margin-bottom: var(--space-lg); }
+  &__title { margin-bottom: var(--space-sm); }
+  &__sub   { margin-bottom: var(--space-lg); }
 
   &__grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
+    align-items: stretch;
   }
 }
 
@@ -18,7 +23,8 @@
   background: var(--color-bg-card);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
-  transition: border-color var(--transition), transform var(--transition);
+  transition: border-color var(--transition), transform var(--transition),
+    box-shadow var(--transition);
   position: relative;
 
   &:hover {
@@ -26,12 +32,28 @@
     transform: translateY(-4px);
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    &:hover { transform: none; }
+  &:focus-within {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
   }
 
-  // ── Label badge (MOST REQUESTED / FOR TEAMS / NICHE) ──────────────────────
+  // ── Featured (Card 2 — most requested) ────────────────────────────────────
+  &--featured {
+    border-color: var(--color-accent);
+    transform: scale(1.04);
+    box-shadow: 0 18px 40px -16px var(--color-accent-glow);
 
+    &:hover { transform: scale(1.04) translateY(-4px); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &,
+    &--featured,
+    &:hover,
+    &--featured:hover { transform: none; }
+  }
+
+  // ── Label badge ───────────────────────────────────────────────────────────
   &__label {
     position: absolute;
     top: -1px;
@@ -42,19 +64,19 @@
     letter-spacing: 0.1em;
     text-transform: uppercase;
     border-radius: 0 0 var(--radius-sm) var(--radius-sm);
-    background: var(--color-accent);
-    color: var(--color-bg);
+    background: var(--color-bg-soft);
+    color: var(--color-text-muted);
+    border: 1px solid var(--color-border);
+    border-top: none;
 
-    &--secondary {
-      background: var(--color-bg-soft);
-      color: var(--color-text-muted);
-      border: 1px solid var(--color-border);
-      border-top: none;
+    &--featured {
+      background: var(--color-accent);
+      color: var(--color-bg);
+      border-color: var(--color-accent);
     }
   }
 
-  // ── Header (title + price) ────────────────────────────────────────────────
-
+  // ── Header (title + 3-level price) ────────────────────────────────────────
   &__header {
     display: flex;
     flex-direction: column;
@@ -69,11 +91,22 @@
     line-height: 1.2;
   }
 
-  &__tag {
-    font-size: 0.7rem;
-    font-weight: var(--font-semibold);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+  &__price {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+
+  &__amount {
+    font-size: 1.6rem;
+    font-weight: var(--font-bold);
+    color: var(--color-accent);
+    line-height: 1.1;
+  }
+
+  &__scope,
+  &__timeline {
+    font-size: 0.78rem;
     color: var(--color-text-muted);
   }
 
@@ -84,14 +117,10 @@
     font-style: italic;
   }
 
-  &__description {
-    font-size: 0.9rem;
-    line-height: 1.7;
-    flex: 1;
-  }
-
   &__features {
     list-style: none;
+    margin: 0;
+    padding: 0;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -112,13 +141,6 @@
     margin-top: 1px;
   }
 
-  &__price {
-    font-size: 0.85rem;
-    font-weight: var(--font-semibold);
-    color: var(--color-accent);
-    letter-spacing: 0.02em;
-  }
-
   &__cta {
     margin-top: auto;
     align-self: flex-start;
@@ -126,6 +148,100 @@
   }
 }
 
+// ── Care Plan — recurring add-on, distinct from the pricing cards ────────────
+.care-plan {
+  position: relative;
+  margin-top: 2.5rem;
+  padding: 1.75rem 2rem;
+  background: var(--color-bg-card);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-lg);
+
+  &__label {
+    position: absolute;
+    top: -0.7rem;
+    left: 1.5rem;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.62rem;
+    font-weight: var(--font-bold);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-radius: var(--radius-sm);
+    background: var(--color-bg-soft);
+    color: var(--color-text-muted);
+    border: 1px solid var(--color-border);
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  &__head {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+  }
+
+  &__title {
+    font-size: 1.15rem;
+    font-weight: var(--font-bold);
+    color: var(--color-text);
+  }
+
+  &__price {
+    display: flex;
+    align-items: baseline;
+    gap: 0.4rem;
+  }
+
+  &__amount {
+    font-size: 1.3rem;
+    font-weight: var(--font-bold);
+    color: var(--color-accent);
+  }
+
+  &__timeline {
+    font-size: 0.78rem;
+    color: var(--color-text-muted);
+  }
+
+  &__intro {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+  }
+
+  &__features {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem 1.5rem;
+
+    li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+    }
+  }
+
+  &__cta {
+    align-self: flex-start;
+    font-size: 0.85rem;
+  }
+}
+
 @media (max-width: 768px) {
   .services__grid { grid-template-columns: 1fr; }
+
+  // Featured card first on mobile (no visual "middle" in a single column)
+  .service-card--featured { order: -1; }
+
+  .care-plan__features { grid-template-columns: 1fr; }
 }

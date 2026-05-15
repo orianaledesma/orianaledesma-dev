@@ -1,0 +1,70 @@
+<section class="lead-magnet" id="lead-magnet" aria-label="Free online presence check">
+  <div class="container">
+    <div class="lead-magnet__wrapper">
+
+      <h2 class="lead-magnet__headline">{{ t().h2 }}</h2>
+      <p class="lead-magnet__sub">{{ t().sub }}</p>
+
+      <form
+        class="lead-magnet__form"
+        [formGroup]="form"
+        (ngSubmit)="onSubmit()"
+        novalidate
+      >
+        <!-- Honeypot — hidden from real users, visible to bots -->
+        <div class="form-field form-field--honeypot" aria-hidden="true">
+          <input type="text" formControlName="website" tabindex="-1" autocomplete="off" />
+        </div>
+
+        <div
+          class="form-field"
+          [class.form-field--error]="emailCtrl.invalid && emailCtrl.touched"
+        >
+          <label class="form-field__label" for="lead-email">{{ t().emailPlaceholder }}</label>
+          <input
+            id="lead-email"
+            class="form-field__input"
+            type="email"
+            formControlName="email"
+            [placeholder]="t().emailPlaceholder"
+            autocomplete="email"
+          />
+          @if (emailCtrl.invalid && emailCtrl.touched) {
+            <span class="form-field__error" data-testid="lead-email-error">
+              {{ t().emailPlaceholder }}
+            </span>
+          }
+        </div>
+
+        @if (status() === 'success') {
+          <p class="lead-magnet__feedback lead-magnet__feedback--success" data-testid="lead-success">
+            {{ t().success }}
+          </p>
+        }
+        @if (status() === 'error') {
+          <p class="lead-magnet__feedback lead-magnet__feedback--error" data-testid="lead-error">
+            {{ t().error }}
+            <a href="mailto:hello&#64;orianaledesma.dev">hello&#64;orianaledesma.dev</a>
+          </p>
+        }
+        @if (status() === 'rateLimit') {
+          <p class="lead-magnet__feedback lead-magnet__feedback--error" data-testid="lead-rate-limit">
+            {{ t().rateLimit }}
+          </p>
+        }
+
+        <button
+          type="submit"
+          class="btn btn--primary lead-magnet__submit"
+          [disabled]="status() === 'sending'"
+          data-testid="lead-submit"
+        >
+          {{ status() === 'sending' ? t().sending : t().submit }}
+        </button>
+
+        <p class="lead-magnet__privacy">{{ t().privacy }}</p>
+      </form>
+
+    </div>
+  </div>
+</section>

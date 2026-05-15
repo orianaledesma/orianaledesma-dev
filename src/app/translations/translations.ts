@@ -16,11 +16,26 @@ interface HeroT {
   ctaSecondary: string;
 }
 
+interface ServicePrice {
+  amount: string;
+  scope?: string;
+  timeline: string;
+}
+
 interface ServiceCardT {
   label: string;
   title: string;
-  price: string;
+  price: ServicePrice;
   for: string;
+  features: string[];
+  cta: string;
+}
+
+interface CarePlanT {
+  label: string;
+  title: string;
+  price: ServicePrice;
+  intro: string;
   features: string[];
   cta: string;
 }
@@ -29,6 +44,7 @@ interface ServicesT {
   h2: string;
   sub: string;
   cards: ServiceCardT[];
+  carePlan: CarePlanT;
 }
 
 interface WorkT {
@@ -90,6 +106,18 @@ interface AvailabilityT {
 
 interface TrustBarT { items: string[]; }
 
+interface LeadMagnetT {
+  h2: string;
+  sub: string;
+  emailPlaceholder: string;
+  submit: string;
+  sending: string;
+  success: string;
+  error: string;
+  rateLimit: string;
+  privacy: string;
+}
+
 interface AppTranslations {
   nav: NavT;
   hero: HeroT;
@@ -100,6 +128,7 @@ interface AppTranslations {
   whyMe: WhyMeT;
   availability: AvailabilityT;
   trustBar: TrustBarT;
+  leadMagnet: LeadMagnetT;
 }
 
 // ─── English ──────────────────────────────────────────────────────────────────
@@ -126,48 +155,62 @@ const en: AppTranslations = {
   },
 
   services: {
-    h2: 'Three ways to work together',
+    h2: 'Pick what your business actually needs',
     sub: 'Fixed scope. Fixed price. No "it depends".',
     cards: [
       {
+        label: 'START HERE',
+        title: 'One-Page Site',
+        price: { amount: '€800', timeline: 'ready in 1 week' },
+        for: 'Small businesses that need to look professional and get found — fast.',
+        features: [
+          'One sharp page: what you do, why you, how to reach you',
+          'Contact form or WhatsApp — leads land straight in your inbox',
+          'A clear, mobile-first design that loads fast',
+          'Found on Google for your name and what you offer',
+        ],
+        cta: 'Book a 20-min call',
+      },
+      {
         label: 'MOST REQUESTED',
-        title: 'The Creator Landing',
-        price: 'From €1,200 · 14 days',
-        for: 'Creators, coaches, infoproducers launching a product, course or waitlist.',
+        title: 'Multi-Page Website',
+        price: { amount: '€1,500', timeline: 'ready in 2–3 weeks' },
+        for: 'Established businesses that need services, proof and a way to take clients online.',
         features: [
-          '1 high-converting landing page (Next.js or Astro)',
-          'Payment / waitlist / booking integration (Stripe, Hotmart, Calendly)',
-          'Mobile-first, <2s load, SEO-ready',
-          'Analytics + 1 A/B test after launch',
+          'Up to 5 pages: home, services, about, contact + one you choose',
+          'Take bookings or deposits online — money in, no monthly platform fee',
+          'You update text and photos yourself — no developer needed',
+          'Built to rank on Google in your area',
         ],
-        cta: 'Start my landing →',
+        cta: 'Book a 20-min call',
       },
       {
-        label: 'FOR TEAMS',
-        title: 'Frontend Engineering on Demand',
-        price: '€70/hr · monthly retainer from €2,400',
-        for: 'SaaS teams of 2–20 that need senior frontend without the hiring overhead.',
+        label: 'SELL ONLINE',
+        title: 'Small Online Store',
+        price: { amount: '€2,000', scope: 'up to 30 products', timeline: 'ready in 3–4 weeks' },
+        for: 'Businesses ready to sell online without paying a platform a cut.',
         features: [
-          'Angular, Next.js, React (5 years in production)',
-          'Component systems, performance audits, migrations',
-          'EU timezone, async-first, Slack/Linear/GitHub',
-          'Code reviews included',
+          'A clean store for a focused catalogue — up to 30 products',
+          'Secure checkout — you keep the full margin',
+          'Manage products and orders from one simple screen',
+          'A launch plan + short video walkthrough, plus 3 months of Care Plan included',
         ],
-        cta: 'Request a scoping call →',
-      },
-      {
-        label: 'NICHE',
-        title: 'Travel-Tech Site + Content Kit',
-        price: 'From €1,800 · 3–4 weeks',
-        for: 'Boutique hotels, tour operators and travel brands that want a site built by someone who has actually stayed in them.',
-        features: [
-          'Booking-ready site (multilingual EN/ES)',
-          '5 reels + 15 photos shot on location (optional)',
-          '48h turnaround on content edits',
-        ],
-        cta: 'Tell me about your property →',
+        cta: 'Book a 20-min call',
       },
     ],
+    carePlan: {
+      label: 'AFTER LAUNCH',
+      title: 'Care Plan',
+      price: { amount: '€69', timeline: 'per month' },
+      intro: "I keep it online and handle the small stuff so you don't.",
+      features: [
+        'Promo banners for special days and seasons',
+        'Up to 3 small changes a month — text, prices, photos, a banner',
+        'One full refresh per year included',
+        'Cancel anytime',
+      ],
+      cta: 'Book a 20-min call',
+    },
   },
 
   work: {
@@ -176,40 +219,47 @@ const en: AppTranslations = {
   },
 
   faq: {
-    h2: 'Before you reach out',
+    h2: 'The questions every owner asks me',
     items: [
       {
-        question: "I'm a creator, not a tech person. Can you work with me?",
+        question: 'How much does a website actually cost?',
         answer:
-          "Yes — that's the point. You give me your offer, your audience and your goals. I handle domain, hosting, payments, analytics. You get a site you can edit, not a black box.",
+          'Between €800 and €2,000 for most small businesses, depending on pages and whether you sell online. You get the exact number before we start — no surprise invoices.',
       },
       {
-        question: "What if I don't have a designer?",
+        question: 'How long does it take?',
         answer:
-          "Design is included in the Creator Landing. I've been shipping interfaces for 5 years and running my own brand for 5 — I know what converts in LATAM and in the EU.",
+          'A one-page site: about a week. A full multi-page site: two to three weeks. An online store: three to four. I tell you the date up front and stick to it.',
       },
       {
-        question: 'How fast can you actually deliver in 14 days?',
+        question: 'What do I need to have ready?',
         answer:
-          "Scope is fixed and small on purpose. One landing, one clear goal, one integration. No feature creep. That's how the timeline holds.",
+          "Your logo if you have one, a few photos, and a rough idea of what you want to say. If you don't have copy or images, I'll help you sort it.",
       },
       {
-        question: 'Do you work in Spanish or English?',
+        question: 'Can I update it myself later?',
         answer:
-          "Both, natively. I'm Argentine, based in Lithuania. Calls, docs and code comments in whichever you prefer.",
+          'Yes. I build it so you can change text, prices and photos without calling a developer. I show you how before we finish.',
+      },
+      {
+        question: 'What if I need changes after it launches?',
+        answer:
+          'Two weeks of tweaks are included after launch. After that, the Care Plan covers ongoing changes — or pay per change, no contract.',
+      },
+      {
+        question: 'Do you work in my language?',
+        answer:
+          "English, Spanish and Portuguese, all fluent. Calls and messages in whichever you're comfortable with — I'm Argentine, based in the EU.",
+      },
+      {
+        question: 'How do I pay?',
+        answer:
+          '50% to start, 50% when it goes live. Bank transfer or card. Proper invoice from the EU.',
       },
       {
         question: 'What do you NOT do?',
         answer:
-          "Full apps from scratch with vague scope. Logos. SEO-only projects. Anything where \"we'll figure it out as we go.\"",
-      },
-      {
-        question: "What's the payment structure?",
-        answer: '50% to start, 50% on delivery. Stripe or SEPA. Invoice from the EU.',
-      },
-      {
-        question: 'What if I need changes after launch?',
-        answer: '14 days of revisions included. After that, hourly or a small retainer.',
+          'Huge platforms with vague scope. Logos. Anything where the plan is "we\'ll figure it out as we go." I keep it focused so it actually ships.',
       },
     ],
   },
@@ -244,13 +294,13 @@ const en: AppTranslations = {
   },
 
   whyMe: {
-    h2: 'Why founders and creators hire me',
+    h2: 'Why small businesses pick me over an agency',
     bullets: [
-      'I ship production code for a 5M-user fintech by day.',
-      'I built a travel brand from zero by night.',
-      'I know what "converts" means because my own product depends on it.',
-      'From the EU, for brands that value judgment over volume.',
-      "I'd rather do fewer projects, better.",
+      'You talk to the person who builds it — not an account manager who relays messages.',
+      'The price I quote is the price you pay. No "extras" invoice at the end.',
+      'I take a few projects at a time, so yours gets real attention and ships on schedule.',
+      'I build things that keep working: fast, easy to update, nothing you have to babysit.',
+      'Real work in production — Exploriando and Trade-Calendar were built from zero, not slides.',
     ],
   },
 
@@ -272,6 +322,18 @@ const en: AppTranslations = {
       'Trade-Calendar — SaaS for traders, live in production',
       'You work directly with the person who builds it',
     ],
+  },
+
+  leadMagnet: {
+    h2: 'Not ready to talk yet?',
+    sub: 'Get a free check of how your business shows up online — what works, what to fix. No pitch, just useful.',
+    emailPlaceholder: 'Your email',
+    submit: 'Send me the free check',
+    sending: 'Sending…',
+    success: "Got it. I'll send your check within 48h.",
+    error: 'Something went wrong. Email me directly at',
+    rateLimit: 'Too many attempts. Please wait 10 minutes before trying again.',
+    privacy: 'No spam. Just your check, then nothing unless you ask.',
   },
 };
 
@@ -299,48 +361,62 @@ const es: AppTranslations = {
   },
 
   services: {
-    h2: 'Tres formas de trabajar juntos',
+    h2: 'Elegí lo que tu negocio realmente necesita',
     sub: 'Alcance fijo. Precio fijo. Sin "depende".',
     cards: [
       {
+        label: 'EMPEZÁ ACÁ',
+        title: 'Sitio de Una Página',
+        price: { amount: '€800', timeline: 'listo en 1 semana' },
+        for: 'Pequeños negocios que necesitan verse profesionales y aparecer — rápido.',
+        features: [
+          'Una página clara: qué hacés, por qué vos, cómo contactarte',
+          'Formulario o WhatsApp — los contactos te llegan directo',
+          'Diseño claro, mobile-first y que carga rápido',
+          'Aparecés en Google por tu nombre y lo que ofrecés',
+        ],
+        cta: 'Reservar llamada de 20 min',
+      },
+      {
         label: 'MÁS SOLICITADO',
-        title: 'La Landing del Creador',
-        price: 'Desde €1.200 · 14 días',
-        for: 'Creadores, coaches e infoproductores que lanzan un producto, curso o lista de espera.',
+        title: 'Sitio Multi-Página',
+        price: { amount: '€1.500', timeline: 'listo en 2–3 semanas' },
+        for: 'Negocios establecidos que necesitan servicios, prueba y una forma de captar clientes online.',
         features: [
-          '1 landing de alta conversión (Next.js o Astro)',
-          'Integración de pago / lista de espera / reserva (Stripe, Hotmart, Calendly)',
-          'Mobile-first, <2s de carga, SEO listo',
-          'Analytics + 1 prueba A/B post-lanzamiento',
+          'Hasta 5 páginas: inicio, servicios, sobre vos, contacto + una a elección',
+          'Cobrá reservas o señas online — sin comisión mensual de plataforma',
+          'Actualizás textos y fotos vos mismo — sin depender de un dev',
+          'Preparado para posicionar en Google en tu zona',
         ],
-        cta: 'Empezar mi landing →',
+        cta: 'Reservar llamada de 20 min',
       },
       {
-        label: 'PARA EQUIPOS',
-        title: 'Ingeniería Frontend on Demand',
-        price: '€70/hora · retainer mensual desde €2.400',
-        for: 'Equipos SaaS de 2 a 20 personas que necesitan frontend senior sin el costo de contratación.',
+        label: 'VENDER ONLINE',
+        title: 'Tienda Online Chica',
+        price: { amount: '€2.000', scope: 'hasta 30 productos', timeline: 'lista en 3–4 semanas' },
+        for: 'Negocios listos para vender online sin que una plataforma se quede con una parte.',
         features: [
-          'Angular, Next.js, React (5 años en producción)',
-          'Sistemas de componentes, auditorías de rendimiento, migraciones',
-          'Zona horaria UE, async-first, Slack/Linear/GitHub',
-          'Code reviews incluidos',
+          'Una tienda limpia para un catálogo enfocado — hasta 30 productos',
+          'Checkout seguro — te quedás con todo el margen',
+          'Gestionás productos y pedidos desde una sola pantalla',
+          'Plan de lanzamiento + video corto de tu sitio, más 3 meses de Care Plan incluidos',
         ],
-        cta: 'Solicitar una llamada de alcance →',
-      },
-      {
-        label: 'NICHO',
-        title: 'Sitio Travel-Tech + Kit de Contenido',
-        price: 'Desde €1.800 · 3–4 semanas',
-        for: 'Hoteles boutique, operadores de viajes y marcas de turismo que quieren un sitio construido por alguien que realmente los ha visitado.',
-        features: [
-          'Sitio listo para reservas (multilingüe EN/ES)',
-          '5 reels + 15 fotos tomadas en el lugar (opcional)',
-          'Turnaround de 48h para ediciones de contenido',
-        ],
-        cta: 'Contame sobre tu propiedad →',
+        cta: 'Reservar llamada de 20 min',
       },
     ],
+    carePlan: {
+      label: 'DESPUÉS DEL LANZAMIENTO',
+      title: 'Care Plan',
+      price: { amount: '€69', timeline: 'por mes' },
+      intro: 'Lo mantengo online y me ocupo de lo chico para que vos no tengas que hacerlo.',
+      features: [
+        'Banners de promo para fechas y temporadas especiales',
+        'Hasta 3 cambios chicos por mes — textos, precios, fotos, un banner',
+        'Un refresh completo por año incluido',
+        'Cancelás cuando quieras',
+      ],
+      cta: 'Reservar llamada de 20 min',
+    },
   },
 
   work: {
@@ -349,40 +425,47 @@ const es: AppTranslations = {
   },
 
   faq: {
-    h2: 'Antes de contactarme',
+    h2: 'Las preguntas que todo dueño me hace',
     items: [
       {
-        question: 'Soy creador/a, no técnico/a. ¿Podés trabajar conmigo?',
+        question: '¿Cuánto cuesta realmente un sitio web?',
         answer:
-          'Sí — para eso está. Vos me das tu oferta, tu audiencia y tus objetivos. Yo me encargo del dominio, hosting, pagos y analytics. Obtenés un sitio que podés editar, no una caja negra.',
+          'Entre €800 y €2.000 para la mayoría de los negocios chicos, según las páginas y si vendés online. Tenés el número exacto antes de empezar — sin facturas sorpresa.',
       },
       {
-        question: '¿Qué pasa si no tengo diseñador/a?',
+        question: '¿Cuánto tarda?',
         answer:
-          'El diseño está incluido en la Creator Landing. Llevo 5 años haciendo interfaces y 5 administrando mi propia marca — sé qué convierte en LATAM y en la UE.',
+          'Un sitio de una página: una semana aprox. Un sitio multi-página: dos a tres semanas. Una tienda online: tres a cuatro. Te doy la fecha desde el arranque y la cumplo.',
       },
       {
-        question: '¿Cómo podés entregar en 14 días?',
+        question: '¿Qué necesito tener listo?',
         answer:
-          'El alcance es fijo y chico a propósito. Una landing, un objetivo claro, una integración. Sin scope creep. Así se mantiene el plazo.',
+          'Tu logo si tenés, algunas fotos, y una idea general de lo que querés decir. Si no tenés textos o imágenes, te ayudo a resolverlo.',
       },
       {
-        question: '¿Trabajás en español o inglés?',
+        question: '¿Puedo actualizarlo yo después?',
         answer:
-          'En los dos, con fluidez nativa. Soy argentina, vivo en Lituania. Llamadas, documentos y comentarios de código en el que prefieras.',
+          'Sí. Lo armo para que cambies textos, precios y fotos sin llamar a un dev. Te muestro cómo antes de terminar.',
+      },
+      {
+        question: '¿Y si necesito cambios después del lanzamiento?',
+        answer:
+          'Dos semanas de ajustes incluidas tras el lanzamiento. Después, el Care Plan cubre los cambios — o pagás por cambio, sin contrato.',
+      },
+      {
+        question: '¿Trabajás en mi idioma?',
+        answer:
+          'Inglés, español y portugués, con fluidez. Llamadas y mensajes en el que te sientas cómodo — soy argentina, basada en la UE.',
+      },
+      {
+        question: '¿Cómo se paga?',
+        answer:
+          '50% para empezar, 50% cuando sale online. Transferencia o tarjeta. Factura desde la UE.',
       },
       {
         question: '¿Qué NO hacés?',
         answer:
-          'Apps completas desde cero con alcance vago. Logos. Proyectos solo de SEO. Cualquier cosa donde «lo vamos viendo».',
-      },
-      {
-        question: '¿Cómo es la estructura de pago?',
-        answer: '50% para empezar, 50% en la entrega. Stripe o SEPA. Factura desde la UE.',
-      },
-      {
-        question: '¿Qué pasa si necesito cambios después del lanzamiento?',
-        answer: '14 días de revisiones incluidos. Después, por hora o retainer pequeño.',
+          'Plataformas enormes con alcance vago. Logos. Cualquier cosa donde el plan sea «lo vamos viendo». Lo mantengo enfocado para que realmente salga.',
       },
     ],
   },
@@ -417,13 +500,13 @@ const es: AppTranslations = {
   },
 
   whyMe: {
-    h2: 'Por qué los founders y creadores me contratan',
+    h2: 'Por qué los negocios chicos me eligen antes que a una agencia',
     bullets: [
-      'De día, shippeo código en producción para una fintech con 5M de usuarios.',
-      'De noche, construí una marca de viajes desde cero.',
-      'Sé lo que significa "convertir" porque mi propio producto depende de eso.',
-      'Desde la UE, para marcas que valoran el criterio más que el volumen.',
-      'Prefiero hacer menos proyectos, pero mejores.',
+      'Hablás con la persona que lo construye — no con un intermediario que pasa mensajes.',
+      'El precio que te paso es el que pagás. Sin factura de "extras" al final.',
+      'Tomo pocos proyectos a la vez, así el tuyo recibe atención real y sale a tiempo.',
+      'Construyo cosas que siguen funcionando: rápidas, fáciles de actualizar, sin sorpresas.',
+      'Trabajo real en producción — Exploriando y Trade-Calendar nacieron de cero, no de slides.',
     ],
   },
 
@@ -445,6 +528,18 @@ const es: AppTranslations = {
       'Trade-Calendar — SaaS para traders, en producción',
       'Trabajás directo con quien lo construye',
     ],
+  },
+
+  leadMagnet: {
+    h2: '¿Todavía no querés hablar?',
+    sub: 'Llevate un check gratis de cómo se ve tu negocio online — qué funciona, qué mejorar. Sin venta, solo útil.',
+    emailPlaceholder: 'Tu email',
+    submit: 'Mandame el check gratis',
+    sending: 'Enviando…',
+    success: 'Listo. Te mando tu check en menos de 48h.',
+    error: 'Algo salió mal. Escribime directamente a',
+    rateLimit: 'Demasiados intentos. Por favor esperá 10 minutos antes de volver a intentarlo.',
+    privacy: 'Sin spam. Solo tu check, después nada salvo que lo pidas.',
   },
 };
 
@@ -472,48 +567,62 @@ const pt: AppTranslations = {
   },
 
   services: {
-    h2: 'Três formas de trabalhar juntos',
+    h2: 'Escolha o que seu negócio realmente precisa',
     sub: 'Escopo fixo. Preço fixo. Sem "depende".',
     cards: [
       {
+        label: 'COMECE AQUI',
+        title: 'Site de Uma Página',
+        price: { amount: '€800', timeline: 'pronto em 1 semana' },
+        for: 'Pequenos negócios que precisam parecer profissionais e ser encontrados — rápido.',
+        features: [
+          'Uma página clara: o que você faz, por que você, como te contatar',
+          'Formulário ou WhatsApp — os contatos chegam direto pra você',
+          'Design claro, mobile-first e que carrega rápido',
+          'Aparece no Google pelo seu nome e o que você oferece',
+        ],
+        cta: 'Agendar call de 20 min',
+      },
+      {
         label: 'MAIS SOLICITADO',
-        title: 'A Landing do Criador',
-        price: 'A partir de €1.200 · 14 dias',
-        for: 'Criadores, coaches e infoprodutores lançando um produto, curso ou lista de espera.',
+        title: 'Site Multi-Página',
+        price: { amount: '€1.500', timeline: 'pronto em 2–3 semanas' },
+        for: 'Negócios estabelecidos que precisam de serviços, prova e uma forma de captar clientes online.',
         features: [
-          '1 landing page de alta conversão (Next.js ou Astro)',
-          'Integração de pagamento / lista de espera / reserva (Stripe, Hotmart, Calendly)',
-          'Mobile-first, <2s de carregamento, SEO pronto',
-          'Analytics + 1 teste A/B após o lançamento',
+          'Até 5 páginas: início, serviços, sobre, contato + uma à escolha',
+          'Receba reservas ou sinais online — sem taxa mensal de plataforma',
+          'Você atualiza textos e fotos sozinho — sem depender de um dev',
+          'Preparado para ranquear no Google na sua região',
         ],
-        cta: 'Começar minha landing →',
+        cta: 'Agendar call de 20 min',
       },
       {
-        label: 'PARA EQUIPES',
-        title: 'Engenharia Frontend sob Demanda',
-        price: '€70/hora · retainer mensal a partir de €2.400',
-        for: 'Equipes SaaS de 2 a 20 pessoas que precisam de frontend sênior sem o custo de contratação.',
+        label: 'VENDER ONLINE',
+        title: 'Loja Online Pequena',
+        price: { amount: '€2.000', scope: 'até 30 produtos', timeline: 'pronta em 3–4 semanas' },
+        for: 'Negócios prontos para vender online sem que uma plataforma fique com uma parte.',
         features: [
-          'Angular, Next.js, React (5 anos em produção)',
-          'Sistemas de componentes, auditorias de performance, migrações',
-          'Fuso horário UE, async-first, Slack/Linear/GitHub',
-          'Code reviews incluídos',
+          'Uma loja limpa para um catálogo focado — até 30 produtos',
+          'Checkout seguro — você fica com toda a margem',
+          'Gerencia produtos e pedidos de uma só tela',
+          'Plano de lançamento + vídeo curto do seu site, mais 3 meses de Care Plan incluídos',
         ],
-        cta: 'Solicitar uma chamada de escopo →',
-      },
-      {
-        label: 'NICHO',
-        title: 'Site Travel-Tech + Kit de Conteúdo',
-        price: 'A partir de €1.800 · 3–4 semanas',
-        for: 'Hotéis boutique, operadores de viagem e marcas de turismo que querem um site construído por alguém que realmente os visitou.',
-        features: [
-          'Site pronto para reservas (multilíngue EN/ES)',
-          '5 reels + 15 fotos no local (opcional)',
-          '48h de prazo para edições de conteúdo',
-        ],
-        cta: 'Me conta sobre sua propriedade →',
+        cta: 'Agendar call de 20 min',
       },
     ],
+    carePlan: {
+      label: 'APÓS O LANÇAMENTO',
+      title: 'Care Plan',
+      price: { amount: '€69', timeline: 'por mês' },
+      intro: 'Mantenho online e cuido do pequeno para você não precisar.',
+      features: [
+        'Banners de promo para datas e temporadas especiais',
+        'Até 3 mudanças pequenas por mês — textos, preços, fotos, um banner',
+        'Um refresh completo por ano incluído',
+        'Cancela quando quiser',
+      ],
+      cta: 'Agendar call de 20 min',
+    },
   },
 
   work: {
@@ -522,40 +631,47 @@ const pt: AppTranslations = {
   },
 
   faq: {
-    h2: 'Antes de entrar em contato',
+    h2: 'As perguntas que todo dono me faz',
     items: [
       {
-        question: 'Sou criador/a, não técnico/a. Você consegue trabalhar comigo?',
+        question: 'Quanto custa de verdade um site?',
         answer:
-          'Sim — é exatamente para isso. Você me dá sua oferta, seu público e seus objetivos. Eu cuido do domínio, hospedagem, pagamentos e analytics. Você recebe um site que consegue editar, não uma caixa preta.',
+          'Entre €800 e €2.000 para a maioria dos pequenos negócios, dependendo das páginas e se você vende online. Você tem o número exato antes de começar — sem faturas surpresa.',
       },
       {
-        question: 'E se eu não tiver designer?',
+        question: 'Quanto tempo leva?',
         answer:
-          'O design está incluído na Creator Landing. Tenho 5 anos entregando interfaces e 5 gerenciando minha própria marca — sei o que converte no LATAM e na UE.',
+          'Um site de uma página: cerca de uma semana. Um site multi-página: duas a três semanas. Uma loja online: três a quatro. Te dou a data no início e cumpro.',
       },
       {
-        question: 'Como você realmente entrega em 14 dias?',
+        question: 'O que preciso ter pronto?',
         answer:
-          'O escopo é fixo e pequeno de propósito. Uma landing, um objetivo claro, uma integração. Sem feature creep. É assim que o prazo se mantém.',
+          'Seu logo se tiver, algumas fotos, e uma ideia geral do que quer dizer. Se não tiver textos ou imagens, te ajudo a resolver.',
       },
       {
-        question: 'Você trabalha em português ou inglês?',
+        question: 'Posso atualizar sozinho depois?',
         answer:
-          'Nos dois, com fluência nativa. Sou argentina, morando na Lituânia. Chamadas, documentos e comentários de código no idioma que preferir.',
+          'Sim. Construo de forma que você mude textos, preços e fotos sem chamar um dev. Te mostro como antes de terminar.',
+      },
+      {
+        question: 'E se eu precisar de mudanças após o lançamento?',
+        answer:
+          'Duas semanas de ajustes incluídas após o lançamento. Depois, o Care Plan cobre as mudanças — ou paga por mudança, sem contrato.',
+      },
+      {
+        question: 'Você trabalha no meu idioma?',
+        answer:
+          'Inglês, espanhol e português, com fluência. Chamadas e mensagens no que você se sentir confortável — sou argentina, baseada na UE.',
+      },
+      {
+        question: 'Como é o pagamento?',
+        answer:
+          '50% para começar, 50% quando vai ao ar. Transferência ou cartão. Nota fiscal da UE.',
       },
       {
         question: 'O que você NÃO faz?',
         answer:
-          "Apps completos do zero com escopo vago. Logos. Projetos só de SEO. Qualquer coisa em que 'a gente vai descobrindo'.",
-      },
-      {
-        question: 'Qual é a estrutura de pagamento?',
-        answer: '50% para começar, 50% na entrega. Stripe ou SEPA. Nota fiscal da UE.',
-      },
-      {
-        question: 'E se eu precisar de alterações após o lançamento?',
-        answer: '14 dias de revisões incluídos. Depois, por hora ou um pequeno retainer.',
+          'Plataformas enormes com escopo vago. Logos. Qualquer coisa em que o plano seja "a gente vai descobrindo". Mantenho focado para realmente sair.',
       },
     ],
   },
@@ -590,13 +706,13 @@ const pt: AppTranslations = {
   },
 
   whyMe: {
-    h2: 'Por que founders e criadores me contratam',
+    h2: 'Por que pequenos negócios me escolhem em vez de uma agência',
     bullets: [
-      'De dia, entrego código em produção para uma fintech com 5M de usuários.',
-      'À noite, construí uma marca de viagens do zero.',
-      'Sei o que significa "converter" porque meu próprio produto depende disso.',
-      'Baseada na UE, para marcas que valorizam julgamento acima de volume.',
-      'Prefiro fazer menos projetos, melhor feitos.',
+      'Você fala com quem constrói — não com um intermediário que repassa mensagens.',
+      'O preço que passo é o que você paga. Sem fatura de "extras" no final.',
+      'Pego poucos projetos por vez, então o seu recebe atenção real e sai no prazo.',
+      'Construo coisas que continuam funcionando: rápidas, fáceis de atualizar, sem dor de cabeça.',
+      'Trabalho real em produção — Exploriando e Trade-Calendar nasceram do zero, não de slides.',
     ],
   },
 
@@ -618,6 +734,18 @@ const pt: AppTranslations = {
       'Trade-Calendar — SaaS para traders, em produção',
       'Você fala direto com quem constrói',
     ],
+  },
+
+  leadMagnet: {
+    h2: 'Ainda não quer conversar?',
+    sub: 'Receba um check grátis de como seu negócio aparece online — o que funciona, o que melhorar. Sem venda, só útil.',
+    emailPlaceholder: 'Seu e-mail',
+    submit: 'Me envie o check grátis',
+    sending: 'Enviando…',
+    success: 'Pronto. Te envio seu check em até 48h.',
+    error: 'Algo deu errado. Me escreva diretamente em',
+    rateLimit: 'Muitas tentativas. Por favor aguarde 10 minutos antes de tentar novamente.',
+    privacy: 'Sem spam. Só o seu check, depois nada a menos que peça.',
   },
 };
 
@@ -645,48 +773,62 @@ const lt: AppTranslations = {
   },
 
   services: {
-    h2: 'Trys bendradarbiavimo būdai',
+    h2: 'Pasirinkite tai, ko jūsų verslui iš tikrųjų reikia',
     sub: 'Fiksuota apimtis. Fiksuota kaina. Be „priklauso nuo aplinkybių".',
     cards: [
       {
+        label: 'PRADĖKITE ČIA',
+        title: 'Vieno puslapio svetainė',
+        price: { amount: '€800', timeline: 'paruošta per 1 savaitę' },
+        for: 'Mažoms įmonėms, kurioms reikia atrodyti profesionaliai ir būti randamoms — greitai.',
+        features: [
+          'Vienas aiškus puslapis: ką darote, kodėl jūs, kaip susisiekti',
+          'Kontaktų forma arba WhatsApp — užklausos krenta tiesiai jums',
+          'Aiškus, mobile-first dizainas, kuris greitai įsikelia',
+          'Randami Google pagal jūsų vardą ir tai, ką siūlote',
+        ],
+        cta: 'Rezervuoti 20 min skambutį',
+      },
+      {
         label: 'POPULIARIAUSIAS',
-        title: 'Kūrėjo nukreipimo puslapis',
-        price: 'Nuo €1 200 · 14 dienų',
-        for: 'Kūrėjams, treneriams ir infoproduktų pardavėjams, pristatantiems produktą, kursą ar laukimo sąrašą.',
+        title: 'Kelių puslapių svetainė',
+        price: { amount: '€1 500', timeline: 'paruošta per 2–3 savaites' },
+        for: 'Įsitvirtinusiems verslams, kuriems reikia paslaugų, įrodymų ir būdo priimti klientus internetu.',
         features: [
-          '1 didelės konversijos nukreipimo puslapis (Next.js arba Astro)',
-          'Mokėjimo / laukimo sąrašo / rezervacijos integracija (Stripe, Hotmart, Calendly)',
-          'Mobile-first, <2s įkėlimas, SEO paruoštas',
-          'Analitika + 1 A/B testas po paleidimo',
+          'Iki 5 puslapių: pradžia, paslaugos, apie, kontaktai + vienas pasirinktas',
+          'Priimkite rezervacijas ar užstatus internetu — be mėnesinio platformos mokesčio',
+          'Patys atnaujinate tekstus ir nuotraukas — be programuotojo',
+          'Paruošta reitinguotis Google jūsų regione',
         ],
-        cta: 'Kurti savo nukreipimo puslapį →',
+        cta: 'Rezervuoti 20 min skambutį',
       },
       {
-        label: 'KOMANDOMS',
-        title: 'Frontend inžinerija pagal poreikį',
-        price: '€70/val. · mėnesinis retaineris nuo €2 400',
-        for: 'SaaS komandoms nuo 2 iki 20 žmonių, kurioms reikia vyriausiojo frontend\'o be samdymo išlaidų.',
+        label: 'PARDUOTI INTERNETU',
+        title: 'Maža internetinė parduotuvė',
+        price: { amount: '€2 000', scope: 'iki 30 produktų', timeline: 'paruošta per 3–4 savaites' },
+        for: 'Verslams, pasiruošusiems parduoti internetu nemokant platformai dalies nuo kiekvieno pardavimo.',
         features: [
-          'Angular, Next.js, React (5 metai produkcijoje)',
-          'Komponentų sistemos, veikimo auditas, migracijos',
-          'ES laiko juosta, async-first, Slack/Linear/GitHub',
-          'Kodo peržiūros įtrauktos',
+          'Tvarkinga parduotuvė fokusuotam katalogui — iki 30 produktų',
+          'Saugus atsiskaitymas — pasiliekate visą maržą',
+          'Valdote produktus ir užsakymus iš vieno ekrano',
+          'Paleidimo planas + trumpas svetainės vaizdo įrašas, plius 3 mėn. Care Plan įskaičiuota',
         ],
-        cta: 'Užsisakyti apimties aptarimo skambutį →',
-      },
-      {
-        label: 'NIŠA',
-        title: 'Kelionių svetainė + turinio rinkinys',
-        price: 'Nuo €1 800 · 3–4 savaitės',
-        for: 'Butikiniai viešbučiai, kelionių operatoriai ir kelionių prekių ženklai, norintys svetainės, sukurtos žmogaus, kuris iš tikrųjų juos aplankė.',
-        features: [
-          'Svetainė, paruošta rezervacijoms (daugiakalbė EN/ES)',
-          '5 reels + 15 nuotraukų, darytų vietoje (neprivaloma)',
-          '48 val. turnaround turinio redagavimui',
-        ],
-        cta: 'Papasakokite apie savo vietą →',
+        cta: 'Rezervuoti 20 min skambutį',
       },
     ],
+    carePlan: {
+      label: 'PO PALEIDIMO',
+      title: 'Care Plan',
+      price: { amount: '€69', timeline: 'per mėnesį' },
+      intro: 'Prižiūriu svetainę ir tvarkau smulkmenas, kad jums nereikėtų.',
+      features: [
+        'Akcijų baneriai ypatingoms dienoms ir sezonams',
+        'Iki 3 nedidelių pakeitimų per mėnesį — tekstai, kainos, nuotraukos, baneris',
+        'Vienas pilnas atnaujinimas per metus įskaičiuotas',
+        'Atšaukiate bet kada',
+      ],
+      cta: 'Rezervuoti 20 min skambutį',
+    },
   },
 
   work: {
@@ -695,40 +837,47 @@ const lt: AppTranslations = {
   },
 
   faq: {
-    h2: 'Prieš susisiekiant',
+    h2: 'Klausimai, kuriuos užduoda kiekvienas savininkas',
     items: [
       {
-        question: 'Esu kūrėjas, ne techninis žmogus. Ar galite dirbti su manimi?',
+        question: 'Kiek iš tikrųjų kainuoja svetainė?',
         answer:
-          'Taip — tam ir skirta. Jūs duodate savo pasiūlymą, auditoriją ir tikslus. Aš rūpinuosi domenu, hostingu, mokėjimais ir analitika. Gausite svetainę, kurią galėsite redaguoti, o ne juodą dėžę.',
+          'Nuo €800 iki €2 000 daugumai mažų verslų, priklausomai nuo puslapių skaičiaus ir ar parduodate internetu. Tikslų skaičių gaunate prieš pradedant — jokių netikėtų sąskaitų.',
       },
       {
-        question: 'Ką daryti, jei neturiu dizainerio?',
+        question: 'Kiek laiko užtrunka?',
         answer:
-          'Dizainas įtrauktas į kūrėjo nukreipimo puslapio paketą. Praleidau 5 metus kuriant sąsajas ir 5 metus valdydama savo prekės ženklą — žinau, kas konvertuoja LATAM ir ES.',
+          'Vieno puslapio svetainė: maždaug savaitė. Kelių puslapių: dvi–trys savaitės. Internetinė parduotuvė: trys–keturios. Datą pasakau iš karto ir jos laikausi.',
       },
       {
-        question: 'Kaip galite pristatyti per 14 dienų?',
+        question: 'Ką turiu turėti paruošta?',
         answer:
-          'Apimtis yra fiksuota ir maža tyčia. Vienas nukreipimo puslapis, vienas aiškus tikslas, viena integracija. Be funkcijų kaupimo. Taip ir laikomasi terminų.',
+          'Logotipą, jei turite, kelias nuotraukas ir apytikslę idėją, ką norite pasakyti. Jei neturite tekstų ar vaizdų, padėsiu tai sutvarkyti.',
       },
       {
-        question: 'Kuria kalba dirbate?',
+        question: 'Ar galėsiu pats atnaujinti vėliau?',
         answer:
-          'Anglų kalba yra mano pagrindinė profesinės komunikacijos kalba, tačiau susisiekti galite lietuviškai. Esu argentinietė, gyvenanti Kaune. Skambučiai, dokumentai ir kodo komentarai — kuria kalba pageidaujate.',
+          'Taip. Kuriu taip, kad galėtumėte keisti tekstus, kainas ir nuotraukas nesikreipdami į programuotoją. Parodau, kaip, prieš baigdama.',
+      },
+      {
+        question: 'O jei prireiks pakeitimų po paleidimo?',
+        answer:
+          'Dvi savaitės pataisymų įskaičiuotos po paleidimo. Po to Care Plan dengia pakeitimus — arba mokate už pakeitimą, be sutarties.',
+      },
+      {
+        question: 'Ar dirbate mano kalba?',
+        answer:
+          'Angliškai, ispaniškai ir portugališkai, laisvai. Skambučiai ir žinutės ta kalba, su kuria jaučiatės patogiai — esu argentinietė, įsikūrusi ES.',
+      },
+      {
+        question: 'Kaip vyksta mokėjimas?',
+        answer:
+          '50% pradžioje, 50% kai svetainė paleidžiama. Pavedimu ar kortele. Sąskaita faktūra iš ES.',
       },
       {
         question: 'Ko NEDAROTE?',
         answer:
-          'Pilnų programėlių nuo nulio su miglota apimtimi. Logotipų. Tik SEO projektų. Bet ko, kur „kaip nors išsiaiškinsime".',
-      },
-      {
-        question: 'Kokia mokėjimo struktūra?',
-        answer: '50% pradžioje, 50% pristatymo metu. Stripe arba SEPA. Sąskaita faktūra iš ES.',
-      },
-      {
-        question: 'Ką daryti, jei po paleidimo prireiks pakeitimų?',
-        answer: 'Įtrauktos 14 dienų peržiūros. Po to — valandiniu tarifu arba mažu retaineriu.',
+          'Didžiulių platformų su miglota apimtimi. Logotipų. Bet ko, kur planas yra „kaip nors išsiaiškinsime". Laikau viską fokusuota, kad tikrai būtų paleista.',
       },
     ],
   },
@@ -763,13 +912,13 @@ const lt: AppTranslations = {
   },
 
   whyMe: {
-    h2: 'Kodėl steigėjai ir kūrėjai mane samdo',
+    h2: 'Kodėl maži verslai renkasi mane vietoj agentūros',
     bullets: [
-      'Dieną rašau produkcinį kodą fintech įmonei su 5M vartotojų.',
-      'Naktį sukūriau kelionių prekės ženklą nuo nulio.',
-      'Žinau, ką reiškia „konvertuoti" — nuo to priklauso ir mano produktas.',
-      'Iš ES, prekės ženklams, vertinantiems sprendimus labiau nei apimtį.',
-      'Verčiau darysiu mažiau projektų, bet geriau.',
+      'Kalbate su žmogumi, kuris kuria — ne su tarpininku, perduodančiu žinutes.',
+      'Kaina, kurią pasakau, yra ta, kurią mokate. Jokios „papildomų" sąskaitos pabaigoje.',
+      'Imuosi nedaug projektų vienu metu, todėl jūsų sulaukia tikro dėmesio ir paleidžiamas laiku.',
+      'Kuriu dalykus, kurie veikia toliau: greiti, lengvai atnaujinami, be rūpesčių.',
+      'Tikras darbas produkcijoje — Exploriando ir Trade-Calendar sukurti nuo nulio, ne iš skaidrių.',
     ],
   },
 
@@ -791,6 +940,18 @@ const lt: AppTranslations = {
       'Trade-Calendar — SaaS prekiautojams, produkcijoje',
       'Dirbate tiesiogiai su kūrėju',
     ],
+  },
+
+  leadMagnet: {
+    h2: 'Dar nepasiruošę kalbėtis?',
+    sub: 'Gaukite nemokamą patikrą, kaip jūsų verslas atrodo internete — kas veikia, ką taisyti. Be pardavimo, tik nauda.',
+    emailPlaceholder: 'Jūsų el. paštas',
+    submit: 'Atsiųskite nemokamą patikrą',
+    sending: 'Siunčiama…',
+    success: 'Gauta. Patikrą atsiųsiu per 48 val.',
+    error: 'Kažkas nepavyko. Rašykite tiesiogiai',
+    rateLimit: 'Per daug bandymų. Palaukite 10 minučių ir bandykite dar kartą.',
+    privacy: 'Jokio šlamšto. Tik jūsų patikra, po to nieko, nebent paprašysite.',
   },
 };
 

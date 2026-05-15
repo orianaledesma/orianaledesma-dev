@@ -4,18 +4,26 @@
     <h2 class="services__title">{{ t().h2 }}</h2>
     <p class="services__sub text-muted">{{ t().sub }}</p>
 
-    <div class="services__grid">
+    <ul class="services__grid">
       @for (card of t().cards; track card.title; let i = $index) {
-        <article class="service-card">
-
+        <li
+          class="service-card"
+          [class.service-card--featured]="i === 1"
+        >
           <span
             class="service-card__label"
-            [class.service-card__label--secondary]="i > 0"
+            [class.service-card__label--featured]="i === 1"
           >{{ card.label }}</span>
 
           <div class="service-card__header">
             <h3 class="service-card__title">{{ card.title }}</h3>
-            <p class="service-card__price">{{ card.price }}</p>
+            <p class="service-card__price">
+              <span class="service-card__amount">{{ card.price.amount }}</span>
+              @if (card.price.scope) {
+                <span class="service-card__scope">{{ card.price.scope }}</span>
+              }
+              <span class="service-card__timeline">{{ card.price.timeline }}</span>
+            </p>
           </div>
 
           <p class="service-card__for">{{ card.for }}</p>
@@ -29,11 +37,51 @@
             }
           </ul>
 
-          <a href="#contact" class="btn btn--outline service-card__cta">{{ card.cta }}</a>
-
-        </article>
+          <a
+            [href]="calendlyUrl"
+            target="_blank"
+            rel="noopener"
+            class="btn btn--outline service-card__cta"
+            (click)="onCtaClick(cardPacks[i])"
+            [attr.aria-label]="card.cta + ' about ' + card.title + ', opens scheduling in a new tab'"
+          >{{ card.cta }}</a>
+        </li>
       }
-    </div>
+    </ul>
+
+    <aside class="care-plan" aria-label="Care Plan">
+      <span class="care-plan__label">{{ t().carePlan.label }}</span>
+
+      <div class="care-plan__body">
+        <div class="care-plan__head">
+          <h3 class="care-plan__title">{{ t().carePlan.title }}</h3>
+          <p class="care-plan__price">
+            <span class="care-plan__amount">{{ t().carePlan.price.amount }}</span>
+            <span class="care-plan__timeline">{{ t().carePlan.price.timeline }}</span>
+          </p>
+        </div>
+
+        <p class="care-plan__intro">{{ t().carePlan.intro }}</p>
+
+        <ul class="care-plan__features">
+          @for (f of t().carePlan.features; track f) {
+            <li>
+              <span class="service-card__check" aria-hidden="true">✓</span>
+              {{ f }}
+            </li>
+          }
+        </ul>
+
+        <a
+          [href]="calendlyUrl"
+          target="_blank"
+          rel="noopener"
+          class="btn btn--outline care-plan__cta"
+          (click)="onCtaClick('care')"
+          [attr.aria-label]="t().carePlan.cta + ' about the Care Plan, opens scheduling in a new tab'"
+        >{{ t().carePlan.cta }}</a>
+      </div>
+    </aside>
 
   </div>
 </section>

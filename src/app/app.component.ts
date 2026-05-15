@@ -7,6 +7,7 @@ import { WhyMeComponent }        from './components/why-me/why-me.component';
 import { WorkComponent }         from './components/work/work.component';
 import { AvailabilityComponent } from './components/availability/availability.component';
 import { FaqComponent }          from './components/faq/faq.component';
+import { LeadMagnetComponent }   from './components/lead-magnet/lead-magnet.component';
 import { ContactComponent }      from './components/contact/contact.component';
 
 @Component({
@@ -20,6 +21,7 @@ import { ContactComponent }      from './components/contact/contact.component';
     WorkComponent,
     AvailabilityComponent,
     FaqComponent,
+    LeadMagnetComponent,
     ContactComponent,
   ],
   templateUrl: './app.component.html',

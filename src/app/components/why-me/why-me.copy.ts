@@ -4,17 +4,13 @@ export interface WhyMeCopy {
 }
 
 export const WHY_ME_COPY: WhyMeCopy = {
-  // V1 — de la estrategia, directa
-  h2: 'Why founders and creators hire me',
-
-  // V2 — más específica, el "not" crea contraste sin sonar defensivo
-  // h2: 'Not a generic dev. A developer who lives in the product she builds.',
+  h2: 'Why small businesses pick me over an agency',
 
   bullets: [
-    'I ship production code for a 5M-user fintech by day.',
-    'I built a travel brand from zero by night.',
-    'I know what "converts" means because my own product depends on it.',
-    'From the EU, for brands that value judgment over volume.',
-    "I'd rather do fewer projects, better.",
+    'You talk to the person who builds it — not an account manager who relays messages.',
+    'The price I quote is the price you pay. No "extras" invoice at the end.',
+    'I take a few projects at a time, so yours gets real attention and ships on schedule.',
+    'I build things that keep working: fast, easy to update, nothing you have to babysit.',
+    'Real work in production — Exploriando and Trade-Calendar were built from zero, not slides.',
   ],
 };

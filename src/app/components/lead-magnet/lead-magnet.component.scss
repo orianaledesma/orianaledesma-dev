@@ -1,0 +1,51 @@
+.lead-magnet {
+  background: var(--color-bg-soft);
+
+  &__wrapper {
+    max-width: 32rem;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  &__headline {
+    font-size: 1.5rem;
+    font-weight: var(--font-bold);
+    color: var(--color-text);
+    margin-bottom: var(--space-sm);
+  }
+
+  &__sub {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-md);
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    text-align: left;
+  }
+
+  &__submit {
+    align-self: center;
+  }
+
+  &__feedback {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    text-align: center;
+
+    &--success { color: var(--color-accent); }
+    &--error   { color: var(--color-error); }
+
+    a { color: inherit; text-decoration: underline; }
+  }
+
+  &__privacy {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-align: center;
+  }
+}

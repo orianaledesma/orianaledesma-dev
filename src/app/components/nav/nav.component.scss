@@ -63,24 +63,7 @@
     margin: 0 auto;
   }
 
-  &__link {
-    background: none;
-    border: none;
-    padding: 0;
-    font-family: var(--font-family);
-    font-size: 0.68rem;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--color-text-muted);
-    cursor: pointer;
-    transition: color var(--transition);
-
-    &:hover { color: var(--color-text); }
-  }
-
-  // ── External link (Exploriando ↗) ────────────────────────────────────────
-
+  &__link,
   &__link-external {
     background: none;
     border: none;
@@ -93,12 +76,16 @@
     color: var(--color-text-muted);
     cursor: pointer;
     transition: color var(--transition);
+  }
+
+  &__link:hover { color: var(--color-text); }
+
+  // ── External link (Exploriando ↗) ────────────────────────────────────────
+
+  &__link-external {
     text-decoration: none;
 
-    &:hover {
-      color: var(--color-accent);
-      opacity: 1;
-    }
+    &:hover { color: var(--color-accent); }
   }
 
   // ── Language dropdown ─────────────────────────────────────────────────────
@@ -202,22 +189,26 @@
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
   }
 
-  &__lang-option {
-    display: block;
-    width: 100%;
+  &__lang-option,
+  &__lang-btn {
     background: none;
     border: none;
-    padding: 0.45rem 0.75rem;
     font-family: var(--font-family);
-    font-size: 0.65rem;
     font-weight: var(--font-bold);
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--color-text-muted);
     cursor: pointer;
+    transition: background var(--transition), color var(--transition);
+  }
+
+  &__lang-option {
+    display: block;
+    width: 100%;
+    padding: 0.45rem 0.75rem;
+    font-size: 0.65rem;
     text-align: left;
     border-radius: var(--radius-sm);
-    transition: background var(--transition), color var(--transition);
 
     &--active {
       color: var(--color-accent);
@@ -234,18 +225,9 @@
   // ── Mobile pill toggle (inside drawer) ────────────────────────────────────
 
   &__lang-btn {
-    background: none;
-    border: none;
     padding: 0.35rem 0.65rem;
     border-radius: var(--radius-pill);
-    font-family: var(--font-family);
     font-size: 0.62rem;
-    font-weight: var(--font-bold);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--color-text-muted);
-    cursor: pointer;
-    transition: background var(--transition), color var(--transition);
     display: inline-flex;
     align-items: center;
     min-height: 28px;
@@ -263,28 +245,32 @@
 
   // ── CTA button ────────────────────────────────────────────────────────────
 
-  &__cta {
-    flex-shrink: 0;
-    display: inline-block;
-    text-decoration: none;
-    text-align: center;
+  &__cta,
+  &__mobile-cta {
     background: transparent;
     border: 1px solid var(--color-accent);
     color: var(--color-accent);
     font-family: var(--font-family);
-    font-size: 0.72rem;
     font-weight: 600;
     letter-spacing: 0.05em;
-    padding: 0.5rem 1.4rem;
     border-radius: 2px;
     cursor: pointer;
+    text-decoration: none;
+    text-align: center;
     transition: background var(--transition), color var(--transition);
-    white-space: nowrap;
 
     &:hover {
       background: var(--color-accent);
       color: var(--color-bg);
     }
+  }
+
+  &__cta {
+    flex-shrink: 0;
+    display: inline-block;
+    font-size: 0.72rem;
+    padding: 0.5rem 1.4rem;
+    white-space: nowrap;
   }
 
   // ── Hamburger ─────────────────────────────────────────────────────────────
@@ -362,26 +348,10 @@
 
   &__mobile-cta {
     display: block;
-    text-decoration: none;
     width: calc(100% - var(--space-md) * 2);
     margin: 0.5rem var(--space-md) var(--space-md);
-    background: transparent;
-    border: 1px solid var(--color-accent);
-    color: var(--color-accent);
-    font-family: var(--font-family);
     font-size: 0.85rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
     padding: 0.75rem 1.4rem;
-    border-radius: 2px;
-    cursor: pointer;
-    text-align: center;
-    transition: background var(--transition), color var(--transition);
-
-    &:hover {
-      background: var(--color-accent);
-      color: var(--color-bg);
-    }
   }
 }
 

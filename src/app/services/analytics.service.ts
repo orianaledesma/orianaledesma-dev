@@ -10,6 +10,8 @@ export type AnalyticsEvent =
   | 'nav_cta_click'               // CTA del nav (Send a brief)
   | 'work_card_click'             // CTA outbound de una case card (Exploriando, TC)
   | 'work_apply_click'            // CTA "Apply for a slot" en Work
+  | 'services_card_click'         // CTA de un pack de servicios o Care Plan → Calendly
+  | 'lead_magnet_submit'          // submit exitoso del lead magnet (free online presence check)
   | 'contact_form_submit'         // submit exitoso del form de contacto
   | 'contact_form_error';         // error del form de contacto (EmailJS, validación)
 
