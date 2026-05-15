@@ -72,7 +72,14 @@
     </div>
 
     <!-- CTA -->
-    <button class="nav__cta" (click)="onCtaClick()">{{ t().cta }}</button>
+    <a
+      class="nav__cta"
+      [href]="calendlyUrl"
+      target="_blank"
+      rel="noopener"
+      (click)="onCtaClick()"
+      [attr.aria-label]="t().cta + ', opens scheduling in a new tab'"
+    >{{ t().cta }}</a>
 
     <!-- Hamburger -->
     <button
@@ -134,7 +141,14 @@
       }
     </div>
 
-    <button class="nav__mobile-cta" (click)="onCtaClick()">{{ t().cta }}</button>
+    <a
+      class="nav__mobile-cta"
+      [href]="calendlyUrl"
+      target="_blank"
+      rel="noopener"
+      (click)="onCtaClick()"
+      [attr.aria-label]="t().cta + ', opens scheduling in a new tab'"
+    >{{ t().cta }}</a>
   </div>
 
 </nav>

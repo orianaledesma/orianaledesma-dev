@@ -8,20 +8,16 @@ export interface HeroCopy {
 }
 
 export const HERO_COPY: HeroCopy = {
-  badge: 'EU-based · 3 spots open for Q2 2026',
+  badge: 'EU-based · Now booking small-business projects',
 
-  h1: 'Landing pages that turn traffic into clients. Built in 14 days.',
+  h1: "You don't need a big agency. You need a site that works.",
 
-  // V1 — directa, menciona el doble perfil sin forzarlo
   subheadline:
-    'Frontend engineer + travel creator. I build conversion-first sites for creators, founders and small SaaS across the EU and LATAM.',
+    'I help small companies look as solid online as they are in person. Fast to launch, easy to maintain, fair price.',
 
-  // V2 — más compacta, el "and" final le da ritmo
-  // subheadline:
-  //   'I build conversion-first sites for creators, founders and small SaaS — EU-based, shipped fast.',
+  // Price micro-trust line, rendered below the CTA
+  tagline: '€800–2,000 · no surprise invoices',
 
-  tagline: 'Booking projects until June 15 — shipping before Q3',
-
-  ctaPrimary: 'See plans & pricing',
-  ctaSecondary: 'Short intro call (20 min)',
+  ctaPrimary: 'Book a 20-min call',
+  ctaSecondary: 'See recent work',
 };

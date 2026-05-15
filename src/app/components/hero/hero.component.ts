@@ -16,12 +16,12 @@ export class HeroComponent {
   private readonly analytics = inject(AnalyticsService);
   readonly t = computed(() => TRANSLATIONS[this.lang.current()].hero);
 
-  /** Tracking: CTA primario del hero (See plans & pricing → #services). */
+  /** Tracking: CTA primario del hero (Book a 15-min call → Calendly, nueva pestaña). */
   onCtaPrimaryClick(): void {
     this.analytics.track('hero_cta_primary_click');
   }
 
-  /** Tracking: CTA secundario del hero (Short intro call → Calendly). */
+  /** Tracking: CTA secundario del hero (See recent work → scroll a #work). */
   onCtaSecondaryClick(): void {
     this.analytics.track('hero_cta_secondary_click');
   }

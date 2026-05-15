@@ -24,23 +24,31 @@ describe('NavComponent', () => {
   });
 
   it('trackea nav_cta_click cuando se clickea el CTA del nav (desktop)', () => {
-    const cta = fixture.debugElement.query(By.css('button.nav__cta'));
+    const cta = fixture.debugElement.query(By.css('a.nav__cta'));
     cta.triggerEventHandler('click', new MouseEvent('click'));
 
     expect(trackSpy).toHaveBeenCalledWith('nav_cta_click');
   });
 
   it('trackea nav_cta_click cuando se clickea el CTA del nav (mobile)', () => {
-    const ctaMobile = fixture.debugElement.query(By.css('button.nav__mobile-cta'));
+    const ctaMobile = fixture.debugElement.query(By.css('a.nav__mobile-cta'));
     ctaMobile.triggerEventHandler('click', new MouseEvent('click'));
 
     expect(trackSpy).toHaveBeenCalledWith('nav_cta_click');
   });
 
-  it('onCtaClick dispara scrollTo("contact")', () => {
-    spyOn(component, 'scrollTo');
+  it('el CTA del nav apunta al Calendly y abre en pestaña nueva', () => {
+    const cta = fixture.debugElement.query(By.css('a.nav__cta'));
+
+    expect(cta.attributes['href']).toBe(component.calendlyUrl);
+    expect(cta.attributes['target']).toBe('_blank');
+    expect(cta.attributes['rel']).toBe('noopener');
+  });
+
+  it('onCtaClick cierra el menú mobile', () => {
+    component.menuOpen.set(true);
     component.onCtaClick();
 
-    expect(component.scrollTo).toHaveBeenCalledWith('contact');
+    expect(component.menuOpen()).toBe(false);
   });
 });

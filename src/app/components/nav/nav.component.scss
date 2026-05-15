@@ -265,6 +265,9 @@
 
   &__cta {
     flex-shrink: 0;
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
     background: transparent;
     border: 1px solid var(--color-accent);
     color: var(--color-accent);
@@ -359,6 +362,7 @@
 
   &__mobile-cta {
     display: block;
+    text-decoration: none;
     width: calc(100% - var(--space-md) * 2);
     margin: 0.5rem var(--space-md) var(--space-md);
     background: transparent;

@@ -112,17 +112,17 @@ const en: AppTranslations = {
       { label: 'FAQ',      fragment: 'faq'      },
       { label: 'Contact',  fragment: 'contact'  },
     ],
-    cta: 'Send a brief',
+    cta: 'Book a 20-min call',
   },
 
   hero: {
-    badge: 'EU-based · 3 spots open for Q2 2026',
-    h1: 'Landing pages that turn traffic into clients. Built in 14 days.',
+    badge: 'EU-based · Now booking small-business projects',
+    h1: "You don't need a big agency. You need a site that works.",
     subheadline:
-      'Frontend engineer + travel creator. I build conversion-first sites for creators, founders and small SaaS across the EU and LATAM.',
-    tagline: 'Booking projects until June 15 — shipping before Q3',
-    ctaPrimary: 'See plans & pricing',
-    ctaSecondary: 'Short intro call (20 min)',
+      'I help small companies look as solid online as they are in person. Fast to launch, easy to maintain, fair price.',
+    tagline: '€800–2,000 · no surprise invoices',
+    ctaPrimary: 'Book a 20-min call',
+    ctaSecondary: 'See recent work',
   },
 
   services: {
@@ -268,11 +268,9 @@ const en: AppTranslations = {
 
   trustBar: {
     items: [
-      '5 years shipping production code',
-      'Naranja X — fintech, 5M+ users',
-      'Exploriando — 40+ countries, bootstrapped',
-      'Angular · Next.js',
-      'Available in EN / ES / PT / LT',
+      'Exploriando — travel platform built from zero to production',
+      'Trade-Calendar — SaaS for traders, live in production',
+      'You work directly with the person who builds it',
     ],
   },
 };
@@ -287,17 +285,17 @@ const es: AppTranslations = {
       { label: 'FAQ',       fragment: 'faq'      },
       { label: 'Contacto',  fragment: 'contact'  },
     ],
-    cta: 'Enviar propuesta',
+    cta: 'Reservar llamada de 20 min',
   },
 
   hero: {
-    badge: 'Basada en la UE · 3 lugares disponibles para Q2 2026',
-    h1: 'Landing pages que convierten visitas en clientes. En 14 días.',
+    badge: 'Desde la UE · Tomando proyectos para pequeñas empresas',
+    h1: 'No necesitás una agencia grande. Necesitás un sitio que funcione.',
     subheadline:
-      'Desarrolladora frontend + creadora de contenido de viajes. Construyo sitios orientados a la conversión para creadores, founders y SaaS pequeños en la UE y LATAM.',
-    tagline: 'Agenda abierta hasta el 15 de junio — entrega antes de Q3',
-    ctaPrimary: 'Ver planes y precios',
-    ctaSecondary: 'Llamada de presentación (20 min)',
+      'Ayudo a pequeñas empresas a verse online tan sólidas como son en persona. Rápido de lanzar, fácil de mantener, precio justo.',
+    tagline: '€800–2.000 · sin facturas sorpresa',
+    ctaPrimary: 'Reservar llamada de 20 min',
+    ctaSecondary: 'Ver trabajos recientes',
   },
 
   services: {
@@ -443,11 +441,9 @@ const es: AppTranslations = {
 
   trustBar: {
     items: [
-      '5 años de código en producción',
-      'Naranja X — fintech, 5M+ usuarios',
-      'Exploriando — 40+ países, bootstrapped',
-      'Angular · Next.js',
-      'Disponible en EN / ES / PT / LT',
+      'Exploriando — plataforma de viajes, de cero a producción',
+      'Trade-Calendar — SaaS para traders, en producción',
+      'Trabajás directo con quien lo construye',
     ],
   },
 };
@@ -462,17 +458,17 @@ const pt: AppTranslations = {
       { label: 'FAQ',      fragment: 'faq'      },
       { label: 'Contato',  fragment: 'contact'  },
     ],
-    cta: 'Enviar proposta',
+    cta: 'Agendar call de 20 min',
   },
 
   hero: {
-    badge: 'Baseada na UE · 3 vagas abertas para Q2 2026',
-    h1: 'Landing pages que transformam visitas em clientes. Em 14 dias.',
+    badge: 'Da UE · Aceitando projetos para pequenas empresas',
+    h1: 'Você não precisa de uma agência grande. Precisa de um site que funcione.',
     subheadline:
-      'Engenheira frontend + criadora de conteúdo de viagens. Construo sites focados em conversão para criadores, founders e SaaS pequenos na UE e LATAM.',
-    tagline: 'Agenda aberta até 15 de junho — entrega antes do Q3',
-    ctaPrimary: 'Ver planos e preços',
-    ctaSecondary: 'Chamada de apresentação (20 min)',
+      'Ajudo pequenas empresas a parecer tão sólidas online quanto são pessoalmente. Rápido de lançar, fácil de manter, preço justo.',
+    tagline: '€800–2.000 · sem faturas surpresa',
+    ctaPrimary: 'Agendar call de 20 min',
+    ctaSecondary: 'Ver trabalhos recentes',
   },
 
   services: {
@@ -618,11 +614,9 @@ const pt: AppTranslations = {
 
   trustBar: {
     items: [
-      '5 anos de código em produção',
-      'Naranja X — fintech, 5M+ usuários',
-      'Exploriando — 40+ países, bootstrapped',
-      'Angular · Next.js',
-      'Disponível em EN / ES / PT / LT',
+      'Exploriando — plataforma de viagens, do zero à produção',
+      'Trade-Calendar — SaaS para traders, em produção',
+      'Você fala direto com quem constrói',
     ],
   },
 };
@@ -637,17 +631,17 @@ const lt: AppTranslations = {
       { label: 'DUK',       fragment: 'faq'      },
       { label: 'Kontaktai', fragment: 'contact'  },
     ],
-    cta: 'Siųsti užklausą',
+    cta: 'Rezervuoti 20 min skambutį',
   },
 
   hero: {
-    badge: 'Įsikūrusi ES · 3 vietos laisvos Q2 2026',
-    h1: 'Landing Page, kurie paverčia lankytojus klientais. Per 14 dienų.',
+    badge: 'Iš ES · Priimami mažų įmonių projektai',
+    h1: 'Jums nereikia didelės agentūros. Jums reikia veikiančios svetainės.',
     subheadline:
-      'Frontend inžinierė + kelionių kūrėja. Kuriu konversijoms orientuotas svetaines kūrėjams, steigėjams ir mažoms SaaS įmonėms ES ir LATAM.',
-    tagline: 'Projektų registracija iki birželio 15 d. — pristatymas prieš Q3',
-    ctaPrimary: 'Peržiūrėti planus ir kainas',
-    ctaSecondary: 'Pažintinis skambutis (20 min)',
+      'Padedu mažoms įmonėms internete atrodyti taip pat patikimai, kaip jos atrodo gyvai. Greitai paleidžiama, lengva prižiūrėti, sąžininga kaina.',
+    tagline: '€800–2 000 · jokių netikėtų sąskaitų',
+    ctaPrimary: 'Rezervuoti 20 min skambutį',
+    ctaSecondary: 'Žiūrėti darbus',
   },
 
   services: {
@@ -793,11 +787,9 @@ const lt: AppTranslations = {
 
   trustBar: {
     items: [
-      '5 metai rašant produkcinį kodą',
-      'Naranja X — fintech, 5M+ vartotojų',
-      'Exploriando — 40+ šalių, bootstrapped',
-      'Angular · Next.js',
-      'Prieinama EN / ES / PT / LT',
+      'Exploriando — kelionių platforma nuo nulio iki produkcijos',
+      'Trade-Calendar — SaaS prekiautojams, produkcijoje',
+      'Dirbate tiesiogiai su kūrėju',
     ],
   },
 };
