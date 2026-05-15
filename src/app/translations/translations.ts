@@ -94,16 +94,6 @@ interface WhyMeT {
   bullets: string[];
 }
 
-interface AvailabilitySlotT { label: string; detail: string; open: boolean; }
-
-interface AvailabilityT {
-  sectionLabel: string;
-  h2: string;
-  slots: AvailabilitySlotT[];
-  closing: string;
-  cta: string;
-}
-
 interface TrustBarT { items: string[]; }
 
 interface LeadMagnetT {
@@ -116,6 +106,7 @@ interface LeadMagnetT {
   error: string;
   rateLimit: string;
   privacy: string;
+  orEmail: string;
 }
 
 interface AppTranslations {
@@ -126,7 +117,6 @@ interface AppTranslations {
   faq: FaqT;
   contact: ContactT;
   whyMe: WhyMeT;
-  availability: AvailabilityT;
   trustBar: TrustBarT;
   leadMagnet: LeadMagnetT;
 }
@@ -304,18 +294,6 @@ const en: AppTranslations = {
     ],
   },
 
-  availability: {
-    sectionLabel: 'Availability',
-    h2: 'Q2 2026 availability',
-    slots: [
-      { label: 'Creator Landings',    detail: '3 open · June delivery',  open: true  },
-      { label: 'Retainer slot',       detail: '1 open · starting May',   open: true  },
-      { label: 'Travel-Tech project', detail: 'By application',          open: false },
-    ],
-    closing: 'Booking closes June 15 or when filled.',
-    cta: 'Claim a slot →',
-  },
-
   trustBar: {
     items: [
       'Exploriando — travel platform built from zero to production',
@@ -334,6 +312,7 @@ const en: AppTranslations = {
     error: 'Something went wrong. Email me directly at',
     rateLimit: 'Too many attempts. Please wait 10 minutes before trying again.',
     privacy: 'No spam. Just your check, then nothing unless you ask.',
+    orEmail: 'Or email me directly at',
   },
 };
 
@@ -510,18 +489,6 @@ const es: AppTranslations = {
     ],
   },
 
-  availability: {
-    sectionLabel: 'Disponibilidad',
-    h2: 'Disponibilidad Q2 2026',
-    slots: [
-      { label: 'Landings para Creadores', detail: '3 disponibles · entrega en junio', open: true  },
-      { label: 'Slot de Retainer',        detail: '1 disponible · inicio en mayo',   open: true  },
-      { label: 'Proyecto Travel-Tech',    detail: 'Por solicitud',                   open: false },
-    ],
-    closing: 'Reservas cerradas el 15 de junio o cuando se complete.',
-    cta: 'Reservar un lugar →',
-  },
-
   trustBar: {
     items: [
       'Exploriando — plataforma de viajes, de cero a producción',
@@ -540,6 +507,7 @@ const es: AppTranslations = {
     error: 'Algo salió mal. Escribime directamente a',
     rateLimit: 'Demasiados intentos. Por favor esperá 10 minutos antes de volver a intentarlo.',
     privacy: 'Sin spam. Solo tu check, después nada salvo que lo pidas.',
+    orEmail: 'O escribime directamente a',
   },
 };
 
@@ -716,18 +684,6 @@ const pt: AppTranslations = {
     ],
   },
 
-  availability: {
-    sectionLabel: 'Disponibilidade',
-    h2: 'Disponibilidade Q2 2026',
-    slots: [
-      { label: 'Landings para Criadores', detail: '3 abertas · entrega em junho', open: true  },
-      { label: 'Vaga de Retainer',        detail: '1 aberta · início em maio',   open: true  },
-      { label: 'Projeto Travel-Tech',     detail: 'Por inscrição',               open: false },
-    ],
-    closing: 'Reservas encerram em 15 de junho ou quando preenchido.',
-    cta: 'Reservar uma vaga →',
-  },
-
   trustBar: {
     items: [
       'Exploriando — plataforma de viagens, do zero à produção',
@@ -746,6 +702,7 @@ const pt: AppTranslations = {
     error: 'Algo deu errado. Me escreva diretamente em',
     rateLimit: 'Muitas tentativas. Por favor aguarde 10 minutos antes de tentar novamente.',
     privacy: 'Sem spam. Só o seu check, depois nada a menos que peça.',
+    orEmail: 'Ou me escreva diretamente em',
   },
 };
 
@@ -922,18 +879,6 @@ const lt: AppTranslations = {
     ],
   },
 
-  availability: {
-    sectionLabel: 'Prieinamumas',
-    h2: 'Q2 2026 prieinamumas',
-    slots: [
-      { label: 'Kūrėjų landing page', detail: '3 laisvos vietos · pristatymas birželį', open: true  },
-      { label: 'Retainerio vieta',             detail: '1 laisva vieta · pradžia gegužę',       open: true  },
-      { label: 'Kelionių technologijų projektas', detail: 'Pagal paraišką',                     open: false },
-    ],
-    closing: 'Registracija baigiasi birželio 15 d. arba kai vietos užpildytos.',
-    cta: 'Rezervuoti vietą →',
-  },
-
   trustBar: {
     items: [
       'Exploriando — kelionių platforma nuo nulio iki produkcijos',
@@ -952,6 +897,7 @@ const lt: AppTranslations = {
     error: 'Kažkas nepavyko. Rašykite tiesiogiai',
     rateLimit: 'Per daug bandymų. Palaukite 10 minučių ir bandykite dar kartą.',
     privacy: 'Jokio šlamšto. Tik jūsų patikra, po to nieko, nebent paprašysite.',
+    orEmail: 'Arba rašykite man tiesiogiai',
   },
 };
 

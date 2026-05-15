@@ -48,4 +48,13 @@
     color: var(--color-text-muted);
     text-align: center;
   }
+
+  &__alt {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    text-align: center;
+
+    a { color: var(--color-accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+  }
 }

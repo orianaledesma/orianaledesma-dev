@@ -159,6 +159,15 @@
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--color-accent);
+
+    &--in-progress {
+      align-self: flex-start;
+      padding: 0.2rem 0.6rem;
+      border-radius: var(--radius-pill);
+      background: var(--color-accent-dim);
+      color: var(--color-text-muted);
+      border: 1px solid var(--color-border);
+    }
   }
 
   &__role {

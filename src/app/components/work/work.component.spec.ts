@@ -32,13 +32,10 @@ describe('WorkComponent', () => {
     expect(trackSpy).toHaveBeenCalledOnceWith('work_card_click', { project: realCase!.title });
   });
 
-  it('trackea work_apply_click para card placeholder', () => {
-    const placeholderCase = component.cases.find(c => c.placeholder);
-    expect(placeholderCase).toBeDefined();
-
-    component.onCaseCtaClick(placeholderCase!);
-
-    expect(trackSpy).toHaveBeenCalledOnceWith('work_apply_click');
+  it('los 3 casos son reales con ctaHref (sin placeholder)', () => {
+    expect(component.cases.length).toBe(3);
+    expect(component.cases.every(c => !c.placeholder)).toBe(true);
+    expect(component.cases.every(c => !!c.ctaHref)).toBe(true);
   });
 
   it('CTA outbound de la card real dispara tracking al click en el DOM', () => {

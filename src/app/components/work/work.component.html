@@ -35,7 +35,10 @@
 
           <!-- Body -->
           <div class="case-card__body">
-            <span class="case-card__category">{{ item.category }}</span>
+            <span
+              class="case-card__category"
+              [class.case-card__category--in-progress]="item.category === 'In progress'"
+            >{{ item.category }}</span>
             <h3 class="case-card__title">{{ item.title }}</h3>
 
             @if (item.role) {

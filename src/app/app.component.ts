@@ -5,7 +5,6 @@ import { TrustBarComponent }     from './components/trust-bar/trust-bar.componen
 import { ServicesComponent }     from './components/services/services.component';
 import { WhyMeComponent }        from './components/why-me/why-me.component';
 import { WorkComponent }         from './components/work/work.component';
-import { AvailabilityComponent } from './components/availability/availability.component';
 import { FaqComponent }          from './components/faq/faq.component';
 import { LeadMagnetComponent }   from './components/lead-magnet/lead-magnet.component';
 import { ContactComponent }      from './components/contact/contact.component';
@@ -19,7 +18,6 @@ import { ContactComponent }      from './components/contact/contact.component';
     ServicesComponent,
     WhyMeComponent,
     WorkComponent,
-    AvailabilityComponent,
     FaqComponent,
     LeadMagnetComponent,
     ContactComponent,
