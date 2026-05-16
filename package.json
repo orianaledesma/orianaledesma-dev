@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:prod": "node scripts/inject-env.mjs && ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "optimize:work-images": "node scripts/optimize-work-images.js"
