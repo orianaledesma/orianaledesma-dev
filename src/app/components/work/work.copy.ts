@@ -9,6 +9,8 @@ export interface CaseStudyCopy {
   ctaHref?: string;
   placeholder?: boolean;
   image?: string;
+  /** Screenshot mobile opcional — se usa vía <picture> en viewports chicos. */
+  imageMobile?: string;
   brandedBg?: string;
 }
 
@@ -51,6 +53,22 @@ export const WORK_COPY: WorkCopy = {
       quote: 'I build things the way I build my own — to last.',
       cta: 'Visit exploriando.page →',
       ctaHref: 'https://exploriando.page',
+    },
+    {
+      category: 'Client work · live',
+      title: 'Rima Berg',
+      role: 'Designed and built it for a jewellery brand in Kaunas',
+      stack: ['Live in production', 'Bilingual EN / LT', 'SEO-ready & responsive'],
+      image: 'assets/images/work/rimaberg_dk.jpeg',
+      imageMobile: 'assets/images/work/rimaberg_mb.jpeg',
+      bullets: [
+        'An elegant bilingual (EN/LT) catalogue for a real jewellery brand',
+        'Designed to show each piece beautifully and turn visits into enquiries',
+        'Fast, responsive and SEO-ready — online at rimaberg.com',
+      ],
+      quote: "A brand's vitrine, crafted to feel as refined as the pieces.",
+      cta: 'Visit rimaberg.com →',
+      ctaHref: 'https://rimaberg.com',
     },
     {
       category: 'In progress',

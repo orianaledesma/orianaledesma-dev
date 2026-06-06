@@ -32,8 +32,8 @@ describe('WorkComponent', () => {
     expect(trackSpy).toHaveBeenCalledOnceWith('work_card_click', { project: realCase!.title });
   });
 
-  it('los 3 casos son reales con ctaHref (sin placeholder)', () => {
-    expect(component.cases.length).toBe(3);
+  it('los 4 casos son reales con ctaHref (sin placeholder)', () => {
+    expect(component.cases.length).toBe(4);
     expect(component.cases.every(c => !c.placeholder)).toBe(true);
     expect(component.cases.every(c => !!c.ctaHref)).toBe(true);
   });
