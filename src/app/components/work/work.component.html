@@ -18,12 +18,17 @@
           <!-- Image area -->
           <div class="case-card__image">
             @if (item.image) {
-              <img
-                [src]="item.image"
-                [alt]="item.title + ' screenshot'"
-                class="case-card__screenshot"
-                loading="lazy"
-              />
+              <picture>
+                @if (item.imageMobile) {
+                  <source media="(max-width: 768px)" [srcset]="item.imageMobile" />
+                }
+                <img
+                  [src]="item.image"
+                  [alt]="item.title + ' screenshot'"
+                  class="case-card__screenshot"
+                  loading="lazy"
+                />
+              </picture>
             } @else if (item.brandedBg) {
               <div class="case-card__branded" [style.background]="item.brandedBg">
                 <span class="case-card__branded-text">{{ item.title }}</span>
