@@ -9,10 +9,9 @@
     </div>
 
     <div class="work__grid">
-      @for (item of cases; track item.title; let i = $index) {
+      @for (item of cases; track item.title) {
         <article
           class="case-card"
-          [class.case-card--wide]="i === 0"
           [class.case-card--placeholder]="item.placeholder"
         >
           <!-- Image area -->

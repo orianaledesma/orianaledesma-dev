@@ -38,12 +38,10 @@
           </ul>
 
           <a
-            [href]="calendlyUrl"
-            target="_blank"
-            rel="noopener"
+            href="#contact"
             class="btn btn--outline service-card__cta"
-            (click)="onCtaClick(cardPacks[i])"
-            [attr.aria-label]="card.cta + ' about ' + card.title + ', opens scheduling in a new tab'"
+            (click)="onCtaClick(cardPacks[i], card.title)"
+            [attr.aria-label]="card.cta + ' — ' + card.title"
           >{{ card.cta }}</a>
         </li>
       }
@@ -73,12 +71,10 @@
         </ul>
 
         <a
-          [href]="calendlyUrl"
-          target="_blank"
-          rel="noopener"
+          href="#contact"
           class="btn btn--outline care-plan__cta"
-          (click)="onCtaClick('care')"
-          [attr.aria-label]="t().carePlan.cta + ' about the Care Plan, opens scheduling in a new tab'"
+          (click)="onCtaClick('care', t().carePlan.title)"
+          [attr.aria-label]="t().carePlan.cta + ' — ' + t().carePlan.title"
         >{{ t().carePlan.cta }}</a>
       </div>
     </aside>

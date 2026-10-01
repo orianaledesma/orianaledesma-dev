@@ -10,13 +10,12 @@ import { TRANSLATIONS } from '../../translations/translations';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeroComponent {
-  readonly calendlyUrl = 'https://calendly.com/hello-orianaledesma/20min';
 
   private readonly lang = inject(LanguageService);
   private readonly analytics = inject(AnalyticsService);
   readonly t = computed(() => TRANSLATIONS[this.lang.current()].hero);
 
-  /** Tracking: CTA primario del hero (Book a 15-min call → Calendly, nueva pestaña). */
+  /** Tracking: CTA primario del hero → formulario de contacto. */
   onCtaPrimaryClick(): void {
     this.analytics.track('hero_cta_primary_click');
   }

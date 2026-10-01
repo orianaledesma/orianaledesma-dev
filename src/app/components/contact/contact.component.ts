@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  effect,
   inject,
   signal,
 } from '@angular/core';
@@ -11,6 +12,7 @@ import { ContactService } from '../../services/contact.service';
 import { ContactFormData } from '../../models/contact.model';
 import { LanguageService } from '../../services/language.service';
 import { AnalyticsService } from '../../services/analytics.service';
+import { ProjectInterestService } from '../../services/project-interest.service';
 import { TRANSLATIONS } from '../../translations/translations';
 
 interface SocialLink { label: string; href: string; icon: string; }
@@ -37,7 +39,6 @@ export type SubmitStatus = 'idle' | 'success' | 'error' | 'rateLimit';
 })
 export class ContactComponent {
   readonly socialLinks = SOCIAL_LINKS;
-  readonly calendlyUrl = 'https://calendly.com/hello-orianaledesma/20min';
 
   private readonly lang = inject(LanguageService);
   readonly t = computed(() => TRANSLATIONS[this.lang.current()].contact);
@@ -47,6 +48,7 @@ export class ContactComponent {
     document.getElementById('contact-name')?.focus();
   }
 
+  private readonly interest       = inject(ProjectInterestService);
   private readonly fb             = inject(FormBuilder);
   private readonly contactService = inject(ContactService);
   private readonly analytics      = inject(AnalyticsService);
@@ -57,6 +59,26 @@ export class ContactComponent {
     message: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(500)]],
     website: [''],  // honeypot — must stay empty
   });
+
+  constructor() {
+    /**
+     * Pre-escribe el mensaje cuando llegaron desde un pack de servicios.
+     *
+     * Sólo si el campo está vacío: si la persona ya empezó a escribir y
+     * después vuelve a tocar otro pack, lo suyo manda. El texto es editable
+     * como cualquier otro, no un campo oculto.
+     */
+    effect(() => {
+      const pack = this.interest.pack();
+      if (!pack) return;
+
+      const ctrl = this.contactForm.controls.message;
+      if (ctrl.value?.trim()) return;
+
+      ctrl.setValue(`Hi Ori, I'm interested in the ${pack}.\n\n`);
+      this.interest.clear();
+    });
+  }
 
   private readonly formStatus = toSignal(
     this.contactForm.statusChanges,

@@ -24,22 +24,6 @@ export const WORK_COPY: WorkCopy = {
 
   cases: [
     {
-      category: 'Live · built from zero',
-      title: 'Trade-Calendar',
-      role: 'I built and shipped the whole thing — design, build, launch',
-      stack: ['Live in production', '3 languages', 'Secure login'],
-      image: 'assets/images/work/trade-calendar.webp',
-      bullets: [
-        'A real product people use every day, online at trade-calendar.com',
-        'Sign-up, secure accounts and a clean dashboard — all working',
-        'Available in 3 languages with a light and dark mode',
-        'From idea to live product, start to finish',
-      ],
-      quote: 'Not a demo. A product in real use.',
-      cta: 'See it live →',
-      ctaHref: 'https://trade-calendar.com',
-    },
-    {
       category: 'Live · 5 years running',
       title: 'Exploriando',
       role: 'Built it from zero and still run it',
@@ -53,6 +37,21 @@ export const WORK_COPY: WorkCopy = {
       quote: 'I build things the way I build my own — to last.',
       cta: 'Visit exploriando.page →',
       ctaHref: 'https://exploriando.page',
+    },
+    {
+      category: 'Live · built from zero',
+      title: 'Trade-Calendar',
+      role: 'I built and shipped the whole thing — design, build, launch',
+      stack: ['Live in production', '3 languages', 'Secure login'],
+      image: 'assets/images/work/trade-calendar.webp',
+      bullets: [
+        'A real product people use every day, online at trade-calendar.com',
+        'Sign-up, secure accounts and a clean dashboard — all working',
+        'Available in 3 languages, with a light and dark mode',
+      ],
+      quote: 'Not a demo. A product in real use.',
+      cta: 'Visit trade-calendar.com →',
+      ctaHref: 'https://trade-calendar.com',
     },
     {
       category: 'Client work · live',
@@ -71,19 +70,34 @@ export const WORK_COPY: WorkCopy = {
       ctaHref: 'https://rimaberg.com',
     },
     {
-      category: 'In progress',
+      category: 'Live · built from zero',
       title: 'Latina Connection',
-      role: 'In build right now',
+      role: 'Brand, site and launch — all of it mine',
       image: 'assets/images/work/latina-connection.webp',
-      stack: ['In progress'],
+      stack: ['Live in production', 'Prerendered for SEO', 'WCAG AA'],
       bullets: [
-        'A community platform currently in the works',
-        'Building it the same way: clear scope, shipped properly',
-        'The product is already live — see it on Hotmart',
+        'A course brand I built end to end, online at latinaconnection.info',
+        'Pages ship as real HTML, so Google reads the content and not an empty shell',
+        'An interactive piece on the page shows what the course teaches before you buy',
       ],
-      cta: 'See the product →',
-      ctaHref:
-        'https://hotmart.com/en/marketplace/products/the-latin-connection-from-gringo-to-galan-in-2-hours/J104478384F',
+      quote: 'The product and its storefront, built by the same hands.',
+      cta: 'Visit latinaconnection.info →',
+      ctaHref: 'https://latinaconnection.info',
+    },
+    {
+      category: 'In progress',
+      title: 'Milesa',
+      role: 'Designing and building it for a construction crew in Kaunas',
+      // Sin captura ni link: todavía no hay nada público que mostrar, y una
+      // tarjeta honesta en obra vale más que una maqueta presentada como sitio.
+      placeholder: true,
+      stack: ['In build', 'Bilingual LT / EN', 'Angular'],
+      bullets: [
+        'A site for a Lithuanian building firm — foundations, walls, roofing, finishes',
+        'Bilingual LT / EN, written for people comparing quotes rather than browsing',
+        'Each service says what it delivers and what comes warranted, in plain words',
+      ],
+      quote: 'Trades sell on trust. The site has to earn it before the call.',
     },
   ],
 };

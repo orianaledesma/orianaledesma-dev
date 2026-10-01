@@ -83,8 +83,10 @@ interface ContactFormT {
 interface ContactT {
   h2: string;
   sub: string;
-  calendlyCta: string;
-  separator: string;
+  /** Promesa de respuesta, junto al botón de enviar. Reemplaza la inmediatez
+   *  que daba el enlace a Calendly: sin calendario, esto es lo único que le
+   *  dice a la persona qué va a pasar después de escribir. */
+  replyPromise: string;
   form: ContactFormT;
   footer: string;
 }
@@ -131,7 +133,7 @@ const en: AppTranslations = {
       { label: 'FAQ',      fragment: 'faq'      },
       { label: 'Contact',  fragment: 'contact'  },
     ],
-    cta: 'Book a 20-min call',
+    cta: 'Work with me',
   },
 
   hero: {
@@ -140,7 +142,7 @@ const en: AppTranslations = {
     subheadline:
       'I help small companies look as solid online as they are in person. Fast to launch, easy to maintain, fair price.',
     tagline: '€800–2,000 · no surprise invoices',
-    ctaPrimary: 'Book a 20-min call',
+    ctaPrimary: 'Tell me about your project',
     ctaSecondary: 'See recent work',
   },
 
@@ -159,7 +161,7 @@ const en: AppTranslations = {
           'A clear, mobile-first design that loads fast',
           'Found on Google for your name and what you offer',
         ],
-        cta: 'Book a 20-min call',
+        cta: 'Start this one',
       },
       {
         label: 'MOST REQUESTED',
@@ -172,7 +174,7 @@ const en: AppTranslations = {
           'You update text and photos yourself — no developer needed',
           'Built to rank on Google in your area',
         ],
-        cta: 'Book a 20-min call',
+        cta: 'Start this one',
       },
       {
         label: 'SELL ONLINE',
@@ -185,7 +187,7 @@ const en: AppTranslations = {
           'Manage products and orders from one simple screen',
           'A launch plan + short video walkthrough, plus 3 months of Care Plan included',
         ],
-        cta: 'Book a 20-min call',
+        cta: 'Start this one',
       },
     ],
     carePlan: {
@@ -199,7 +201,7 @@ const en: AppTranslations = {
         'One full refresh per year included',
         'Cancel anytime',
       ],
-      cta: 'Book a 20-min call',
+      cta: 'Ask about the plan',
     },
   },
 
@@ -257,8 +259,7 @@ const en: AppTranslations = {
   contact: {
     h2: 'Ship something that actually converts.',
     sub: 'Tell me about your project in 3 lines. I reply within 48h.',
-    calendlyCta: 'Book a 20-min intro call',
-    separator: 'or',
+    replyPromise: 'I read every message myself. You get an answer within 48h.',
     form: {
       nameLbl: 'Name',
       namePlaceholder: 'Your name',
@@ -326,7 +327,7 @@ const es: AppTranslations = {
       { label: 'FAQ',       fragment: 'faq'      },
       { label: 'Contacto',  fragment: 'contact'  },
     ],
-    cta: 'Reservar llamada de 20 min',
+    cta: 'Trabajemos juntos',
   },
 
   hero: {
@@ -335,7 +336,7 @@ const es: AppTranslations = {
     subheadline:
       'Ayudo a pequeñas empresas a verse online tan sólidas como son en persona. Rápido de lanzar, fácil de mantener, precio justo.',
     tagline: '€800–2.000 · sin facturas sorpresa',
-    ctaPrimary: 'Reservar llamada de 20 min',
+    ctaPrimary: 'Contame tu proyecto',
     ctaSecondary: 'Ver trabajos recientes',
   },
 
@@ -354,7 +355,7 @@ const es: AppTranslations = {
           'Diseño claro, mobile-first y que carga rápido',
           'Aparecés en Google por tu nombre y lo que ofrecés',
         ],
-        cta: 'Reservar llamada de 20 min',
+        cta: 'Empecemos con este',
       },
       {
         label: 'MÁS SOLICITADO',
@@ -367,7 +368,7 @@ const es: AppTranslations = {
           'Actualizás textos y fotos vos mismo — sin depender de un dev',
           'Preparado para posicionar en Google en tu zona',
         ],
-        cta: 'Reservar llamada de 20 min',
+        cta: 'Empecemos con este',
       },
       {
         label: 'VENDER ONLINE',
@@ -380,7 +381,7 @@ const es: AppTranslations = {
           'Gestionás productos y pedidos desde una sola pantalla',
           'Plan de lanzamiento + video corto de tu sitio, más 3 meses de Care Plan incluidos',
         ],
-        cta: 'Reservar llamada de 20 min',
+        cta: 'Empecemos con este',
       },
     ],
     carePlan: {
@@ -394,7 +395,7 @@ const es: AppTranslations = {
         'Un refresh completo por año incluido',
         'Cancelás cuando quieras',
       ],
-      cta: 'Reservar llamada de 20 min',
+      cta: 'Consultame por el plan',
     },
   },
 
@@ -452,8 +453,7 @@ const es: AppTranslations = {
   contact: {
     h2: 'Lanzá algo que realmente convierta.',
     sub: 'Contame tu proyecto en 3 líneas. Respondo en menos de 48h.',
-    calendlyCta: 'Reservar una llamada de 20 min',
-    separator: 'o',
+    replyPromise: 'Cada mensaje lo leo yo. Tenés respuesta en menos de 48h.',
     form: {
       nameLbl: 'Nombre',
       namePlaceholder: 'Tu nombre',
@@ -521,7 +521,7 @@ const pt: AppTranslations = {
       { label: 'FAQ',      fragment: 'faq'      },
       { label: 'Contato',  fragment: 'contact'  },
     ],
-    cta: 'Agendar call de 20 min',
+    cta: 'Vamos trabalhar juntos',
   },
 
   hero: {
@@ -530,7 +530,7 @@ const pt: AppTranslations = {
     subheadline:
       'Ajudo pequenas empresas a parecer tão sólidas online quanto são pessoalmente. Rápido de lançar, fácil de manter, preço justo.',
     tagline: '€800–2.000 · sem faturas surpresa',
-    ctaPrimary: 'Agendar call de 20 min',
+    ctaPrimary: 'Me conte seu projeto',
     ctaSecondary: 'Ver trabalhos recentes',
   },
 
@@ -549,7 +549,7 @@ const pt: AppTranslations = {
           'Design claro, mobile-first e que carrega rápido',
           'Aparece no Google pelo seu nome e o que você oferece',
         ],
-        cta: 'Agendar call de 20 min',
+        cta: 'Vamos com este',
       },
       {
         label: 'MAIS SOLICITADO',
@@ -562,7 +562,7 @@ const pt: AppTranslations = {
           'Você atualiza textos e fotos sozinho — sem depender de um dev',
           'Preparado para ranquear no Google na sua região',
         ],
-        cta: 'Agendar call de 20 min',
+        cta: 'Vamos com este',
       },
       {
         label: 'VENDER ONLINE',
@@ -575,7 +575,7 @@ const pt: AppTranslations = {
           'Gerencia produtos e pedidos de uma só tela',
           'Plano de lançamento + vídeo curto do seu site, mais 3 meses de Care Plan incluídos',
         ],
-        cta: 'Agendar call de 20 min',
+        cta: 'Vamos com este',
       },
     ],
     carePlan: {
@@ -589,7 +589,7 @@ const pt: AppTranslations = {
         'Um refresh completo por ano incluído',
         'Cancela quando quiser',
       ],
-      cta: 'Agendar call de 20 min',
+      cta: 'Me pergunte sobre o plano',
     },
   },
 
@@ -647,8 +647,7 @@ const pt: AppTranslations = {
   contact: {
     h2: 'Lance algo que realmente converta.',
     sub: 'Me conta seu projeto em 3 linhas. Respondo em até 48h.',
-    calendlyCta: 'Agendar uma chamada de 20 min',
-    separator: 'ou',
+    replyPromise: 'Leio cada mensagem eu mesma. Você recebe resposta em até 48h.',
     form: {
       nameLbl: 'Nome',
       namePlaceholder: 'Seu nome',
@@ -716,7 +715,7 @@ const lt: AppTranslations = {
       { label: 'DUK',       fragment: 'faq'      },
       { label: 'Kontaktai', fragment: 'contact'  },
     ],
-    cta: 'Rezervuoti 20 min skambutį',
+    cta: 'Dirbkime kartu',
   },
 
   hero: {
@@ -725,7 +724,7 @@ const lt: AppTranslations = {
     subheadline:
       'Padedu mažoms įmonėms internete atrodyti taip pat patikimai, kaip jos atrodo gyvai. Greitai paleidžiama, lengva prižiūrėti, sąžininga kaina.',
     tagline: '€800–2 000 · jokių netikėtų sąskaitų',
-    ctaPrimary: 'Rezervuoti 20 min skambutį',
+    ctaPrimary: 'Papasakokite apie projektą',
     ctaSecondary: 'Žiūrėti darbus',
   },
 
@@ -744,7 +743,7 @@ const lt: AppTranslations = {
           'Aiškus, mobile-first dizainas, kuris greitai įsikelia',
           'Randami Google pagal jūsų vardą ir tai, ką siūlote',
         ],
-        cta: 'Rezervuoti 20 min skambutį',
+        cta: 'Pradėkime nuo šio',
       },
       {
         label: 'POPULIARIAUSIAS',
@@ -757,7 +756,7 @@ const lt: AppTranslations = {
           'Patys atnaujinate tekstus ir nuotraukas — be programuotojo',
           'Paruošta reitinguotis Google jūsų regione',
         ],
-        cta: 'Rezervuoti 20 min skambutį',
+        cta: 'Pradėkime nuo šio',
       },
       {
         label: 'PARDUOTI INTERNETU',
@@ -770,7 +769,7 @@ const lt: AppTranslations = {
           'Valdote produktus ir užsakymus iš vieno ekrano',
           'Paleidimo planas + trumpas svetainės vaizdo įrašas, plius 3 mėn. Care Plan įskaičiuota',
         ],
-        cta: 'Rezervuoti 20 min skambutį',
+        cta: 'Pradėkime nuo šio',
       },
     ],
     carePlan: {
@@ -784,7 +783,7 @@ const lt: AppTranslations = {
         'Vienas pilnas atnaujinimas per metus įskaičiuotas',
         'Atšaukiate bet kada',
       ],
-      cta: 'Rezervuoti 20 min skambutį',
+      cta: 'Paklauskite apie planą',
     },
   },
 
@@ -842,8 +841,7 @@ const lt: AppTranslations = {
   contact: {
     h2: 'Sukurkite kažką, kas iš tikrųjų konvertuoja.',
     sub: 'Papasakokite apie projektą 3 eilutėmis. Atsakau per 48 val.',
-    calendlyCta: 'Užsisakyti 20 min pažintinį skambutį',
-    separator: 'arba',
+    replyPromise: 'Kiekvieną žinutę perskaitau pati. Atsakymą gausite per 48 val.',
     form: {
       nameLbl: 'Vardas',
       namePlaceholder: 'Jūsų vardas',

@@ -28,14 +28,15 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version-file: '.nvmrc'
           cache: 'npm'
 
       - name: Install dependencies
         run: npm ci
 
       - name: Run tests with coverage
-        run: npx ng test --watch=false --browsers=ChromeHeadless --code-coverage
+        # Vitest sobre jsdom desde Angular 22 — ya no hace falta un Chrome.
+        run: npx ng test --watch=false
 
       - name: Upload coverage report
         uses: actions/upload-artifact@v4
@@ -62,7 +63,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version-file: '.nvmrc'
           cache: 'npm'
 
       - name: Install dependencies

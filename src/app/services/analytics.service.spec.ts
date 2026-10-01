@@ -2,46 +2,50 @@ import { TestBed } from '@angular/core/testing';
 import { AnalyticsService } from './analytics.service';
 
 describe('AnalyticsService', () => {
-  let svc: AnalyticsService;
-  let originalGtag: Window['gtag'];
+    let svc: AnalyticsService;
+    let originalGtag: Window['gtag'];
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    svc = TestBed.inject(AnalyticsService);
-    originalGtag = window.gtag;
-  });
+    beforeEach(() => {
+        TestBed.configureTestingModule({});
+        svc = TestBed.inject(AnalyticsService);
+        originalGtag = window.gtag;
+    });
 
-  afterEach(() => {
-    window.gtag = originalGtag;
-  });
+    afterEach(() => {
+        window.gtag = originalGtag;
+    });
 
-  it('llama a window.gtag con event + name + params', () => {
-    const spy = jasmine.createSpy('gtag');
-    window.gtag = spy;
+    it('llama a window.gtag con event + name + params', () => {
+        const spy = vi.fn().mockName('gtag');
+        window.gtag = spy;
 
-    svc.track('hero_cta_primary_click', { section: 'hero' });
+        svc.track('hero_cta_primary_click', { section: 'hero' });
 
-    expect(spy).toHaveBeenCalledOnceWith('event', 'hero_cta_primary_click', { section: 'hero' });
-  });
+        expect(spy).toHaveBeenCalledTimes(1);
 
-  it('usa params vacío por default si no se pasan', () => {
-    const spy = jasmine.createSpy('gtag');
-    window.gtag = spy;
+        expect(spy).toHaveBeenCalledWith('event', 'hero_cta_primary_click', { section: 'hero' });
+    });
 
-    svc.track('nav_cta_click');
+    it('usa params vacío por default si no se pasan', () => {
+        const spy = vi.fn().mockName('gtag');
+        window.gtag = spy;
 
-    expect(spy).toHaveBeenCalledOnceWith('event', 'nav_cta_click', {});
-  });
+        svc.track('nav_cta_click');
 
-  it('es no-op si window.gtag no está definido', () => {
-    window.gtag = undefined;
+        expect(spy).toHaveBeenCalledTimes(1);
 
-    expect(() => svc.track('work_card_click', { project: 'exploriando' })).not.toThrow();
-  });
+        expect(spy).toHaveBeenCalledWith('event', 'nav_cta_click', {});
+    });
 
-  it('no propaga errores si gtag tira', () => {
-    window.gtag = (() => { throw new Error('boom'); }) as Window['gtag'];
+    it('es no-op si window.gtag no está definido', () => {
+        window.gtag = undefined;
 
-    expect(() => svc.track('contact_form_submit')).not.toThrow();
-  });
+        expect(() => svc.track('work_card_click', { project: 'exploriando' })).not.toThrow();
+    });
+
+    it('no propaga errores si gtag tira', () => {
+        window.gtag = (() => { throw new Error('boom'); }) as Window['gtag'];
+
+        expect(() => svc.track('contact_form_submit')).not.toThrow();
+    });
 });

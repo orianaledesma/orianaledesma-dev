@@ -5,86 +5,73 @@ import { ContactService } from './contact.service';
 import { ContactFormData } from '../models/contact.model';
 
 const MOCK_DATA: ContactFormData = {
-  name:    'Test User',
-  email:   'test@example.com',
-  message: 'This is a test message for the contact form.',
+    name: 'Test User',
+    email: 'test@example.com',
+    message: 'This is a test message for the contact form.',
 };
 
 describe('ContactService', () => {
-  let service: ContactService;
+    let service: ContactService;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            imports: [HttpClientTestingModule],
+        });
+        service = TestBed.inject(ContactService);
     });
-    service = TestBed.inject(ContactService);
-  });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-
-  it('should call emailjs.send with the correct parameters', (done) => {
-    const sendSpy = spyOn(emailjs, 'send').and.returnValue(
-      Promise.resolve({ status: 200, text: 'OK' }),
-    );
-
-    service.sendMessage(MOCK_DATA).subscribe({
-      complete: () => {
-        expect(sendSpy).toHaveBeenCalledWith(
-          jasmine.any(String),
-          jasmine.any(String),
-          {
-            from_name: 'Test User',
-            reply_to:  'test@example.com',
-            message:   'This is a test message for the contact form.',
-          },
-          { publicKey: jasmine.any(String) },
-        );
-        done();
-      },
+    it('should be created', () => {
+        expect(service).toBeTruthy();
     });
-  });
 
-  it('should return an Observable that completes on success', (done) => {
-    spyOn(emailjs, 'send').and.returnValue(
-      Promise.resolve({ status: 200, text: 'OK' }),
-    );
+    it('should call emailjs.send with the correct parameters', async () => {
+        const sendSpy = vi.spyOn(emailjs, 'send').mockResolvedValue({ status: 200, text: 'OK' });
 
-    let nextCalled = false;
-
-    service.sendMessage(MOCK_DATA).subscribe({
-      next:     ()  => { nextCalled = true; },
-      complete: ()  => {
-        expect(nextCalled).toBeTrue();
-        done();
-      },
+        service.sendMessage(MOCK_DATA).subscribe({
+            complete: () => {
+                expect(sendSpy).toHaveBeenCalledWith(expect.any(String), expect.any(String), {
+                    from_name: 'Test User',
+                    reply_to: 'test@example.com',
+                    message: 'This is a test message for the contact form.',
+                }, { publicKey: expect.any(String) });
+                ;
+            },
+        });
     });
-  });
 
-  it('should propagate network errors through the Observable', (done) => {
-    spyOn(emailjs, 'send').and.returnValue(
-      Promise.reject(new Error('Network error')),
-    );
+    it('should return an Observable that completes on success', async () => {
+        vi.spyOn(emailjs, 'send').mockResolvedValue({ status: 200, text: 'OK' });
 
-    service.sendMessage(MOCK_DATA).subscribe({
-      error: (err: Error) => {
-        expect(err.message).toBe('Network error');
-        done();
-      },
+        let nextCalled = false;
+
+        service.sendMessage(MOCK_DATA).subscribe({
+            next: () => { nextCalled = true; },
+            complete: () => {
+                expect(nextCalled).toBe(true);
+                ;
+            },
+        });
     });
-  });
 
-  it('should emit void (undefined) on success — not the raw emailjs response', (done) => {
-    spyOn(emailjs, 'send').and.returnValue(
-      Promise.resolve({ status: 200, text: 'OK' }),
-    );
+    it('should propagate network errors through the Observable', async () => {
+        vi.spyOn(emailjs, 'send').mockRejectedValue(new Error('Network error'));
 
-    service.sendMessage(MOCK_DATA).subscribe({
-      next: (value) => {
-        expect(value).toBeUndefined();
-        done();
-      },
+        service.sendMessage(MOCK_DATA).subscribe({
+            error: (err: Error) => {
+                expect(err.message).toBe('Network error');
+                ;
+            },
+        });
     });
-  });
+
+    it('should emit void (undefined) on success — not the raw emailjs response', async () => {
+        vi.spyOn(emailjs, 'send').mockResolvedValue({ status: 200, text: 'OK' });
+
+        service.sendMessage(MOCK_DATA).subscribe({
+            next: (value) => {
+                expect(value).toBeUndefined();
+                ;
+            },
+        });
+    });
 });
