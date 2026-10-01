@@ -6,11 +6,11 @@ import { Injectable } from '@angular/core';
  */
 export type AnalyticsEvent =
   | 'hero_cta_primary_click'      // CTA principal del hero (See plans & pricing)
-  | 'hero_cta_secondary_click'    // CTA secundario del hero (Short intro call)
+  | 'hero_cta_secondary_click'    // CTA secundario del hero → sección de trabajos
   | 'nav_cta_click'               // CTA del nav (Send a brief)
   | 'work_card_click'             // CTA outbound de una case card (Exploriando, TC)
   | 'work_apply_click'            // CTA "Apply for a slot" en Work
-  | 'services_card_click'         // CTA de un pack de servicios o Care Plan → Calendly
+  | 'services_card_click'         // CTA de un pack o Care Plan → formulario de contacto (param `pack`)
   | 'lead_magnet_submit'          // submit exitoso del lead magnet (free online presence check)
   | 'contact_form_submit'         // submit exitoso del form de contacto
   | 'contact_form_error';         // error del form de contacto (EmailJS, validación)
