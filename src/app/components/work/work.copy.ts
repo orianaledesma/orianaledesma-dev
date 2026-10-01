@@ -24,22 +24,6 @@ export const WORK_COPY: WorkCopy = {
 
   cases: [
     {
-      category: 'Live · built from zero',
-      title: 'Trade-Calendar',
-      role: 'I built and shipped the whole thing — design, build, launch',
-      stack: ['Live in production', '3 languages', 'Secure login'],
-      image: 'assets/images/work/trade-calendar.webp',
-      bullets: [
-        'A real product people use every day, online at trade-calendar.com',
-        'Sign-up, secure accounts and a clean dashboard — all working',
-        'Available in 3 languages with a light and dark mode',
-        'From idea to live product, start to finish',
-      ],
-      quote: 'Not a demo. A product in real use.',
-      cta: 'See it live →',
-      ctaHref: 'https://trade-calendar.com',
-    },
-    {
       category: 'Live · 5 years running',
       title: 'Exploriando',
       role: 'Built it from zero and still run it',
@@ -53,6 +37,21 @@ export const WORK_COPY: WorkCopy = {
       quote: 'I build things the way I build my own — to last.',
       cta: 'Visit exploriando.page →',
       ctaHref: 'https://exploriando.page',
+    },
+    {
+      category: 'Live · built from zero',
+      title: 'Trade-Calendar',
+      role: 'I built and shipped the whole thing — design, build, launch',
+      stack: ['Live in production', '3 languages', 'Secure login'],
+      image: 'assets/images/work/trade-calendar.webp',
+      bullets: [
+        'A real product people use every day, online at trade-calendar.com',
+        'Sign-up, secure accounts and a clean dashboard — all working',
+        'Available in 3 languages, with a light and dark mode',
+      ],
+      quote: 'Not a demo. A product in real use.',
+      cta: 'Visit trade-calendar.com →',
+      ctaHref: 'https://trade-calendar.com',
     },
     {
       category: 'Client work · live',
