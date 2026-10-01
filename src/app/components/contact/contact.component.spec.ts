@@ -1,4 +1,5 @@
-import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import type { Mock, MockedObject } from "vitest";
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { of, throwError } from 'rxjs';
 import { ContactComponent } from './contact.component';
@@ -6,231 +7,239 @@ import { ContactService } from '../../services/contact.service';
 import { AnalyticsService } from '../../services/analytics.service';
 
 const VALID_FORM = {
-  name:    'Test User',
-  email:   'test@example.com',
-  message: 'This is a message that is long enough to pass validation.',
-  website: '',
+    name: 'Test User',
+    email: 'test@example.com',
+    message: 'This is a message that is long enough to pass validation.',
+    website: '',
 };
 
 describe('ContactComponent', () => {
-  let component: ContactComponent;
-  let fixture:   ComponentFixture<ContactComponent>;
-  let mockContactService: jasmine.SpyObj<ContactService>;
-  let trackSpy: jasmine.Spy;
+    beforeEach(() => {
+        vi.useFakeTimers({ advanceTimeDelta: 1, shouldAdvanceTime: true });
+    });
+    afterEach(() => {
+        vi.useRealTimers();
+    });
+    let component: ContactComponent;
+    let fixture: ComponentFixture<ContactComponent>;
+    let mockContactService: MockedObject<ContactService>;
+    let trackSpy: Mock;
 
-  beforeEach(async () => {
-    mockContactService = jasmine.createSpyObj<ContactService>('ContactService', ['sendMessage']);
+    beforeEach(async () => {
+        mockContactService = {
+            sendMessage: vi.fn().mockName("ContactService.sendMessage")
+        };
 
-    await TestBed.configureTestingModule({
-      imports:   [ContactComponent, HttpClientTestingModule],
-      providers: [{ provide: ContactService, useValue: mockContactService }],
-    }).compileComponents();
+        await TestBed.configureTestingModule({
+            imports: [ContactComponent, HttpClientTestingModule],
+            providers: [{ provide: ContactService, useValue: mockContactService }],
+        }).compileComponents();
 
-    fixture   = TestBed.createComponent(ContactComponent);
-    component = fixture.componentInstance;
-    trackSpy  = spyOn(TestBed.inject(AnalyticsService), 'track');
-    fixture.detectChanges();
-  });
+        fixture = TestBed.createComponent(ContactComponent);
+        component = fixture.componentInstance;
+        trackSpy = vi.spyOn(TestBed.inject(AnalyticsService), 'track').mockReturnValue(undefined);
+        fixture.detectChanges();
+    });
 
-  afterEach(() => localStorage.clear());
+    afterEach(() => localStorage.clear());
 
-  // ── Component creation ────────────────────────────────────────────────────
+    // ── Component creation ────────────────────────────────────────────────────
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 
-  // ── Form validation ───────────────────────────────────────────────────────
+    // ── Form validation ───────────────────────────────────────────────────────
 
-  it('should start with an invalid form', () => {
-    expect(component.contactForm.invalid).toBeTrue();
-  });
+    it('should start with an invalid form', () => {
+        expect(component.contactForm.invalid).toBe(true);
+    });
 
-  it('should show email error with incorrect format', () => {
-    component.emailCtrl.setValue('not-an-email');
-    component.emailCtrl.markAsTouched();
-    fixture.detectChanges();
+    it('should show email error with incorrect format', () => {
+        component.emailCtrl.setValue('not-an-email');
+        component.emailCtrl.markAsTouched();
+        fixture.detectChanges();
 
-    const errorEl: HTMLElement = fixture.nativeElement.querySelector('[data-testid="email-error"]');
-    expect(errorEl).toBeTruthy();
-    expect(errorEl.textContent).toContain('valid email');
-  });
+        const errorEl: HTMLElement = fixture.nativeElement.querySelector('[data-testid="email-error"]');
+        expect(errorEl).toBeTruthy();
+        expect(errorEl.textContent).toContain('valid email');
+    });
 
-  it('should show name error if fewer than 2 characters', () => {
-    component.nameCtrl.setValue('a');
-    component.nameCtrl.markAsTouched();
-    fixture.detectChanges();
+    it('should show name error if fewer than 2 characters', () => {
+        component.nameCtrl.setValue('a');
+        component.nameCtrl.markAsTouched();
+        fixture.detectChanges();
 
-    const errorEl: HTMLElement = fixture.nativeElement.querySelector('[data-testid="name-error"]');
-    expect(errorEl).toBeTruthy();
-    expect(errorEl.textContent).toContain('2 characters');
-  });
+        const errorEl: HTMLElement = fixture.nativeElement.querySelector('[data-testid="name-error"]');
+        expect(errorEl).toBeTruthy();
+        expect(errorEl.textContent).toContain('2 characters');
+    });
 
-  it('should show message error if fewer than 10 characters', () => {
-    component.messageCtrl.setValue('short');
-    component.messageCtrl.markAsTouched();
-    fixture.detectChanges();
+    it('should show message error if fewer than 10 characters', () => {
+        component.messageCtrl.setValue('short');
+        component.messageCtrl.markAsTouched();
+        fixture.detectChanges();
 
-    const errorEl: HTMLElement = fixture.nativeElement.querySelector('[data-testid="message-error"]');
-    expect(errorEl).toBeTruthy();
-    expect(errorEl.textContent).toContain('10 characters');
-  });
+        const errorEl: HTMLElement = fixture.nativeElement.querySelector('[data-testid="message-error"]');
+        expect(errorEl).toBeTruthy();
+        expect(errorEl.textContent).toContain('10 characters');
+    });
 
-  it('should not show errors on untouched invalid fields', () => {
-    const nameError = fixture.nativeElement.querySelector('[data-testid="name-error"]');
-    expect(nameError).toBeNull();
-  });
+    it('should not show errors on untouched invalid fields', () => {
+        const nameError = fixture.nativeElement.querySelector('[data-testid="name-error"]');
+        expect(nameError).toBeNull();
+    });
 
-  // ── Submit button state ───────────────────────────────────────────────────
+    // ── Submit button state ───────────────────────────────────────────────────
 
-  it('should have submit button enabled even when form is invalid', () => {
-    const btn: HTMLButtonElement = fixture.nativeElement.querySelector('[data-testid="submit-button"]');
-    expect(btn.disabled).toBeFalse();
-  });
+    it('should have submit button enabled even when form is invalid', () => {
+        const btn: HTMLButtonElement = fixture.nativeElement.querySelector('[data-testid="submit-button"]');
+        expect(btn.disabled).toBe(false);
+    });
 
-  it('should mark all controls as touched when submitting invalid form', () => {
-    component.onSubmit();
-    expect(component.nameCtrl.touched).toBeTrue();
-    expect(component.emailCtrl.touched).toBeTrue();
-    expect(component.messageCtrl.touched).toBeTrue();
-  });
+    it('should mark all controls as touched when submitting invalid form', () => {
+        component.onSubmit();
+        expect(component.nameCtrl.touched).toBe(true);
+        expect(component.emailCtrl.touched).toBe(true);
+        expect(component.messageCtrl.touched).toBe(true);
+    });
 
-  it('should enable submit button when form is valid', fakeAsync(() => {
-    mockContactService.sendMessage.and.returnValue(of(undefined));
-    component.contactForm.setValue(VALID_FORM);
-    tick();
-    fixture.detectChanges();
+    it('should enable submit button when form is valid', async () => {
+        mockContactService.sendMessage.mockReturnValue(of(undefined));
+        component.contactForm.setValue(VALID_FORM);
+        await vi.advanceTimersByTimeAsync(0);
+        fixture.detectChanges();
 
-    const btn: HTMLButtonElement = fixture.nativeElement.querySelector('[data-testid="submit-button"]');
-    expect(btn.disabled).toBeFalse();
-  }));
+        const btn: HTMLButtonElement = fixture.nativeElement.querySelector('[data-testid="submit-button"]');
+        expect(btn.disabled).toBe(false);
+    });
 
-  // ── Submit success ────────────────────────────────────────────────────────
+    // ── Submit success ────────────────────────────────────────────────────────
 
-  it('should show success message on successful submit', fakeAsync(() => {
-    mockContactService.sendMessage.and.returnValue(of(undefined));
-    component.contactForm.setValue(VALID_FORM);
-    tick();
+    it('should show success message on successful submit', async () => {
+        mockContactService.sendMessage.mockReturnValue(of(undefined));
+        component.contactForm.setValue(VALID_FORM);
+        await vi.advanceTimersByTimeAsync(0);
 
-    component.onSubmit();
-    fixture.detectChanges();
+        component.onSubmit();
+        fixture.detectChanges();
 
-    expect(component.submitStatus()).toBe('success');
-    const successEl = fixture.nativeElement.querySelector('[data-testid="success-message"]');
-    expect(successEl).toBeTruthy();
-    expect(successEl.textContent).toContain('24h');
-  }));
+        expect(component.submitStatus()).toBe('success');
+        const successEl = fixture.nativeElement.querySelector('[data-testid="success-message"]');
+        expect(successEl).toBeTruthy();
+        expect(successEl.textContent).toContain('24h');
+    });
 
-  it('should reset the form after successful submit', fakeAsync(() => {
-    mockContactService.sendMessage.and.returnValue(of(undefined));
-    component.contactForm.setValue(VALID_FORM);
-    tick();
+    it('should reset the form after successful submit', async () => {
+        mockContactService.sendMessage.mockReturnValue(of(undefined));
+        component.contactForm.setValue(VALID_FORM);
+        await vi.advanceTimersByTimeAsync(0);
 
-    component.onSubmit();
+        component.onSubmit();
 
-    expect(component.contactForm.value.name).toBeFalsy();
-  }));
+        expect(component.contactForm.value.name).toBeFalsy();
+    });
 
-  // ── Submit error ──────────────────────────────────────────────────────────
+    // ── Submit error ──────────────────────────────────────────────────────────
 
-  it('should show error message on failed submit', fakeAsync(() => {
-    mockContactService.sendMessage.and.returnValue(throwError(() => new Error('Network error')));
-    component.contactForm.setValue(VALID_FORM);
-    tick();
+    it('should show error message on failed submit', async () => {
+        mockContactService.sendMessage.mockReturnValue(throwError(() => new Error('Network error')));
+        component.contactForm.setValue(VALID_FORM);
+        await vi.advanceTimersByTimeAsync(0);
 
-    component.onSubmit();
-    fixture.detectChanges();
+        component.onSubmit();
+        fixture.detectChanges();
 
-    expect(component.submitStatus()).toBe('error');
-    const errorEl = fixture.nativeElement.querySelector('[data-testid="error-message"]');
-    expect(errorEl).toBeTruthy();
-  }));
+        expect(component.submitStatus()).toBe('error');
+        const errorEl = fixture.nativeElement.querySelector('[data-testid="error-message"]');
+        expect(errorEl).toBeTruthy();
+    });
 
-  it('should set sending to false after error', fakeAsync(() => {
-    mockContactService.sendMessage.and.returnValue(throwError(() => new Error('error')));
-    component.contactForm.setValue(VALID_FORM);
-    tick();
+    it('should set sending to false after error', async () => {
+        mockContactService.sendMessage.mockReturnValue(throwError(() => new Error('error')));
+        component.contactForm.setValue(VALID_FORM);
+        await vi.advanceTimersByTimeAsync(0);
 
-    component.onSubmit();
+        component.onSubmit();
 
-    expect(component.sending()).toBeFalse();
-  }));
+        expect(component.sending()).toBe(false);
+    });
 
-  // ── Honeypot ──────────────────────────────────────────────────────────────
+    // ── Honeypot ──────────────────────────────────────────────────────────────
 
-  it('should have honeypot field in the DOM', () => {
-    const honeypotWrap = fixture.nativeElement.querySelector('.form-field--honeypot');
-    const honeypotInput: HTMLInputElement = fixture.nativeElement.querySelector('[formControlName="website"]');
+    it('should have honeypot field in the DOM', () => {
+        const honeypotWrap = fixture.nativeElement.querySelector('.form-field--honeypot');
+        const honeypotInput: HTMLInputElement = fixture.nativeElement.querySelector('[formControlName="website"]');
 
-    expect(honeypotWrap).toBeTruthy();
-    expect(honeypotInput).toBeTruthy();
-    expect(honeypotInput.getAttribute('tabindex')).toBe('-1');
-  });
+        expect(honeypotWrap).toBeTruthy();
+        expect(honeypotInput).toBeTruthy();
+        expect(honeypotInput.getAttribute('tabindex')).toBe('-1');
+    });
 
-  it('should not call service when honeypot is filled', fakeAsync(() => {
-    component.contactForm.setValue({ ...VALID_FORM, website: 'spam-value' });
-    tick();
+    it('should not call service when honeypot is filled', async () => {
+        component.contactForm.setValue({ ...VALID_FORM, website: 'spam-value' });
+        await vi.advanceTimersByTimeAsync(0);
 
-    component.onSubmit();
+        component.onSubmit();
 
-    expect(mockContactService.sendMessage).not.toHaveBeenCalled();
-    expect(component.submitStatus()).toBe('success');
-  }));
+        expect(mockContactService.sendMessage).not.toHaveBeenCalled();
+        expect(component.submitStatus()).toBe('success');
+    });
 
-  // ── Rate limiting ─────────────────────────────────────────────────────────
+    // ── Rate limiting ─────────────────────────────────────────────────────────
 
-  it('should block submission after 3 attempts in rate limit window', fakeAsync(() => {
-    mockContactService.sendMessage.and.returnValue(of(undefined));
+    it('should block submission after 3 attempts in rate limit window', async () => {
+        mockContactService.sendMessage.mockReturnValue(of(undefined));
 
-    // 3 successful submissions
-    for (let i = 0; i < 3; i++) {
-      component.contactForm.setValue(VALID_FORM);
-      tick();
-      component.onSubmit();
-    }
+        // 3 successful submissions
+        for (let i = 0; i < 3; i++) {
+            component.contactForm.setValue(VALID_FORM);
+            await vi.advanceTimersByTimeAsync(0);
+            component.onSubmit();
+        }
 
-    // 4th attempt should be blocked
-    component.contactForm.setValue(VALID_FORM);
-    tick();
-    component.onSubmit();
-    fixture.detectChanges();
+        // 4th attempt should be blocked
+        component.contactForm.setValue(VALID_FORM);
+        await vi.advanceTimersByTimeAsync(0);
+        component.onSubmit();
+        fixture.detectChanges();
 
-    expect(component.submitStatus()).toBe('rateLimit');
-    expect(mockContactService.sendMessage).toHaveBeenCalledTimes(3);
-  }));
+        expect(component.submitStatus()).toBe('rateLimit');
+        expect(mockContactService.sendMessage).toHaveBeenCalledTimes(3);
+    });
 
-  it('should allow submission after rate limit window expires', fakeAsync(() => {
-    mockContactService.sendMessage.and.returnValue(of(undefined));
+    it('should allow submission after rate limit window expires', async () => {
+        mockContactService.sendMessage.mockReturnValue(of(undefined));
 
-    // Fill localStorage with 3 old timestamps (outside the 10-min window)
-    const oldTimestamp = Date.now() - 11 * 60 * 1000;
-    localStorage.setItem('contact_submissions', JSON.stringify([oldTimestamp, oldTimestamp, oldTimestamp]));
+        // Fill localStorage with 3 old timestamps (outside the 10-min window)
+        const oldTimestamp = Date.now() - 11 * 60 * 1000;
+        localStorage.setItem('contact_submissions', JSON.stringify([oldTimestamp, oldTimestamp, oldTimestamp]));
 
-    component.contactForm.setValue(VALID_FORM);
-    tick();
-    component.onSubmit();
+        component.contactForm.setValue(VALID_FORM);
+        await vi.advanceTimersByTimeAsync(0);
+        component.onSubmit();
 
-    expect(mockContactService.sendMessage).toHaveBeenCalledTimes(1);
-    expect(component.submitStatus()).toBe('success');
-  }));
+        expect(mockContactService.sendMessage).toHaveBeenCalledTimes(1);
+        expect(component.submitStatus()).toBe('success');
+    });
 
-  // ── Analytics ─────────────────────────────────────────────────────────────
+    // ── Analytics ─────────────────────────────────────────────────────────────
 
-  it('trackea contact_form_submit en submit exitoso', fakeAsync(() => {
-    mockContactService.sendMessage.and.returnValue(of(undefined));
-    component.contactForm.setValue(VALID_FORM);
-    tick();
-    component.onSubmit();
+    it('trackea contact_form_submit en submit exitoso', async () => {
+        mockContactService.sendMessage.mockReturnValue(of(undefined));
+        component.contactForm.setValue(VALID_FORM);
+        await vi.advanceTimersByTimeAsync(0);
+        component.onSubmit();
 
-    expect(trackSpy).toHaveBeenCalledWith('contact_form_submit');
-  }));
+        expect(trackSpy).toHaveBeenCalledWith('contact_form_submit');
+    });
 
-  it('trackea contact_form_error en submit con error', fakeAsync(() => {
-    mockContactService.sendMessage.and.returnValue(throwError(() => new Error('boom')));
-    component.contactForm.setValue(VALID_FORM);
-    tick();
-    component.onSubmit();
+    it('trackea contact_form_error en submit con error', async () => {
+        mockContactService.sendMessage.mockReturnValue(throwError(() => new Error('boom')));
+        component.contactForm.setValue(VALID_FORM);
+        await vi.advanceTimersByTimeAsync(0);
+        component.onSubmit();
 
-    expect(trackSpy).toHaveBeenCalledWith('contact_form_error');
-  }));
+        expect(trackSpy).toHaveBeenCalledWith('contact_form_error');
+    });
 });
