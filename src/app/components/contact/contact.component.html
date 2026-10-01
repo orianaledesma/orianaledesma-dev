@@ -6,24 +6,6 @@
       <h2 class="contact__headline">{{ t().h2 }}</h2>
       <p class="contact__sub">{{ t().sub }}</p>
 
-      <!-- Calendly CTA (secondary) -->
-      <a
-        [href]="calendlyUrl"
-        target="_blank"
-        rel="noopener"
-        class="btn btn--outline contact__calendly-btn"
-        [attr.aria-label]="t().calendlyCta + ', opens in new tab'"
-      >
-        {{ t().calendlyCta }}
-      </a>
-
-      <!-- Separator -->
-      <div class="contact__separator">
-        <span class="contact__separator-line"></span>
-        <span class="contact__separator-text">{{ t().separator }}</span>
-        <span class="contact__separator-line"></span>
-      </div>
-
       <!-- Form -->
       <form
         class="contact__form"
@@ -139,6 +121,8 @@
         >
           {{ sending() ? t().form.sending : t().form.submit }}
         </button>
+
+        <p class="contact__reply-promise">{{ t().replyPromise }}</p>
       </form>
 
       <!-- Social links -->

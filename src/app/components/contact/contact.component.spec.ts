@@ -5,6 +5,7 @@ import { of, throwError } from 'rxjs';
 import { ContactComponent } from './contact.component';
 import { ContactService } from '../../services/contact.service';
 import { AnalyticsService } from '../../services/analytics.service';
+import { ProjectInterestService } from '../../services/project-interest.service';
 
 const VALID_FORM = {
     name: 'Test User',
@@ -242,4 +243,40 @@ describe('ContactComponent', () => {
 
         expect(trackSpy).toHaveBeenCalledWith('contact_form_error');
     });
+
+    // ─── Pack elegido desde servicios ─────────────────────────────────────────
+
+    it('pre-escribe el mensaje cuando llegaron desde un pack', () => {
+        TestBed.inject(ProjectInterestService).select('Multi-page site');
+        fixture.detectChanges();
+
+        const msg = component.contactForm.controls.message.value ?? '';
+        expect(msg).toContain('Multi-page site');
+        // Queda editable: es texto normal, no un campo oculto.
+        expect(component.contactForm.controls.message.enabled).toBe(true);
+    });
+
+    it('no pisa lo que la persona ya venía escribiendo', () => {
+        component.contactForm.controls.message.setValue('Ya escribí esto yo');
+        fixture.detectChanges();
+
+        TestBed.inject(ProjectInterestService).select('Online store');
+        fixture.detectChanges();
+
+        expect(component.contactForm.controls.message.value).toBe('Ya escribí esto yo');
+    });
+
+    it('muestra la promesa de respuesta junto al botón de enviar', () => {
+        // Sin Calendly, es lo único que le dice a la persona qué pasa después.
+        const promesa = fixture.nativeElement.querySelector('.contact__reply-promise');
+        expect(promesa).toBeTruthy();
+        expect(promesa.textContent.trim().length).toBeGreaterThan(0);
+    });
+
+    it('ya no ofrece agendar una llamada', () => {
+        const html = fixture.nativeElement.innerHTML;
+        expect(html).not.toContain('calendly');
+        expect(fixture.nativeElement.querySelector('.contact__separator')).toBeNull();
+    });
+
 });
