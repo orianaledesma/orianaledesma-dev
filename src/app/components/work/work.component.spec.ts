@@ -32,10 +32,24 @@ describe('WorkComponent', () => {
     expect(trackSpy).toHaveBeenCalledOnceWith('work_card_click', { project: realCase!.title });
   });
 
-  it('los 4 casos son reales con ctaHref (sin placeholder)', () => {
-    expect(component.cases.length).toBe(4);
-    expect(component.cases.every(c => !c.placeholder)).toBe(true);
-    expect(component.cases.every(c => !!c.ctaHref)).toBe(true);
+  it('todo caso publicado tiene a dónde llevar; los que están en obra, no', () => {
+    // Derivado de los datos, no un número fijo: agregar o sacar un caso no
+    // debería obligar a editar el test. Lo que sí es invariante: una tarjeta
+    // sin link tiene que estar marcada como placeholder, o queda muerta.
+    expect(component.cases.length).toBeGreaterThan(0);
+
+    for (const c of component.cases) {
+      if (c.placeholder) {
+        expect(c.ctaHref).toBeUndefined();
+      } else {
+        expect(c.ctaHref).toBeTruthy();
+      }
+    }
+  });
+
+  it('hay al menos un caso en producción con link', () => {
+    const publicados = component.cases.filter(c => !c.placeholder && c.ctaHref);
+    expect(publicados.length).toBeGreaterThan(0);
   });
 
   it('CTA outbound de la card real dispara tracking al click en el DOM', () => {

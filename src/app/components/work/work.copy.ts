@@ -85,5 +85,20 @@ export const WORK_COPY: WorkCopy = {
       cta: 'Visit latinaconnection.info →',
       ctaHref: 'https://latinaconnection.info',
     },
+    {
+      category: 'In progress',
+      title: 'Milesa',
+      role: 'Designing and building it for a construction crew in Kaunas',
+      // Sin captura ni link: todavía no hay nada público que mostrar, y una
+      // tarjeta honesta en obra vale más que una maqueta presentada como sitio.
+      placeholder: true,
+      stack: ['In build', 'Bilingual LT / EN', 'Angular'],
+      bullets: [
+        'A site for a Lithuanian building firm — foundations, walls, roofing, finishes',
+        'Bilingual LT / EN, written for people comparing quotes rather than browsing',
+        'Each service says what it delivers and what comes warranted, in plain words',
+      ],
+      quote: 'Trades sell on trust. The site has to earn it before the call.',
+    },
   ],
 };
