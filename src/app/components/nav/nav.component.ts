@@ -26,7 +26,6 @@ export class NavComponent {
   private readonly langService = inject(LanguageService);
   private readonly analytics   = inject(AnalyticsService);
 
-  readonly calendlyUrl = 'https://calendly.com/hello-orianaledesma/20min';
 
   readonly activeLang  = computed(() => this.langService.current().toUpperCase());
   readonly t           = computed(() => TRANSLATIONS[this.langService.current()].nav);
@@ -62,7 +61,7 @@ export class NavComponent {
     this.langOpen.set(false);
   }
 
-  /** Tracking: click en el CTA del nav (desktop o mobile) → Calendly, nueva pestaña. */
+  /** Tracking: click en el CTA del nav (desktop o mobile) → formulario de contacto. */
   onCtaClick(): void {
     this.analytics.track('nav_cta_click');
     this.menuOpen.set(false);

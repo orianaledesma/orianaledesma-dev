@@ -38,12 +38,13 @@ describe('NavComponent', () => {
         expect(trackSpy).toHaveBeenCalledWith('nav_cta_click');
     });
 
-    it('el CTA del nav apunta al Calendly y abre en pestaña nueva', () => {
+    it('el CTA del nav lleva al formulario, dentro de la página', () => {
         const cta = fixture.debugElement.query(By.css('a.nav__cta'));
 
-        expect(cta.attributes['href']).toBe(component.calendlyUrl);
-        expect(cta.attributes['target']).toBe('_blank');
-        expect(cta.attributes['rel']).toBe('noopener');
+        expect(cta.attributes['href']).toBe('#contact');
+        // Ya no es un destino externo: abrirlo en otra pestaña sacaría a la
+        // persona del sitio para llevarla a una sección del mismo sitio.
+        expect(cta.attributes['target']).toBeUndefined();
     });
 
     it('onCtaClick cierra el menú mobile', () => {
