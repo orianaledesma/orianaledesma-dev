@@ -71,19 +71,19 @@ export const WORK_COPY: WorkCopy = {
       ctaHref: 'https://rimaberg.com',
     },
     {
-      category: 'In progress',
+      category: 'Live · built from zero',
       title: 'Latina Connection',
-      role: 'In build right now',
+      role: 'Brand, site and launch — all of it mine',
       image: 'assets/images/work/latina-connection.webp',
-      stack: ['In progress'],
+      stack: ['Live in production', 'Prerendered for SEO', 'WCAG AA'],
       bullets: [
-        'A community platform currently in the works',
-        'Building it the same way: clear scope, shipped properly',
-        'The product is already live — see it on Hotmart',
+        'A course brand I built end to end, online at latinaconnection.info',
+        'Pages ship as real HTML, so Google reads the content and not an empty shell',
+        'An interactive piece on the page shows what the course teaches before you buy',
       ],
-      cta: 'See the product →',
-      ctaHref:
-        'https://hotmart.com/en/marketplace/products/the-latin-connection-from-gringo-to-galan-in-2-hours/J104478384F',
+      quote: 'The product and its storefront, built by the same hands.',
+      cta: 'Visit latinaconnection.info →',
+      ctaHref: 'https://latinaconnection.info',
     },
   ],
 };
