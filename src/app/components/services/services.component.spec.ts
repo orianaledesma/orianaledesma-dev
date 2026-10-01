@@ -57,12 +57,14 @@ describe('ServicesComponent', () => {
         expect(scope.nativeElement.textContent.trim()).toBe('up to 30 products');
     });
 
-    it('los CTAs apuntan al Calendly y abren en pestaña nueva', () => {
-        const cta = fixture.debugElement.query(By.css('.service-card__cta'));
+    it('los CTAs de los packs llevan al formulario', () => {
+        const ctas = fixture.debugElement.queryAll(By.css('.service-card__cta'));
 
-        expect(cta.attributes['href']).toBe(component.calendlyUrl);
-        expect(cta.attributes['target']).toBe('_blank');
-        expect(cta.attributes['rel']).toBe('noopener');
+        expect(ctas.length).toBeGreaterThan(0);
+        for (const cta of ctas) {
+            expect(cta.attributes['href']).toBe('#contact');
+            expect(cta.attributes['target']).toBeUndefined();
+        }
     });
 
     it('trackea services_card_click con el pack al clickear una card', () => {
